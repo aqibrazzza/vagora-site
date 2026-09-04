@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# Internal reference surfaces, not part of the site.
+Disallow: /reference/

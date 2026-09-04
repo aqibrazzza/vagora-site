@@ -1,0 +1,1826 @@
+/* ==========================================================================
+   Vagora — v6 site styles · design foundations
+   One monochrome colour family, six typography tiers, one page gutter,
+   one spacing vocabulary, sharp editorial media, bounded fluid scaling.
+   Foundations create consistency; the art direction of each chapter sits
+   on top of them and is not what this file decides.
+   ========================================================================== */
+
+/* ── Fonts ──────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Switzer";
+  src: url("/assets/fonts/Switzer-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Switzer";
+  src: url("/assets/fonts/Switzer-VariableItalic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Fragment Mono (OFL, self-hosted, regular only): the notation voice. */
+@font-face {
+  font-family: "Fragment Mono";
+  src: url("/assets/fonts/FragmentMono-Regular-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Tokens ─────────────────────────────────────────────────────────────── */
+:root {
+  /* Colour — the light world and the dark world, nothing else. */
+  --surface-light: #ffffff;
+  --ink: #0f0f0f;
+  --text-primary: #0f0f0f;
+  --text-secondary: rgba(15, 15, 15, 0.62);
+  --text-muted: rgba(15, 15, 15, 0.45);
+  /* The notation colour: one value for every Fragment Mono element on a
+     light surface, whatever it labels. Never lighter, never darker. */
+  --notation-ink: rgba(15, 15, 15, 0.55);
+  --rule: rgba(15, 15, 15, 0.1);
+
+  --surface-dark: #000000;
+  --text-inverse: #ffffff;
+  --text-inverse-secondary: rgba(255, 255, 255, 0.68);
+  --text-inverse-muted: rgba(255, 255, 255, 0.45);
+  --notation-inverse: rgba(255, 255, 255, 0.52);
+  --rule-inverse: rgba(255, 255, 255, 0.14);
+
+  /* Operational status — console pills only, never brand or decoration. */
+  --status-success: #0f7a52;
+  --status-warning: #8a5a00;
+  --status-critical: #c0342e;
+  --status-success-bg: #eaf5f0;
+  --status-warning-bg: #f7f0e2;
+  --status-critical-bg: #faeceb;
+
+  /* Surface-relative aliases: re-resolved inside a dark field. */
+  --bg: var(--surface-light);
+  --text: var(--text-primary);
+  --text-2: var(--text-secondary);
+  --text-3: var(--text-muted);
+  --line: var(--rule);
+  --notation: var(--notation-ink);
+  --media-ground: rgba(15, 15, 15, 0.04);
+  --control-bg: var(--ink);
+  --control-fg: var(--text-inverse);
+  --control-hover: rgba(15, 15, 15, 0.86);
+  --focus: var(--ink);
+  --frost: rgba(15, 15, 15, 0.35);
+  --shadow-lift: 0 -4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.14);
+
+  /* Type — Switzer only. Two expressive headline scales and three text
+     sizes, nothing else: display (narrative peaks: act openings, the close),
+     statement (everything important inside the acts: chapter and feature
+     headings, the manifesto), body (explanation), small (secondary and
+     compact information), label (14px fixed: eyebrows, indexes, metadata).
+     Component exceptions: the dock's own type variables, the console's
+     metric numerals, the curtain count. */
+  --sans: "Switzer", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "Fragment Mono", "SFMono-Regular", Consolas, monospace; /* the system annotating — never Vagora speaking */
+  --type-display: clamp(3.75rem, 1.5rem + 7.5vw, 10rem); /* the close, the curtain count */
+  --type-lead: clamp(2.625rem, 1.5rem + 3.33vw, 5.25rem); /* 84 max — the proposition */
+  --type-chapter: clamp(2.25rem, 1.4rem + 2.6vw, 4rem); /* 64 max — an act opening */
+  --type-section: clamp(1.75rem, 1.2rem + 1.6vw, 3rem); /* 48 max — a section heading */
+  --type-body: clamp(1.125rem, 1.05rem + 0.25vw, 1.375rem);
+  --type-small: clamp(1rem, 0.97rem + 0.1vw, 1.0625rem);
+  --type-label: 0.875rem;
+
+  --lh-display: 0.9;
+  --lh-lead: 0.94;
+  --lh-chapter: 0.98;
+  --lh-section: 1.02;
+  --lh-body: 1.42;
+  --lh-small: 1.4;
+  --lh-label: 1.2;
+
+  --ls-display: -0.045em;
+  --ls-lead: -0.035em;
+  --ls-chapter: -0.03em;
+  --ls-section: -0.025em;
+  --ls-body: 0;
+  --ls-small: 0;
+
+  /* Weight: scale creates authority, weight creates refinement — 500 on
+     light surfaces, 450 on dark (white blooms, so the same number reads
+     heavier); body stays 400 everywhere. */
+  --w-display: 500;
+  --w-heading: 500;
+  --w-medium: 500;
+
+  /* Reading widths — for copy, never for the visual stage. */
+  --reading-max: 42rem;
+  --copy-max: 30rem;
+
+  /* Space */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 128px;
+  --space-10: 160px;
+
+  /* One distance from an eyebrow to the heading it names, site-wide. */
+  --eyebrow-gap: var(--space-4);
+
+  --section-sm: clamp(72px, 7vw, 112px);
+  --section-md: clamp(96px, 9vw, 152px);
+  --section-lg: clamp(120px, 11vw, 192px);
+
+  /* Page gutter — editorial content sits inside it; art-directed media may
+     run past it to the viewport edge. */
+  --page-x: clamp(1.5rem, 1rem + 1.1vw, 3rem);
+
+  /* Geometry */
+  --radius-media: 0;
+  --radius-control: 8px;
+  --radius-pill: 999px;
+
+  /* Chrome */
+  /* Dock distance from the bottom edge: 1vw on large screens (≈26px on a
+     2560px-wide desktop, 19px at 1920), never closer than 16px, plus the
+     phone home-indicator zone where the browser reports one. */
+  --dock-inset: calc(max(1vw, 16px) + env(safe-area-inset-bottom, 0px));
+  --dock-h: calc(clamp(48px, 46px + 0.45vw, 52px) + 8px); /* link height + 2 × 4px padding */
+
+  /* Motion */
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 700ms;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* THE DARK WORLD — a surface scope, not a page theme. Text inverts and the
+   heading and medium weights step down to 450, because light on dark blooms. */
+[data-surface="dark"] {
+  --bg: var(--surface-dark);
+  --text: var(--text-inverse);
+  --text-2: var(--text-inverse-secondary);
+  --text-3: var(--text-inverse-muted);
+  --line: var(--rule-inverse);
+  --notation: var(--notation-inverse);
+  --media-ground: rgba(255, 255, 255, 0.06);
+  --control-bg: var(--text-inverse);
+  --control-fg: var(--ink);
+  --control-hover: rgba(255, 255, 255, 0.86);
+  --focus: var(--text-inverse);
+  --w-display: 450;
+  --w-heading: 450;
+  --w-medium: 450;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  background: var(--surface-light);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img,
+video {
+  display: block;
+  max-width: 100%;
+  border-radius: var(--radius-media);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+[hidden] {
+  display: none !important;
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip {
+  position: fixed;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 1000;
+  padding: var(--space-2) var(--space-3);
+  background: var(--ink);
+  color: var(--text-inverse);
+  border-radius: var(--radius-pill);
+  font-size: var(--type-small);
+  line-height: var(--lh-label);
+  transform: translateY(-200%);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+.skip:focus-visible {
+  transform: none;
+}
+
+/* ── Type tiers ─────────────────────────────────────────────────────────── */
+/* --eyebrow-lift: how much of the gap under an eyebrow this tier's own top
+   leading already supplies. The larger the headline, the more air sits
+   above its caps inside the line box; the lift takes that air back, so the
+   *seen* distance is the same under a 48px section heading and a 160px
+   close. The section tier is the reference and needs none. */
+.display {
+  font-size: var(--type-display);
+  font-weight: var(--w-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  --eyebrow-lift: max(0px, calc(0.09em - 5px));
+}
+.h2 {
+  font-size: var(--type-section);
+  font-weight: var(--w-heading);
+  line-height: var(--lh-section);
+  letter-spacing: var(--ls-section);
+  text-wrap: balance;
+}
+.h3 {
+  font-size: var(--type-section);
+  font-weight: var(--w-heading);
+  line-height: var(--lh-section);
+  letter-spacing: var(--ls-section);
+  text-wrap: balance;
+}
+.lede {
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  font-weight: 400;
+}
+.small {
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  letter-spacing: var(--ls-small);
+}
+/* Structural label: the label tier, uppercase, tracked. Never a new size. */
+/* Every eyebrow is notation: the system naming the part of the page you
+   are in, not Vagora speaking. Same 14px tier, regular weight, mono.
+   One eyebrow → heading distance for the whole site: the label always sits
+   the same distance above the heading it names, whatever scale that
+   heading is. Sections do not set their own value; where a heading tier's
+   own leading eats into the gap it is compensated on that tier below, so
+   the *optical* distance stays constant, not just the margin. */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--type-label);
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--notation);
+  display: block;
+  margin-bottom: var(--eyebrow-gap);
+}
+/* + the heading's own top leading; see --eyebrow-lift on each tier. */
+.eyebrow + .h2,
+.eyebrow + .h3,
+.eyebrow + .display,
+.eyebrow + .manifesto__text,
+.eyebrow + .floor__title,
+.eyebrow + .business__title {
+  margin-top: calc(var(--eyebrow-lift, 0px) * -1);
+}
+.eyebrow__index {
+  display: inline-block;
+  margin-inline-end: var(--space-3);
+  font-variant-numeric: tabular-nums;
+}
+.muted {
+  color: var(--text-2);
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Split text: the wrapper keeps the accessible name; the visual words are
+   decorative and hidden from AT. Without JS nothing is split. */
+/* Each line is the animation mask for its words. The mask carries a glyph
+   safety area — ascenders, descenders and the side bearings of terminal
+   glyphs under negative tracking all reach past the line box — with
+   compensating negative margins so the rhythm is unchanged; and once the
+   line has settled (or motion is reduced) the mask opens completely, so a
+   resting glyph can never be cropped. */
+.split-line {
+  display: block;
+  overflow: hidden;
+  padding: 0.1em 0.07em 0.16em;
+  margin: -0.1em -0.07em -0.16em;
+}
+/* Those safety margins are compensation, not rhythm. Contain them, or the
+   first line's negative top margin collapses out of the heading and pulls
+   it up — which is why a heading in a block parent used to sit closer to
+   its eyebrow than the same heading in a flex or grid parent. */
+.split-ready {
+  display: flow-root;
+}
+.split-ready.is-in .split-line,
+.js.reduced .split-line {
+  overflow: visible;
+}
+.split-word {
+  display: inline-block;
+  will-change: transform;
+}
+.js .split-ready:not([data-scrub]) .split-word {
+  transform: translateY(120%);
+  opacity: 0;
+}
+.js .split-ready.is-in .split-word,
+.js.reduced .split-ready .split-word {
+  transform: none;
+  opacity: 1;
+}
+
+/* Reveal: single pass, once. Choreographed timing, kept as authored. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 900ms var(--ease-standard),
+    transform 900ms var(--ease-standard);
+}
+.js .reveal[data-delay="1"].is-in {
+  transition-delay: 80ms;
+}
+.js .reveal[data-delay="2"].is-in {
+  transition-delay: 160ms;
+}
+.js .reveal[data-delay="3"].is-in {
+  transition-delay: 240ms;
+}
+.js.reduced .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* ── Layout ─────────────────────────────────────────────────────────────── */
+.container {
+  padding-inline: var(--page-x);
+}
+.section {
+  position: relative;
+  padding-block: var(--section-lg);
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── Controls ───────────────────────────────────────────────────────────── */
+.btn {
+  --pad: 1.15em 1.6em;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: var(--pad);
+  border-radius: var(--radius-pill);
+  background: var(--control-bg);
+  color: var(--control-fg);
+  font-size: var(--type-small);
+  font-weight: var(--w-medium);
+  letter-spacing: var(--ls-small);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard),
+    color var(--duration-base) var(--ease-standard);
+}
+.btn span {
+  position: relative;
+  z-index: 1;
+}
+.btn svg {
+  position: relative;
+  z-index: 1;
+  width: 1.1em;
+  height: 1.1em;
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+@media (hover: hover) {
+  .btn:hover {
+    background: var(--control-hover);
+  }
+  .btn:hover svg {
+    transform: translate(2px, -2px);
+  }
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn--lg {
+  --pad: 1.3em 2em;
+  font-size: var(--type-body);
+}
+.btn[aria-disabled="true"],
+.btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: right;
+  transform: scaleX(1);
+}
+@media (hover: hover) {
+  .link:hover::after {
+    animation: linkwipe 600ms var(--ease-standard);
+  }
+}
+@keyframes linkwipe {
+  0% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  50% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  51% {
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ── The dock — the only navigation. A frosted ink pill, fixed bottom-centre.
+   Composition frozen. Proportions (approved in-browser on desktop, applied
+   as bounded fluid values): links 52px tall / 16px labels on desktop,
+   easing to 48px / 15px on narrow screens; no gap between items; 4px outer
+   padding at every width; nothing grows on large monitors. These three
+   custom properties are the single source of truth. ────────────────────── */
+.dock {
+  --dock-link-h: clamp(48px, 46px + 0.45vw, 52px);
+  --dock-type: clamp(15px, 14.6px + 0.1vw, 16px);
+  --dock-link-pad: clamp(10px, 4px + 1.1vw, 20px);
+  position: fixed;
+  inset-inline: 0;
+  bottom: var(--dock-inset);
+  margin-inline: auto;
+  inline-size: fit-content;
+  max-inline-size: calc(100% - 24px);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 4px;
+  background: rgba(15, 15, 15, 0.88);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-float);
+  z-index: 60;
+}
+.dock a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--dock-link-h);
+  padding-inline: var(--dock-link-pad);
+  border-radius: var(--radius-pill);
+  color: var(--text-inverse);
+  font-size: var(--dock-type);
+  font-weight: var(--w-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-small);
+  white-space: nowrap;
+  overflow: hidden;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+.dock a:focus-visible {
+  outline: 2px solid var(--text-inverse);
+  outline-offset: -2px;
+}
+.dock__link.is-active {
+  background: rgba(255, 255, 255, 0.08);
+}
+/* The flip: the label leaves upward and its twin arrives from below. */
+.flip {
+  position: relative;
+  display: block;
+  overflow: clip;
+}
+.flip > span {
+  display: block;
+  transition: transform 520ms var(--ease-standard);
+}
+.flip > span:last-child {
+  position: absolute;
+  inset: 0;
+  transform: translateY(115%);
+}
+@media (hover: hover) {
+  .dock__link:not(.is-active):hover .flip > span:first-child {
+    transform: translateY(-115%);
+  }
+  .dock__link:not(.is-active):hover .flip > span:last-child {
+    transform: none;
+  }
+}
+.dock__divider {
+  inline-size: 1px;
+  block-size: 22px;
+  margin-inline: 4px 6px;
+  background: var(--rule-inverse);
+  flex: none;
+}
+.dock__brand {
+  inline-size: 56px;
+  padding: 0 !important;
+  background: none !important;
+  perspective: 240px;
+}
+.dock__brand .mark {
+  block-size: 33px;
+  inline-size: 17px;
+  color: var(--text-inverse);
+  transform-origin: center;
+  transition: transform 600ms var(--ease-standard);
+}
+@media (hover: hover) {
+  .dock__brand:hover .mark {
+    transform: rotateY(-24deg) translateY(-1px);
+  }
+}
+/* Narrow: the brand cell steps down as before; link padding and type are
+   already fluid, so nothing else changes. */
+@media (max-width: 460px) {
+  .dock__brand {
+    inline-size: 40px;
+  }
+  .dock__brand .mark {
+    block-size: 21px;
+    inline-size: 11px;
+  }
+}
+.js .dock {
+  transform: translateY(calc(100% + var(--space-5)));
+  opacity: 0;
+  transition:
+    transform 480ms var(--ease-standard),
+    opacity 480ms var(--ease-standard);
+}
+.js .dock.is-in,
+.js.reduced .dock {
+  transform: none;
+  opacity: 1;
+}
+
+/* ── Curtain (JS-only preloader) ────────────────────────────────────────── */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--surface-dark);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.curtain .mark {
+  width: 34px;
+  height: 66px;
+  color: var(--text-inverse);
+  opacity: 0;
+}
+.curtain__count {
+  position: absolute;
+  left: var(--page-x);
+  bottom: var(--space-4);
+  font-size: var(--type-display);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--ls-display);
+  color: var(--text-inverse);
+}
+.mark {
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: url("/assets/brand/logo/vagora-brandmark-dark.svg") center / contain no-repeat;
+  mask: url("/assets/brand/logo/vagora-brandmark-dark.svg") center / contain no-repeat;
+}
+
+/* ── Hero — the film takes the whole viewport. ──────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: clip;
+  isolation: isolate;
+  background: var(--surface-dark);
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+}
+.hero__media video,
+.hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+.hero__film-toggle {
+  position: absolute;
+  right: var(--page-x);
+  top: var(--page-x);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  display: grid;
+  place-items: center;
+  color: var(--text-inverse);
+  background: var(--frost);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  transition: opacity var(--duration-base);
+}
+.hero__film-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+.hero:hover .hero__film-toggle,
+.hero__film-toggle:focus-visible,
+.no-hover .hero__film-toggle {
+  opacity: 1;
+}
+.hero__film-toggle[data-state="paused"] .ic-pause,
+.hero__film-toggle[data-state="playing"] .ic-play {
+  display: none;
+}
+
+/* ── Manifesto ──────────────────────────────────────────────────────────── */
+.manifesto {
+  padding-block: var(--section-md);
+}
+.manifesto__text {
+  font-size: var(--type-lead);
+  font-weight: var(--w-heading);
+  line-height: var(--lh-lead);
+  letter-spacing: var(--ls-lead);
+  max-width: 24ch;
+  text-wrap: pretty;
+  --eyebrow-lift: max(0px, calc(0.05em - 1.4px));
+}
+.manifesto__text .split-word {
+  transition: opacity var(--duration-fast) linear;
+}
+.js .manifesto__text .split-word {
+  opacity: 0.18;
+}
+.js .manifesto__text .split-word.is-lit,
+.js.reduced .manifesto__text .split-word {
+  opacity: 1;
+}
+.manifesto__meta {
+  margin-top: clamp(var(--space-6), 6vw, var(--space-8));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  max-width: 56rem;
+}
+.manifesto__meta div {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--line);
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+}
+.manifesto__meta strong {
+  display: block;
+  font-weight: var(--w-medium);
+  margin-bottom: 4px;
+}
+.manifesto__meta span {
+  color: var(--text-2);
+}
+@media (max-width: 700px) {
+  .manifesto__meta {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}
+
+/* ── Section heads ──────────────────────────────────────────────────────── */
+.head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  align-items: end;
+  margin-bottom: clamp(var(--space-6), 8vw, var(--space-9));
+}
+.head__lede {
+  max-width: var(--reading-max);
+  color: var(--text-2);
+}
+@media (min-width: 900px) {
+  .head {
+    grid-template-columns: 7fr 5fr;
+  }
+  .head__lede {
+    justify-self: end;
+    padding-bottom: 0.4em;
+  }
+}
+
+/* ── Act one: the floor — a large retail world with editorial annotation.
+   Two layouts, one markup. Below the wide breakpoint every state is a
+   self-contained editorial scene in normal flow: image, index + category,
+   headline, description, then generous air before the next. From 1100px
+   wide (and 600px tall) the sticky stage takes over: narrative rail left,
+   one media plane right that changes state with the active step. The
+   stage is an art-directed exception to the page gutter: it runs to the
+   right viewport edge. */
+.floor {
+  --media-w: clamp(720px, 60.5vw, 1440px);
+  --media-h: clamp(520px, 71svh, 940px);
+  /* The opening keeps its generous column gap; the annotation sits close to
+     the image — 24px on a normal desktop, 32px at 2560. */
+  --head-gap: clamp(var(--space-6), 5vw, var(--space-9));
+  --breath: clamp(var(--space-4), 1.25vw, var(--space-5));
+  /* The annotation column: 280px on a normal desktop, 320px at 2560. */
+  --annot-w: clamp(280px, 16.5vw, 320px);
+  --stick-top: calc((100svh - var(--media-h)) / 2);
+  padding-top: var(--section-md);
+  padding-bottom: var(--section-md);
+}
+
+/* Chapter opening — stacked: label, title, statement. On narrow screens the
+   first state's image follows directly and is the introductory image. */
+.floor__head {
+  padding-inline: var(--page-x);
+}
+.floor__title {
+  font-size: var(--type-chapter);
+  line-height: var(--lh-chapter);
+  letter-spacing: var(--ls-chapter);
+  --eyebrow-lift: max(0px, calc(0.045em - 1.2px));
+}
+.floor__lede {
+  max-width: var(--reading-max);
+  margin-top: var(--space-4);
+}
+
+/* The sequence — normal flow. */
+.stage {
+  margin-top: var(--space-7);
+}
+.stage__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--page-x);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--space-8), 12vw, var(--space-10));
+}
+.step__media {
+  margin: 0 0 var(--space-4);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--media-ground);
+}
+.step__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* The feature annotation — the same system in both acts. The image is the
+   dominant object; the copy is small, precise and black, on one left axis,
+   with a fixed internal rhythm of 12 / 16 / 24 / 8. Hierarchy comes from
+   scale, weight, font and structure — not from grey. */
+.step__block,
+.entry__block {
+  display: flex;
+  flex-direction: column;
+  max-width: 34ch;
+}
+.step__index,
+.entry__index {
+  font-family: var(--mono);
+  font-size: var(--type-label);
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--notation);
+  margin-bottom: var(--space-2);
+}
+.step__title,
+.entry__title {
+  text-wrap: balance;
+  font-size: var(--type-body);
+  font-weight: var(--w-medium);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: var(--space-3);
+}
+.step__body,
+.entry__body {
+  text-wrap: pretty;
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  color: var(--text);
+}
+/* The sticky stage does not exist below the wide breakpoint. */
+.stage__media {
+  display: none;
+}
+@media (min-width: 640px) {
+  .step__media {
+    aspect-ratio: 4 / 3;
+  }
+}
+@media (min-width: 900px) {
+  .step__media {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* Wide viewports — the sticky stage. */
+@media (min-width: 1100px) and (min-height: 600px) {
+  /* Phase A: the head shares the stage's grid, so the supporting statement's
+     left edge is the media stage's left edge; the title may run past its
+     column (row one of the second column is empty). */
+  .floor__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--media-w);
+    grid-template-rows: auto auto;
+    column-gap: var(--head-gap);
+    align-items: start;
+    padding-right: 0;
+  }
+  .floor__head > div {
+    grid-column: 1;
+    grid-row: 1;
+    /* Sized to its own lines so the title can run past the column; the
+       split-line clips would otherwise cut it at the column edge. */
+    width: max-content;
+    max-width: calc(100vw - var(--page-x) * 2);
+  }
+  .floor__title {
+    white-space: nowrap;
+  }
+  .floor__lede {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: var(--space-5);
+    padding-right: var(--page-x);
+  }
+  /* Phase B: narrative rail, breathing space, one media plane to the right
+     edge. The first step waits below the opening frame so State 01 reaches
+     its reading position only once the opening has cleared. */
+  .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--media-w);
+    column-gap: var(--breath);
+    align-items: start;
+    padding-left: var(--page-x);
+    margin-top: var(--space-6);
+  }
+  .stage__steps {
+    display: block;
+    padding: 0;
+    padding-block: calc(var(--stick-top) + 16svh) 10svh;
+  }
+  .step {
+    min-height: 80svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .step__media {
+    display: none;
+  }
+  .step__block {
+    /* Exactly the annotation column, pushed to the end of the rail so its
+       right edge sits --breath from the image, as Act two's left edge does. */
+    width: var(--annot-w);
+    max-width: 100%;
+    margin-left: auto;
+    opacity: 0.35;
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+  .step.is-active .step__block {
+    opacity: 1;
+  }
+  html:not(.js) .step__block,
+  .js.reduced .step__block {
+    opacity: 1;
+  }
+  .stage__media {
+    display: block;
+    position: sticky;
+    top: var(--stick-top);
+  }
+  .aperture {
+    margin: 0;
+    position: relative;
+    height: var(--media-h);
+    width: 100%;
+    overflow: hidden;
+    background: var(--media-ground);
+    border-radius: var(--radius-media);
+  }
+  /* State change: 300ms, in and out together, nothing layered for long. */
+  .aperture__state {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 300ms var(--ease-standard);
+  }
+  .aperture__state.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+  .aperture__state.is-leaving {
+    opacity: 0;
+  }
+}
+
+/* ── The Vagora Mirror — a dark sculptural product chapter ─────────────
+   the site's one dark surface, pure #000000. Macro: the
+   complete Vagora Mirror standing in its own dark studio as a large product
+   field on the left — height-driven (≈80svh), left of centre, its
+   photographic environment merging with the surface through a purely
+   functional edge mask; white editorial annotation on the right, beginning
+   around the product's upper third. Micro: a technical specification rail
+   beneath both — one structural rule, four territories. No card, border,
+   shadow, glow or backing panel anywhere. The .object container is
+   video-ready: the same box takes a <video class="object__media">. */
+.mirror {
+  --media-h: clamp(560px, 80svh, 1040px);
+  overflow: clip;
+  padding-block: var(--section-md) var(--section-lg);
+}
+.mirror__stage {
+  width: min(calc(100% - 2 * var(--page-x)), 1680px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "body"
+    "object"
+    "spec";
+  row-gap: var(--space-7);
+}
+.mirror__body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+/* The column gap already carries the site eyebrow → heading distance here. */
+.mirror__body .eyebrow {
+  margin-bottom: 0;
+}
+.mirror__body .h2 {
+  max-width: 21ch;
+}
+.mirror__lede {
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  color: var(--text-2);
+  max-width: 40ch;
+}
+.mirror__object {
+  grid-area: object;
+  display: grid;
+  justify-items: center;
+}
+
+/* The object: the photograph shown whole (frame, sensor arm, base, casters),
+   nothing drawn around or over it. The mask only softens the photograph's
+   outer environment into the surface so no hard rectangle reads; the product
+   itself sits well inside the untouched centre. */
+.object {
+  --object-ratio: 4 / 5;
+  --object-fit: cover;
+  --object-pos: 50% 50%;
+  margin: 0;
+  position: relative;
+  width: min(100vw, calc(var(--media-h) * 4 / 5));
+  aspect-ratio: var(--object-ratio);
+  overflow: hidden;
+  background: var(--bg);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, rgba(0, 0, 0, 0.4) 10%, #000 26%, #000 82%, rgba(0, 0, 0, 0.4) 92%, transparent),
+    linear-gradient(to bottom, transparent, #000 6%, #000 90%, rgba(0, 0, 0, 0.5) 95%, transparent);
+  mask-image:
+    linear-gradient(to right, transparent, rgba(0, 0, 0, 0.4) 10%, #000 26%, #000 82%, rgba(0, 0, 0, 0.4) 92%, transparent),
+    linear-gradient(to bottom, transparent, #000 6%, #000 90%, rgba(0, 0, 0, 0.5) 95%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+.object__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--object-fit);
+  object-position: var(--object-pos);
+  border-radius: 0;
+}
+/* Narrow: the product field runs edge to edge, large and immersive. On
+   phones it is set slightly wider than the viewport (the product sits in
+   the photograph's central 55%, so only environment leaves the frame). */
+.mirror__object .object {
+  --object-w: min(118vw, calc(84svh * 4 / 5));
+  width: var(--object-w);
+  max-width: none;
+  margin-inline: calc((100% - var(--object-w)) / 2);
+}
+@media (min-width: 700px) {
+  .mirror__object .object {
+    --object-w: min(calc(100% + 2 * var(--page-x)), calc(84svh * 4 / 5));
+  }
+}
+
+/* Technical specification rail: one structural rule, index above fact.
+   Stacked below 700px, 2 × 2 to 1280px, four columns beyond. */
+.spec {
+  grid-area: spec;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.spec li {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.spec li:first-child {
+  border-top: 0;
+}
+.spec__index {
+  font-size: var(--type-label);
+  line-height: var(--lh-label);
+  font-variant-numeric: tabular-nums;
+}
+.spec__fact {
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  color: var(--text-2);
+  max-width: 34ch;
+}
+
+@media (min-width: 700px) {
+  .spec {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+  .spec li:nth-child(2) {
+    border-top: 0;
+  }
+}
+/* Wide: product field left (≈56% of the stage), annotation right (≈38%),
+   rail beneath. The photograph is height-driven and sits centred in its
+   field — left of the chapter's centre, clear of the page edge — so the
+   dark space either side of it belongs to the composition. */
+@media (min-width: 1200px) {
+  .mirror {
+    padding-block: var(--section-md);
+  }
+  .mirror__stage {
+    grid-template-columns: minmax(0, 55fr) minmax(0, 37fr);
+    grid-template-areas:
+      "object body"
+      "spec   spec";
+    column-gap: clamp(48px, 5vw, 96px);
+    row-gap: clamp(64px, 8svh, 112px);
+    align-items: start;
+  }
+  .mirror__object {
+    justify-items: center;
+  }
+  .mirror__object .object {
+    width: min(100%, calc(var(--media-h) * 4 / 5));
+    margin-inline: 0;
+  }
+  .mirror__body {
+    /* Optical: the annotation begins around the product's upper third. */
+    padding-top: calc(var(--media-h) * 0.26);
+  }
+}
+@media (min-width: 1280px) {
+  .spec {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--space-6);
+  }
+  .spec li {
+    border-top: 0;
+  }
+}
+/* ── Act two: in the business — Act one's system, mirrored ─────────────
+   The same two layouts, the same tokens, the same state machine. Below the
+   wide breakpoint every feature is a self-contained editorial scene in
+   normal flow: image, index + category, headline, description, retail
+   impact, then generous air before the next. From 1100px wide (and 600px
+   tall) the sticky stage takes over — and this is the only compositional
+   difference from Act one: the media plane runs to the LEFT viewport edge
+   and the narrative rail sits on the right. */
+.business {
+  --media-w: clamp(720px, 60.5vw, 1440px);
+  --media-h: clamp(520px, 71svh, 940px);
+  --head-gap: clamp(var(--space-6), 5vw, var(--space-9));
+  --breath: clamp(var(--space-4), 1.25vw, var(--space-5));
+  /* The annotation column: 280px on a normal desktop, 320px at 2560. */
+  --annot-w: clamp(280px, 16.5vw, 320px);
+  --stick-top: calc((100svh - var(--media-h)) / 2);
+  padding-top: var(--section-md);
+  padding-bottom: var(--section-md);
+}
+
+/* Chapter opening — Act one's intro exactly, not mirrored: label and title
+   left, supporting statement right, at the same display scale. Only the
+   sticky feature section below is mirrored. */
+.business__head {
+  padding-inline: var(--page-x);
+}
+.business__title {
+  font-size: var(--type-chapter);
+  line-height: var(--lh-chapter);
+  letter-spacing: var(--ls-chapter);
+  --eyebrow-lift: max(0px, calc(0.045em - 1.2px));
+}
+.business__lede {
+  max-width: var(--reading-max);
+  margin-top: var(--space-4);
+}
+
+/* The sequence — normal flow. */
+.ledger {
+  margin-top: var(--space-7);
+}
+.ledger__rail {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--page-x);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--space-8), 12vw, var(--space-10));
+}
+.entry__media {
+  margin: 0 0 var(--space-4);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--media-ground);
+}
+.entry__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.entry__media--ui {
+  background: #141211; /* the asset's own ground: shown whole, never cropped */
+}
+.entry__media--ui img {
+  object-fit: contain;
+}
+/* Retail impact: short rule, mono label, statement — kept with its feature. */
+.impact {
+  display: grid;
+  gap: var(--space-1);
+  /* 32px on normal screens, 48px at 2560 — the one break in the block. */
+  margin-top: clamp(var(--space-5), 1.9vw, var(--space-6));
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  color: var(--text);
+}
+.impact__label {
+  font-size: var(--type-label);
+  line-height: 1.25;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.impact p {
+  text-wrap: pretty;
+  color: var(--text);
+  max-width: 100%; /* never wider than the annotation column */
+}
+/* The sticky stage does not exist below the wide breakpoint. */
+.ledger__media {
+  display: none;
+}
+@media (min-width: 640px) {
+  .entry__media {
+    aspect-ratio: 4 / 3;
+  }
+  .entry__media--ui {
+    aspect-ratio: 16 / 9;
+  }
+}
+@media (min-width: 900px) {
+  .entry__media {
+    aspect-ratio: 16 / 10;
+  }
+  .entry__media--ui {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Wide viewports — the sticky stage, mirrored. */
+@media (min-width: 1100px) and (min-height: 600px) {
+  /* Phase A: the head shares the stage's grid, so the supporting statement's
+     right edge is the media stage's right edge; the title may run past its
+     column (row one of the first column is empty). */
+  /* Phase A — the opening reads left to right as one unit: label and title
+     left, the supporting statement beside them on the same baseline. */
+  .business__head {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: clamp(var(--space-6), 5vw, var(--space-9));
+    align-items: end;
+  }
+  .business__title {
+    white-space: nowrap; /* the authored break is the only break */
+  }
+  .business__lede {
+    margin-top: 0;
+    padding-bottom: 0.4em;
+  }
+  /* Phase B: one media plane to the left edge, breathing space, narrative
+     rail. The first feature waits below the opening frame so 01 reaches its
+     reading position only once the opening has cleared. */
+  .ledger {
+    display: grid;
+    grid-template-columns: var(--media-w) minmax(0, 1fr);
+    column-gap: var(--breath);
+    align-items: start;
+    padding-right: var(--page-x);
+    margin-top: var(--space-6);
+  }
+  .ledger__rail {
+    display: block;
+    padding: 0;
+    padding-block: calc(var(--stick-top) + 16svh) 10svh;
+  }
+  .entry {
+    min-height: 80svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .entry__media {
+    display: none;
+  }
+  .entry__block {
+    width: var(--annot-w);
+    max-width: 100%;
+    opacity: 0.35;
+    transition: opacity var(--duration-base) var(--ease-standard);
+  }
+  .entry.is-active .entry__block {
+    opacity: 1;
+  }
+  html:not(.js) .entry__block,
+  .js.reduced .entry__block {
+    opacity: 1;
+  }
+  .ledger__media {
+    display: block;
+    position: sticky;
+    top: var(--stick-top);
+  }
+  .evid {
+    margin: 0;
+    position: relative;
+    height: var(--media-h);
+    width: 100%;
+    overflow: hidden;
+    background: var(--media-ground);
+    border-radius: var(--radius-media);
+  }
+  /* State change: 300ms, in and out together, nothing layered for long. */
+  .evid__state {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 300ms var(--ease-standard);
+  }
+  .evid__state--ui {
+    object-fit: contain;
+    background: #141211;
+  }
+  .evid__state.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+  .evid__state.is-leaving {
+    opacity: 0;
+  }
+}
+
+/* ── The console — object-led and calm ──────────────────────────────────
+   A small editorial cluster at the upper left, then the intact interface
+   below it and offset strongly to the right: small intro above, large
+   precise object below — not a text column beside a dashboard column. */
+.console {
+  padding-block: var(--section-md);
+}
+.console__intro {
+  display: flex;
+  flex-direction: column;
+  max-width: 360px;
+}
+.console__intro .h2 {
+  margin-bottom: var(--space-4);
+}
+.console__lede {
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  text-wrap: pretty;
+  color: var(--text-2);
+}
+.console__object {
+  margin-top: var(--space-7);
+}
+@media (min-width: 1024px) {
+  .console {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(var(--space-3), 1.7vw, var(--space-4));
+  }
+  .console__intro {
+    grid-column: 1 / span 5;
+    grid-row: 1;
+  }
+  .console__object {
+    /* Below the cluster and offset right — its top edge never lines up with
+       the heading. */
+    grid-column: 4 / span 9;
+    grid-row: 2;
+    margin-top: clamp(var(--space-7), 8vh, var(--space-9));
+  }
+}
+
+/* The console object. */
+.surface {
+  --surface-pad: clamp(var(--space-4), 2.2vw, var(--space-6));
+  border: 1px solid var(--line);
+  background: var(--surface-light);
+}
+.surface__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--surface-pad);
+  border-bottom: 1px solid var(--line);
+  text-transform: uppercase;
+}
+.surface__tag {
+}
+.metrics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.metric {
+  padding: var(--surface-pad);
+}
+.metric + .metric {
+  border-top: 1px solid var(--line);
+}
+.metric__label {
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+/* The interface's own numerals: component typography inside the object. */
+.metric__value {
+  font-size: clamp(2.5rem, 1.5rem + 2.4vw, 4rem);
+  font-weight: var(--w-heading);
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+}
+.metric__delta {
+  margin-top: var(--space-2);
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  color: var(--text-2);
+}
+.metric__delta.up {
+  color: var(--status-success);
+}
+.stores {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.stores li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--surface-pad);
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+}
+.stores li + li {
+  border-top: 1px solid var(--line);
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: var(--type-label);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-small);
+  border: 1px solid var(--rule);
+}
+.pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.pill--live {
+  color: var(--status-success);
+  background: var(--status-success-bg);
+  border-color: transparent;
+}
+.pill--sync {
+  color: var(--status-warning);
+  background: var(--status-warning-bg);
+  border-color: transparent;
+}
+.pill--sync::before {
+  animation: blink 1.4s ease-in-out infinite;
+}
+.pill--off {
+  color: var(--status-critical);
+  background: var(--status-critical-bg);
+  border-color: transparent;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+.console__note {
+  margin-top: var(--space-3);
+  text-transform: uppercase;
+}
+@media (min-width: 640px) {
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .metric + .metric {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+  }
+}
+
+/* ── Handoff — the physical reset ───────────────────────────────────────
+   Full-bleed after the system: the photograph is the width of the viewport
+   and cropped into the room, nothing written on it. */
+.handoff {
+  padding-block: 0;
+}
+.handoff__frame {
+  position: relative;
+  margin: 0;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  height: clamp(420px, 70vh, 900px);
+  overflow: hidden;
+  background: var(--media-ground);
+}
+.handoff__frame img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: 52% 42%;
+  will-change: transform;
+}
+@media (max-width: 640px) {
+  .handoff__frame {
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* ── Answers ────────────────────────────────────────────────────────────── */
+.answers__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(var(--space-6), 6vw, var(--space-9));
+  align-items: start;
+}
+.answers__head {
+  position: sticky;
+  top: clamp(var(--space-8), 14vh, 140px);
+}
+.qa {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.qa li {
+  display: grid;
+  grid-template-columns: 3ch 1fr;
+  gap: clamp(var(--space-3), 2vw, var(--space-5));
+  padding-block: clamp(var(--space-4), 3vw, var(--space-6));
+  border-bottom: 1px solid var(--line);
+}
+.qa li span {
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  font-variant-numeric: tabular-nums;
+  color: var(--notation);
+  padding-top: 0.5em;
+}
+.qa h3 {
+  font-weight: var(--w-heading);
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  margin-bottom: var(--space-2);
+}
+.qa p {
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+  text-wrap: pretty;
+  color: var(--text-2);
+  max-width: var(--reading-max);
+}
+@media (max-width: 900px) {
+  .answers__grid {
+    grid-template-columns: 1fr;
+  }
+  .answers__head {
+    position: static;
+  }
+}
+
+/* ── The ask ────────────────────────────────────────────────────────────── */
+.ask {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding-block: var(--section-lg);
+}
+.ask__title {
+  margin-inline: auto;
+  max-width: 10ch;
+}
+.ask__actions {
+  margin-top: clamp(var(--space-5), 4vw, var(--space-6));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.ask__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  font-weight: var(--w-medium);
+}
+.ask__copy {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--text-2);
+  transition:
+    color var(--duration-fast),
+    box-shadow var(--duration-fast),
+    transform var(--duration-base) var(--ease-standard);
+}
+.ask__copy svg {
+  width: 16px;
+  height: 16px;
+}
+.ask__copy:hover,
+.ask__copy[data-done="true"] {
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--text);
+}
+.ask__copy[data-done="true"] .ic-copy,
+.ask__copy:not([data-done="true"]) .ic-check {
+  display: none;
+}
+.ask__note {
+  color: var(--text-2);
+  max-width: var(--copy-max);
+  margin-inline: auto;
+}
+.magnetic {
+  will-change: transform;
+}
+
+/* ── Footer — the wordmark is a brand treatment, outside the type tiers. ── */
+.footer {
+  /* Clears the dock, which is fixed on the same bottom axis. */
+  padding: 0 var(--page-x) calc(var(--dock-inset) + var(--dock-h) + var(--space-4));
+  overflow: clip;
+}
+.footer__word {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.footer__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  color: var(--text-2);
+  font-size: var(--type-small);
+  line-height: var(--lh-small);
+}
+.footer__row a {
+  color: var(--text);
+}
+.footer__links {
+  display: flex;
+  gap: var(--space-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Cursor (fine pointers only) ────────────────────────────────────────── */
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--text-inverse);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  transform: translate(-100px, -100px);
+  transition:
+    width var(--duration-base) var(--ease-standard),
+    height var(--duration-base) var(--ease-standard),
+    margin var(--duration-base) var(--ease-standard),
+    opacity var(--duration-base);
+  opacity: 0;
+}
+.cursor.is-on {
+  opacity: 1;
+}
+.cursor.is-link {
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  opacity: 0.9;
+}
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}
+
+/* ── Notation — Fragment Mono ───────────────────────────────────────────
+   Two voices. Switzer is Vagora speaking: every display and statement
+   headline, all body copy and descriptions, FAQ questions and answers, the
+   dock, buttons, links, contact copy, the console's readable interface copy
+   and its large metrics. Fragment Mono (regular only) is Vagora's micro
+   compositional language: every eyebrow (handled on `.eyebrow` above),
+   plus — through `.notation` — indexes and sequence numbers, feature
+   classifications, RETAIL IMPACT labels, specification and FAQ indexes, and
+   system metadata (ESTATE OVERVIEW, ILLUSTRATIVE, the metric labels, SAMPLE
+   DATA · NOT A LIVE ESTATE). One 14px tier, weight 400, one 0.02em tracking everywhere,
+   one colour — `--notation`, 55% ink on light and 52% white on dark —
+   stable at every viewport. There are no lighter or darker mono elements:
+   the voice does not change strength with what it happens to label.
+   No brackets, coordinates, timestamps or terminal decoration: the font is
+   the notation. */
+.notation {
+  font-family: var(--mono);
+  font-size: var(--type-label);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--notation);
+}
+.qa li span.notation {
+  font-size: var(--type-label);
+  line-height: 1.25;
+  padding-top: 0.45em;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .aperture__state,
+  .aperture__state.is-leaving {
+    transition: opacity 200ms linear;
+  }
+}

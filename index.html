@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vagora — The in-store try-on mirror</title>
+    <meta
+      name="description"
+      content="An interactive mirror that helps customers discover more, explore effortlessly, and gives retailers more from every visit." />
+    <meta name="theme-color" content="#FFFFFF" />
+    <link rel="canonical" href="https://www.vagoramirror.com/" />
+    <link
+      rel="icon"
+      href="/assets/brand/avatar/vagora-avatar-mark-light.png"
+      media="(prefers-color-scheme: light)" />
+    <link
+      rel="icon"
+      href="/assets/brand/avatar/vagora-avatar-mark-dark.png"
+      media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/assets/brand/avatar/vagora-avatar-mark-light.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Vagora — The in-store try-on mirror" />
+    <meta
+      property="og:description"
+      content="An interactive mirror that helps customers discover more, explore effortlessly, and gives retailers more from every visit." />
+    <!-- Absolute, and on the canonical host: crawlers are not required to
+         resolve a relative og:image, and Vite's relative base would rewrite
+         one to "./share-card.png". Update all four URLs together if the
+         canonical host ever changes. -->
+    <meta property="og:url" content="https://www.vagoramirror.com/" />
+    <meta property="og:image" content="https://www.vagoramirror.com/share-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Vagora Mirror" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Switzer-Variable.woff2" />
+    <link rel="preload" as="image" href="/assets/video/vagora-intro-poster.webp" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <!--
+      Asset provenance
+      · Film, poster, renders, logo: Vagora. The renders are concept renders of
+        the Mirror in a store, not photographs of an installation.
+      · Switzer: Fontshare Free Font Licence (assets/fonts/LICENSE-Switzer-FFL.txt).
+      · Icons: Solar by 480 Design, CC BY 4.0, via Iconify (@iconify-json/solar),
+        inlined below as symbols.
+      Evidence
+      · No customer, store, pilot result or uplift figure appears on this page
+        because none is evidenced yet. The console figures are sample data and
+        say so on the asset.
+    -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-arrow-up-right" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9" />
+      </symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z" /><path d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5" /></g>
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.5 12.5L10.5 14.5L15.5 9.5" /></g>
+      </symbol>
+      <symbol id="i-play" viewBox="0 0 24 24">
+        <path fill="none" stroke="currentColor" stroke-width="1.5" d="M20.4086 9.35258C22.5305 10.5065 22.5305 13.4935 20.4086 14.6474L7.59662 21.6145C5.53435 22.736 3 21.2763 3 18.9671L3 5.0329C3 2.72368 5.53435 1.26402 7.59661 2.38548L20.4086 9.35258Z" />
+      </symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6C2 4.11438 2 3.17157 2.58579 2.58579C3.17157 2 4.11438 2 6 2C7.88562 2 8.82843 2 9.41421 2.58579C10 3.17157 10 4.11438 10 6V18C10 19.8856 10 20.8284 9.41421 21.4142C8.82843 22 7.88562 22 6 22C4.11438 22 3.17157 22 2.58579 21.4142C2 20.8284 2 19.8856 2 18V6Z" /><path d="M14 6C14 4.11438 14 3.17157 14.5858 2.58579C15.1716 2 16.1144 2 18 2C19.8856 2 20.8284 2 21.4142 2.58579C22 3.17157 22 4.11438 22 6V18C22 19.8856 22 20.8284 21.4142 21.4142C20.8284 22 19.8856 22 18 22C16.1144 22 15.1716 22 14.5858 21.4142C14 20.8284 14 19.8856 14 18V6Z" /></g>
+      </symbol>
+    </svg>
+
+    <a class="skip" href="#main">Skip to content</a>
+
+    <main id="main">
+      <!-- ══ THE INTRO ══ The film takes the whole viewport; the poster is the
+           static first frame. Nothing is written over it — the dock introduces
+           itself by arriving. -->
+      <header class="hero" id="top" data-surface="dark">
+        <div class="hero__media" data-hero-media>
+          <video
+            muted
+            loop
+            playsinline
+            autoplay
+            preload="auto"
+            poster="/assets/video/vagora-intro-poster.webp"
+            aria-label="A customer trying on outfits at a Vagora Mirror"
+            data-hero-video>
+            <source src="/assets/video/vagora-intro.webm" type="video/webm" />
+            <source src="/assets/video/vagora-intro.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <button class="hero__film-toggle" type="button" data-state="playing" aria-label="Pause the film" data-film-toggle>
+          <svg class="ic-pause" aria-hidden="true"><use href="#i-pause" /></svg>
+          <svg class="ic-play" aria-hidden="true"><use href="#i-play" /></svg>
+        </button>
+      </header>
+
+      <!-- ══ MANIFESTO ══ -->
+      <section class="section manifesto container" aria-labelledby="manifesto-h">
+        <p class="eyebrow reveal">Vagora is</p>
+        <h2 class="manifesto__text" id="manifesto-h" data-split="words" data-scrub>
+          An interactive mirror that helps customers discover more, explore effortlessly, and gives retailers
+          more from every visit.
+        </h2>
+        <div class="manifesto__meta">
+          <div class="reveal" data-delay="1">
+            <strong>Live 3D try-on</strong>
+            <span>The garment moves when the customer moves.</span>
+          </div>
+          <div class="reveal" data-delay="2">
+            <strong>The whole catalogue</strong>
+            <span>Every size and colourway, checked against live stock.</span>
+          </div>
+          <div class="reveal" data-delay="3">
+            <strong>One connected estate</strong>
+            <span>Every mirror in every store on one console.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ ACT ONE · THE FLOOR ══ A large retail world with editorial
+           annotation. Wide viewports: the media stage runs to the right edge
+           and stays while the five steps pass it, changing state with the
+           active step. Narrow viewports: no sticky media — each state is one
+           editorial scene (image, index, headline, description) in normal
+           flow, using the same source images via .step__media. The Retail
+           impact lines are kept in the markup but withheld from presentation
+           (hidden, data-impact-withheld). -->
+      <section class="section floor" id="floor" aria-labelledby="floor-h">
+        <div class="floor__head">
+          <div>
+            <p class="eyebrow reveal">Act one · On the floor</p>
+            <h2 class="h2 floor__title" id="floor-h" data-split="lines">What happens<br />on the floor.</h2>
+          </div>
+          <p class="floor__lede lede reveal" data-delay="1">
+            Five things your customers can do with Vagora that aren’t possible anywhere else on your floor.
+          </p>
+        </div>
+
+        <div class="stage" data-stage>
+          <ol class="stage__steps" data-steps>
+            <li class="step is-active" data-step="01">
+              <figure class="step__media">
+                <img
+                  src="/assets/imagery/feature-try-on.webp"
+                  width="1920"
+                  height="1080"
+                  alt="A customer moving her hand at the mirror while the garment renders on her in real time"
+                  style="object-position: 46% center"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="step__block" data-step-block>
+                <p class="step__index num">(01)</p>
+                <h3 class="step__title">The garment, rendered on the customer in live 3D.</h3>
+                <p class="step__body">It tracks the customer’s movement in real time, so the garment responds as they move.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>Staff fetch a piece the customer has already seen on themselves, rather than asking them to imagine it.</p>
+                </div>
+              </div>
+            </li>
+            <li class="step" data-step="02">
+              <figure class="step__media">
+                <img
+                  src="/assets/imagery/feature-catalogue.webp"
+                  width="1920"
+                  height="1080"
+                  alt="The mirror showing a look beside a full grid of colourways from the catalogue"
+                  style="object-position: 60% center"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="step__block" data-step-block>
+                <p class="step__index num">(02)</p>
+                <h3 class="step__title">Every size and colourway, on screen.</h3>
+                <p class="step__body">Customers can explore the full catalogue, with each option checked against live stock before it is shown.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>The buying decision is no longer limited to what physically fits on the rail.</p>
+                </div>
+              </div>
+            </li>
+            <li class="step" data-step="03">
+              <figure class="step__media">
+                <img
+                  src="/assets/imagery/feature-outfit.webp"
+                  width="1920"
+                  height="1080"
+                  alt="A complete look on the mirror with its coordinating pieces listed alongside"
+                  style="object-position: 55% center"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="step__block" data-step-block>
+                <p class="step__index num">(03)</p>
+                <h3 class="step__title">The whole look, before anything is fetched.</h3>
+                <p class="step__body">Customers can combine pieces on themselves to see how the complete outfit comes together.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>More pieces enter consideration without staff having to suggest them one by one.</p>
+                </div>
+              </div>
+            </li>
+            <li class="step" data-step="04">
+              <figure class="step__media">
+                <img
+                  src="/assets/imagery/feature-made-to-order.webp"
+                  width="1920"
+                  height="1080"
+                  alt="A made-to-order dress rendered on the mirror beside its fabric swatches and sketch"
+                  style="object-position: 58% center"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="step__block" data-step-block>
+                <p class="step__index num">(04)</p>
+                <h3 class="step__title">Made-to-order, before the first cut.</h3>
+                <p class="step__body">Unstitched cloth and made-to-order garments can be rendered on the customer before production begins.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>Orders are taken against something the customer has already seen, so cloth is cut to demand rather than forecast.</p>
+                </div>
+              </div>
+            </li>
+            <li class="step" data-step="05">
+              <figure class="step__media">
+                <img
+                  src="/assets/imagery/feature-scene.webp"
+                  width="1920"
+                  height="1080"
+                  alt="Scene mode placing the customer and the look inside a built world"
+                  style="object-position: 55% center"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="step__block" data-step-block>
+                <p class="step__index num">(05)</p>
+                <h3 class="step__title">The campaign, with the customer in it.</h3>
+                <p class="step__body">Vagora places the customer inside campaign scenes built around the collection.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>The campaign becomes an in-store experience rather than something the customer only sees around them.</p>
+                </div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="stage__media">
+            <figure class="aperture" data-aperture>
+              <img
+                class="aperture__state is-active"
+                data-state="01"
+                src="/assets/imagery/feature-try-on.webp"
+                width="1920"
+                height="1080"
+                alt="A customer moving her hand at the mirror while the garment renders on her in real time"
+                style="object-position: 46% center"
+                loading="eager"
+                decoding="async" />
+              <img
+                class="aperture__state"
+                data-state="02"
+                src="/assets/imagery/feature-catalogue.webp"
+                width="1920"
+                height="1080"
+                alt="The mirror showing a look beside a full grid of colourways from the catalogue"
+                style="object-position: 60% center"
+                loading="lazy"
+                decoding="async" />
+              <img
+                class="aperture__state"
+                data-state="03"
+                src="/assets/imagery/feature-outfit.webp"
+                width="1920"
+                height="1080"
+                alt="A complete look on the mirror with its coordinating pieces listed alongside"
+                style="object-position: 55% center"
+                loading="lazy"
+                decoding="async" />
+              <img
+                class="aperture__state"
+                data-state="04"
+                src="/assets/imagery/feature-made-to-order.webp"
+                width="1920"
+                height="1080"
+                alt="A made-to-order dress rendered on the mirror beside its fabric swatches and sketch"
+                style="object-position: 58% center"
+                loading="lazy"
+                decoding="async" />
+              <img
+                class="aperture__state"
+                data-state="05"
+                src="/assets/imagery/feature-scene.webp"
+                width="1920"
+                height="1080"
+                alt="Scene mode placing the customer and the look inside a built world"
+                style="object-position: 55% center"
+                loading="lazy"
+                decoding="async" />
+              <figcaption class="visually-hidden">The Vagora Mirror, changing state with each step.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ THE VAGORA MIRROR ══ Not an act: the physical product that
+           connects the shopper's experience (Act one) with what the retailer
+           gets back (Act two). A dark sculptural product chapter on the
+           site's one dark surface, #000000: the complete
+           Vagora Mirror standing in a dark studio as a large product field on
+           the left, white editorial annotation on the right, and a quiet
+           technical specification rail beneath both.
+           MEDIA: vagora-mirror-dark.jpeg (4:5, temporary — the photoshoot
+           video of the real Mirror waking up replaces it). The .object
+           container is video-ready: swap the <img> for
+           <video class="object__media" autoplay muted playsinline loop
+           poster="…"> and nothing else changes. No scripted wake here. -->
+      <section class="section mirror" data-surface="dark" aria-labelledby="mirror-h">
+        <div class="mirror__stage">
+          <div class="mirror__body">
+            <p class="eyebrow reveal">The Vagora Mirror</p>
+            <h2 class="h2" id="mirror-h" data-split="lines">An interactive mirror that starts by itself.</h2>
+            <p class="mirror__lede reveal" data-delay="1">
+              Freestanding on the shop floor, the Vagora Mirror starts when someone steps in front of it.
+              Nothing to tap, nothing to learn.
+            </p>
+          </div>
+
+          <div class="mirror__object">
+            <figure class="object">
+              <img
+                class="object__media"
+                src="/assets/imagery/vagora-mirror-dark.jpeg"
+                width="1024"
+                height="1280"
+                alt="The Vagora Mirror in a dark studio: a tall black-framed vertical screen with its sensing hardware on the right edge, standing on a black base with casters"
+                loading="eager"
+                decoding="async" />
+            </figure>
+          </div>
+
+          <ol class="spec mirror__spec reveal" data-delay="2" aria-label="Technical specification">
+            <li><span class="spec__index notation">01</span><span class="spec__fact">Camera active only during a session. Nothing is stored.</span></li>
+            <li><span class="spec__index notation">02</span><span class="spec__fact">No account, no registration, no face database.</span></li>
+            <li><span class="spec__index notation">03</span><span class="spec__fact">Live stock is checked before every item is shown.</span></li>
+            <li><span class="spec__index notation">04</span><span class="spec__fact">49-inch portrait display, readable from a natural standing distance.</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ══ ACT TWO · IN THE BUSINESS ══ Act one's system, mirrored.
+           Same markup shape, same tokens, same state machine: wide viewports
+           get one sticky media plane — here running to the LEFT viewport
+           edge — that stays while the three features pass it on the right,
+           changing state with the active feature. Narrow viewports: no
+           sticky media, each feature is one editorial scene (image, index,
+           headline, description, retail impact) in normal flow using the
+           same source images via .entry__media. -->
+      <section class="section business" id="business" aria-labelledby="business-h">
+        <div class="business__head">
+          <div>
+            <p class="eyebrow reveal">Act two · In the business</p>
+            <h2 class="h2 business__title" id="business-h" data-split="lines">What it returns<br />to the business.</h2>
+          </div>
+          <p class="business__lede lede reveal" data-delay="1">
+            Vagora turns customer interaction into action at the counter, insight for the next buying decision,
+            and one connected system across every store.
+          </p>
+        </div>
+
+        <div class="ledger" data-ledger>
+          <div class="ledger__media">
+            <figure class="evid" data-evid aria-hidden="true">
+              <img class="evid__state is-active" data-state="01" src="/assets/imagery/biz-carryover.webp" width="1920" height="1080" alt="" style="object-position: 62% center" loading="lazy" decoding="async" />
+              <img class="evid__state" data-state="02" src="/assets/imagery/biz-intelligence.webp" width="1920" height="1080" alt="" style="object-position: 58% center" loading="lazy" decoding="async" />
+              <!-- System evidence, not photography: shown whole on its own
+                   ground so the estate list is never cropped. -->
+              <img class="evid__state evid__state--ui" data-state="03" src="/assets/imagery/biz-fleet.webp" width="1920" height="1080" alt="" loading="lazy" decoding="async" />
+            </figure>
+          </div>
+
+          <ol class="ledger__rail" data-rail>
+            <li class="entry is-active" data-entry="01">
+              <figure class="entry__media">
+                <img
+                  src="/assets/imagery/biz-carryover.webp"
+                  width="1920"
+                  height="1080"
+                  alt="A customer beside the Vagora Mirror, her picks shown on the screen"
+                  style="object-position: 62% center"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="entry__block" data-entry-block>
+                <p class="entry__index num">(01)</p>
+                <h3 class="entry__title">Their picks, already at the till.</h3>
+                <p class="entry__body">One scan sends the customer’s selected garments, colourways and sizes to their phone and the counter.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>The customer reaches the till without having to repeat what they want.</p>
+                </div>
+              </div>
+            </li>
+            <li class="entry" data-entry="02">
+              <figure class="entry__media">
+                <img
+                  src="/assets/imagery/biz-intelligence.webp"
+                  width="1920"
+                  height="1080"
+                  alt="A retail intelligence wall showing garment interest and try-on data"
+                  style="object-position: 58% center"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="entry__block" data-entry-block>
+                <p class="entry__index num">(02)</p>
+                <h3 class="entry__title">See what customers actually tried on.</h3>
+                <p class="entry__body">See what customers browsed, tried, combined, saved and ignored, by store and garment.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>Demand becomes visible before purchase, not only after it.</p>
+                </div>
+              </div>
+            </li>
+            <li class="entry" data-entry="03">
+              <figure class="entry__media entry__media--ui">
+                <img
+                  src="/assets/imagery/biz-fleet.webp"
+                  width="1920"
+                  height="1080"
+                  alt="Estate status: 41 of 42 mirrors online across six markets"
+                  loading="lazy"
+                  decoding="async" />
+              </figure>
+              <div class="entry__block" data-entry-block>
+                <p class="entry__index num">(03)</p>
+                <h3 class="entry__title">Run every mirror from one console.</h3>
+                <p class="entry__body">Manage catalogue, content and configuration across every store, with sync status and offline alerts in one place.</p>
+                <div class="impact">
+                  <span class="impact__label notation">Retail impact</span>
+                  <p>The second store becomes a rollout date, not a second project.</p>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ══ THE CONSOLE ══ Object-led and calm after Act two: a small
+           editorial cluster at the upper left, then the intact console
+           interface below it and offset to the right. Every metric, status
+           and store row lives inside the object. -->
+      <section class="section console container" aria-labelledby="console-h">
+        <div class="console__intro">
+          <p class="eyebrow reveal">The console</p>
+          <h2 class="h2" id="console-h" data-split="lines">You find out before<br />the store does.</h2>
+          <p class="console__lede reveal" data-delay="1">
+            Every mirror in every store on one screen, with its catalogue, session activity and last sync
+            status. If a mirror goes offline, the console alerts you with the time it stopped and its last
+            successful sync, before anyone on the floor notices the screen is dark.
+          </p>
+        </div>
+
+        <div class="console__object reveal" data-delay="1">
+          <div class="surface" role="img" aria-label="Illustration of the console: session count, mirrors online, and per-store sync state. Sample data.">
+            <div class="surface__bar notation">
+              <span>Estate overview</span>
+              <span class="surface__tag">Illustrative</span>
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <div class="metric__label notation">Sessions today</div>
+                <div class="metric__value num" data-count="1284">0</div>
+                <div class="metric__delta up num">+12.4%</div>
+              </div>
+              <div class="metric">
+                <div class="metric__label notation">Mirrors online</div>
+                <div class="metric__value num"><span data-count="41">0</span> / 42</div>
+                <div class="metric__delta num">Mirror 12 offline</div>
+              </div>
+            </div>
+            <ul class="stores">
+              <li><span class="stores__name">Store 1</span><span class="pill pill--live">Live</span></li>
+              <li><span class="stores__name">Store 2</span><span class="pill pill--sync">Syncing</span></li>
+              <li><span class="stores__name">Store 3</span><span class="pill pill--off">Offline</span></li>
+            </ul>
+          </div>
+          <p class="console__note notation">Sample data, not a live estate.</p>
+        </div>
+      </section>
+
+      <!-- ══ HANDOFF ══ The physical reset after the system: the photograph
+           full-bleed, cropped into the room, nothing written on it. -->
+      <section class="section handoff" aria-label="The handoff">
+        <figure class="handoff__frame reveal">
+          <img
+            src="/assets/imagery/store-handoff.webp"
+            width="1920"
+            height="1080"
+            alt="A customer scanning the mirror's code with her phone while a colleague brings the piece"
+            loading="lazy"
+            decoding="async"
+            data-parallax />
+        </figure>
+      </section>
+
+      <!-- ══ ANSWERS ══ All open: an answer left collapsed is an objection left standing. -->
+      <section class="section container" id="answers" aria-labelledby="answers-h">
+        <div class="answers__grid">
+          <div class="answers__head">
+            <p class="eyebrow reveal">FAQ</p>
+            <h2 class="h2" id="answers-h" data-split="lines">Before you commit.</h2>
+          </div>
+          <ol class="qa">
+            <li class="reveal">
+              <span class="notation" aria-hidden="true">01</span>
+              <div>
+                <h3>What happens to customer images?</h3>
+                <p>The camera is active only during a session and nothing is stored. There is no enrolment, no account and no face database. A photo the customer chooses to keep goes to their phone and leaves the mirror when the session ends.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="notation" aria-hidden="true">02</span>
+              <div>
+                <h3>Will it work with our catalogue?</h3>
+                <p>It reads the product feed you already publish, and stock syncs live from your system. Nothing appears on the mirror that the store cannot produce.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="notation" aria-hidden="true">03</span>
+              <div>
+                <h3>What do staff have to do?</h3>
+                <p>Nothing during a session. The mirror starts, runs and ends on its own. Staff meet the customer at the counter with a list that is already there, which is where a person is worth more than a screen.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="notation" aria-hidden="true">04</span>
+              <div>
+                <h3>How do we know whether it worked?</h3>
+                <p>Sessions, try-ons per session, scans to phone and scans to counter, by store and by garment, in the console from the first day. We have no benchmark to compare you against yet, and will not invent one.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="notation" aria-hidden="true">05</span>
+              <div>
+                <h3>What does a rollout involve?</h3>
+                <p>One store first, on a fixed term, with the measure agreed in writing before installation. After that, catalogue, content and configuration are managed centrally, so each further store is a delivery date.</p>
+              </div>
+            </li>
+            <li class="reveal">
+              <span class="notation" aria-hidden="true">06</span>
+              <div>
+                <h3>What does it cost?</h3>
+                <p>We quote per estate. The price depends on the number of mirrors, the stores they go into and what your catalogue and stock systems need on our side. Ask and we will put a number in writing.</p>
+              </div>
+            </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ══ THE ASK ══ -->
+      <section class="section ask container" id="contact" data-surface="dark" aria-labelledby="ask-h">
+        <p class="eyebrow reveal">Request a demo</p>
+        <h2 class="display ask__title" id="ask-h" data-split="lines">See it in<br />your store.</h2>
+        <div class="ask__actions reveal" data-delay="1">
+          <a class="btn btn--lg" href="mailto:hi@vagoramirror.com?subject=Request%20a%20demo" data-magnetic>
+            <span>Write to us</span>
+            <svg aria-hidden="true"><use href="#i-arrow-up-right" /></svg>
+          </a>
+          <p class="ask__mail">
+            <a class="link" href="mailto:hi@vagoramirror.com">hi@vagoramirror.com</a>
+            <button class="ask__copy" type="button" data-copy="hi@vagoramirror.com" aria-label="Copy the email address">
+              <svg class="ic-copy" aria-hidden="true"><use href="#i-copy" /></svg>
+              <svg class="ic-check" aria-hidden="true"><use href="#i-check" /></svg>
+            </button>
+            <span class="visually-hidden" role="status" aria-live="polite" data-copy-status></span>
+          </p>
+          <p class="ask__note small">
+            One line about your estate and your catalogue system is enough to get a useful reply.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" data-surface="dark">
+      <img
+        class="footer__word"
+        src="/assets/brand/logo/display-vagora-only.svg"
+        width="450"
+        height="127"
+        alt="Vagora"
+        loading="lazy" />
+      <div class="footer__row">
+        <p>© 2026 Vagora</p>
+        <ul class="footer__links">
+          <li><a class="link" href="mailto:hi@vagoramirror.com">hi@vagoramirror.com</a></li>
+          <li><a class="link" href="https://aqib.framer.ai" target="_blank" rel="noopener noreferrer">Site by Aqib</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <!-- The dock: the only navigation — a frosted ink pill fixed bottom-centre.
+         The brand cell reloads the page and is deliberately not a link like the
+         others: no hover, no active state, no flip. -->
+    <nav class="dock" aria-label="Primary">
+      <a class="dock__brand" href="#top" aria-label="Vagora, back to the top">
+        <span class="mark" aria-hidden="true"></span>
+      </a>
+      <span class="dock__divider" aria-hidden="true"></span>
+      <!-- Each link carries its label twice for the flip; only the hidden copy
+           is exposed to assistive technology, so the name is never doubled. -->
+      <a class="dock__link" href="#floor" data-spy="floor">
+        <span class="flip" aria-hidden="true"><span>Experience</span><span>Experience</span></span>
+        <span class="visually-hidden">Experience</span>
+      </a>
+      <a class="dock__link" href="#business" data-spy="business">
+        <span class="flip" aria-hidden="true"><span>Business</span><span>Business</span></span>
+        <span class="visually-hidden">Business</span>
+      </a>
+      <a class="dock__link" href="#contact" data-spy="contact">
+        <span class="flip" aria-hidden="true"><span>Contact</span><span>Contact</span></span>
+        <span class="visually-hidden">Contact</span>
+      </a>
+    </nav>
+
+    <div class="cursor" aria-hidden="true" data-cursor></div>
+  </body>
+</html>

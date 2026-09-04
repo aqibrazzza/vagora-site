@@ -1,0 +1,11 @@
+# One line ending in the repository, whatever the checkout platform.
+* text=auto eol=lf
+
+# Binaries: never normalised, never diffed as text.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.webm  binary
+*.mp4   binary
+*.woff2 binary
