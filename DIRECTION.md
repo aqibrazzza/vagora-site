@@ -41,3 +41,6 @@ No. The hero is the film; a shader would be ornament here.
 - Switzer: Fontshare FFL (licence file kept in assets/fonts). Fragment Mono: SIL OFL 1.1, self-hosted (latin woff2 from the fontsource package; licence in assets/fonts).
 - Icons: Solar (Iconify, CC BY 4.0) — inlined at build time from `@iconify-json/solar`.
 - No avatars, no testimonials, no logo wall: no evidenced customer exists yet, so none is shown.
+
+## Motion
+See `MOTION.md`. Deliberately small, and smaller after a cinematic pass was built and rejected in use. Motion is either a fix (the hero film's loop), an arrival (the product resolving by exposure, the console plane, the store crop, the wordmark), or an answer to where the reader is (the dock's tone). It is never a section's decoration, and it never makes the reader wait — the preloader hands scrolling back the moment the black clears. There is no WebGL, one smooth-scroll engine, and under reduced motion the page is simply finished on first paint.
