@@ -64,24 +64,43 @@ mass along the bottom edge and a mark at exactly 50% reads as low.
 Scrolling is handed back the moment the black clears; the film's scale goes on
 settling for another second on its own, and the page never waits for it.
 
-**The hero film.** Two separate things, and they were separate problems.
+**The hero film.** A white studio: the Mirror stands at the left of the frame,
+a customer walks in from the right and stops in front of it, and the mirror
+renders the look onto him. Measured frame by frame, all 192 of them: the mean
+luma never leaves **200–215**. There are no dark cuts inside it and no fade to
+black on its tail — the fault the film it replaced had baked into its last
+second. Every frame it has is usable, so the loop is taken at the end.
 
-*The black was baked into the asset.* Measured frame by frame: across all 356
-frames the film's mean luma never leaves 113–133 — **there are no dark cuts
-inside it**. It holds full exposure to **10.833s** and then fades to black
-over its last ~0.95s (114 → 0 between 10.867s and 11.800s), after which the
-native loop cut hard from that black to a bright first frame. The native loop
-is off and playback never enters the fade. **The asset should be re-exported
-without the fade tail**; nothing here covers it up.
+*Where* the loop is taken is read from the media, never written down. A
+constant matched to one asset's tail is a constant a shorter film can never
+reach: the loop would simply never come round and the hero would hold its last
+frame for ever. And the point is the last frame the film **presents**, not its
+duration — a frame's time is the moment it appears, so the final frame of a
+24fps clip lands at duration − 1/24 and a test against the duration itself can
+only ever be false. An `ended` listener is the backstop behind both.
 
-*The restart is a scene change we own*, and a hard cut there is still a jump
-(luma 115 → 127). So the two ends are crossfaded directly, media to media,
-with a second decoder: the film dissolving into itself over 550ms. Only the
-**outgoing** reel fades, over an incoming one already at full opacity —
-fading both, the obvious way, lets the black behind show through and the hero
-dips about 25% at the midpoint. One layer moving, one solid: constant
-brightness, measured. Wide viewports only; a phone keeps the single-decoder
-cut, where a second video decoder costs more than the cut does.
+*The restart is a scene change we own*, and a hard cut there is a jump: the
+clip opens on the Mirror alone and closes on a customer standing at it. So the
+two ends are crossfaded directly, media to media, with a second decoder: the
+film dissolving into itself over 550ms. Only the **outgoing** reel fades, over
+an incoming one already at full opacity — fading both, the obvious way, lets
+the ground behind show through and the hero visibly dips at the midpoint. One
+layer moving, one solid: constant brightness, measured. Wide viewports only; a
+phone keeps the single decoder and the instant restart, where a second video
+decoder costs more than the cut does.
+
+**The crop is keyed to the screen's proportion, not its width.** The film is
+16:9 and the hero is the whole screen, so what survives depends on the shape
+of the screen: a 16:9 desktop keeps all of it, a portrait tablet keeps 42%, a
+phone keeps a quarter. The subject's position decides the anchor — the Mirror
+occupies the frame's 19–42% and the customer stops at 50–63%, so the story
+lives in the left two thirds and centring is only right once the slice is wide
+enough to hold it. Three bands, on `aspect-ratio`: below 0.62 the slice holds
+**the Mirror whole**, which is the product and the thing the screen is
+rendering onto, with the customer entering at its edge; to 1.2 it is anchored
+at 41%, wide enough for both; above that it is centred. Measured at all eight
+viewports, the film fills the hero exactly and the subject is 12.8–33.3% of
+the screen at every one.
 
 **The hero's entrance is the preloader lifting off it.** All the film adds is
 a 1.015 → 1 settle — small enough to read as the image coming to rest rather

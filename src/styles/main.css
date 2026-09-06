@@ -776,7 +776,33 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* THE CROP. The film is 16:9 and the hero is the whole screen, so how much
+     of the frame survives depends on the SCREEN'S proportion, not its width —
+     a 16:9 desktop keeps all of it, a phone keeps a quarter. So the crop is
+     keyed to aspect ratio, and the anchor is chosen from where the subject
+     actually is: the Mirror occupies the frame's 19–42% and the customer
+     stops at 50–63%, so the whole story lives in the left two thirds and
+     centring is only correct once the slice is wide enough to hold it. */
+  object-position: 50% 50%;
   will-change: transform;
+}
+/* Portrait tablets and square-ish screens keep a slice of roughly 42–68%:
+   wide enough for the Mirror and the customer together, but only if it is
+   anchored on them rather than on the middle of an empty studio. */
+@media (max-aspect-ratio: 6 / 5) {
+  .hero__media video,
+  .hero__media img {
+    object-position: 41% 50%;
+  }
+}
+/* Phones keep about a quarter of the frame — too little for both. It holds
+   the Mirror whole, which is the product and the thing the screen is
+   rendering onto; the customer enters at the edge of it. */
+@media (max-aspect-ratio: 31 / 50) {
+  .hero__media video,
+  .hero__media img {
+    object-position: 29% 50%;
+  }
 }
 .hero__film-toggle {
   position: absolute;
@@ -788,7 +814,13 @@ p {
   display: grid;
   place-items: center;
   color: var(--text-inverse);
-  background: var(--frost);
+  /* A heavier wash than the dock's --frost, and only here. The dock carries
+     its own dark pill wherever it goes; this control has nothing behind it but
+     the film, and the film is now a white studio. At the shared 0.35 the pill
+     measured 2.4–3.0:1 against the studio — under the 3:1 a non-text control
+     needs. At 0.55 it is 4.0:1 on the brightest part of the frame, and the
+     white glyph inside it 4.8:1. The dock's token is untouched. */
+  background: rgba(15, 15, 15, 0.55);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   opacity: 0;

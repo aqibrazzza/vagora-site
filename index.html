@@ -34,14 +34,18 @@
     <meta property="og:image:alt" content="Vagora Mirror" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/Switzer-Variable.woff2" />
-    <link rel="preload" as="image" href="/assets/video/vagora-intro-poster.webp" />
+    <link rel="preload" as="image" href="/assets/video/hero-poster.webp" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
     <!--
       Asset provenance
-      · Film, poster, renders, logo: Vagora. The renders are concept renders of
-        the Mirror in a store, not photographs of an installation.
+      · Film (hero-video), poster, renders, logo: Vagora. The renders are
+        concept renders of the Mirror in a store, not photographs of an
+        installation. The hero film is the client's own studio footage:
+        hero-video.mp4 is the master as delivered and is NOT shipped;
+        hero-video.webm / hero-video-web.mp4 are the web encodes of it
+        (audio stripped, faststart) and are what the page loads.
       · Switzer: Fontshare Free Font Licence (assets/fonts/LICENSE-Switzer-FFL.txt).
       · Icons: Solar by 480 Design, CC BY 4.0, via Iconify (@iconify-json/solar),
         inlined below as symbols.
@@ -88,11 +92,11 @@
               playsinline
               autoplay
               preload="auto"
-              poster="/assets/video/vagora-intro-poster.webp"
-              aria-label="A customer trying on outfits at a Vagora Mirror"
+              poster="/assets/video/hero-poster.webp"
+              aria-label="A customer walking up to a Vagora Mirror in a studio, the mirror rendering the look on him as he stops in front of it"
               data-hero-video>
-              <source src="/assets/video/vagora-intro.webm" type="video/webm" />
-              <source src="/assets/video/vagora-intro.mp4" type="video/mp4" />
+              <source src="/assets/video/hero-video.webm" type="video/webm" />
+              <source src="/assets/video/hero-video-web.mp4" type="video/mp4" />
             </video>
           </div>
 

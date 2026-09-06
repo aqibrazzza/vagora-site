@@ -63,24 +63,27 @@ document.addEventListener("click", (e) => {
 })
 
 /* ── The film ───────────────────────────────────────────────────────────────
-   DIAGNOSIS, measured frame by frame from the source asset:
+   Measured frame by frame from the asset: across all 192 frames the mean luma
+   never leaves 200–215. There are no dark cuts inside it and — unlike the film
+   this replaced — no fade to black baked into its tail, so every frame it has
+   is usable and the loop is taken at the end.
 
-   · There are NO dark cuts inside the film. Across all 356 frames the mean
-     luma never leaves 113–133 until the very end.
-   · The black IS BAKED INTO THE ASSET. vagora-intro.webm holds full exposure
-     to 10.833s and then fades to black over its last ~0.95s (luma 114 → 0
-     between 10.867s and 11.800s). The browser's native loop then cut hard from
-     that black back to a bright first frame — that was the interruption.
-     **The asset should be re-exported without the fade tail.** Nothing here
-     covers it up: the native loop is off and playback never enters the fade.
+   The restart is still a scene change we own, and a hard cut there is a jump:
+   the clip opens on the Mirror alone and closes on a customer standing at it.
+   So the two ends are crossfaded directly, media to media, with a second
+   decoder — one film dissolving into itself. Desktop only; a phone gets the
+   instant restart, where a second video decoder costs more than the cut does.
 
-   What remains is a scene change we own — the restart — and a hard cut there
-   is still a jump (luma 115 → 127). So the two ends of the loop are
-   crossfaded directly, media to media, with a second decoder: one film
-   dissolving into itself. Desktop only; a phone gets the instant restart,
-   where a second video decoder costs more than the cut does. */
-const FADE_STARTS = 10.833
+   WHERE the loop is taken is read from the media, never written down. It used
+   to be a constant matched to one asset's fade tail, which meant a shorter
+   film would never reach it: the loop would simply never come round and the
+   hero would freeze on its last frame. If a future asset does carry a tail,
+   FILM_TAIL is the only number to set. */
+const FILM_TAIL = 0
 const LOOP_FADE = 0.55
+/* NaN before metadata, and Infinity keeps the loop from firing until the
+   duration is known — which is the safe direction to be wrong in. */
+const filmEnd = () => (video.duration || Infinity) - FILM_TAIL
 
 const hero = $(".hero")
 const heroScope = $(".hero-scope")
@@ -122,22 +125,30 @@ function film() {
   const canCrossfade = matchMedia(WIDE).matches && typeof video.requestVideoFrameCallback === "function"
 
   if (!canCrossfade) {
-    // One decoder: cut cleanly at the last fully-exposed frame.
+    /* One decoder: cut at the last frame the film actually presents. Note the
+       frame, not the duration — a frame's mediaTime is the moment it appears,
+       so the final frame of a 24fps clip lands at duration − 1/24 and a test
+       against the duration itself can only ever be false. That is exactly how
+       a phone came to hold the last frame for ever instead of looping. */
+    const LAST_FRAME = 0.08
     const restart = () => {
       video.currentTime = 0
       if (!video.paused) video.play().catch(() => {})
     }
     if (typeof video.requestVideoFrameCallback === "function") {
       const tick = (_, meta) => {
-        if (meta.mediaTime >= FADE_STARTS) restart()
+        if (meta.mediaTime >= filmEnd() - LAST_FRAME) restart()
         video.requestVideoFrameCallback(tick)
       }
       video.requestVideoFrameCallback(tick)
     } else {
       video.addEventListener("timeupdate", () => {
-        if (video.currentTime >= FADE_STARTS - 0.3) restart()
+        if (video.currentTime >= filmEnd() - 0.3) restart()
       })
     }
+    // The backstop: whatever the callbacks do, a film that reaches its end
+    // starts again rather than standing still.
+    video.addEventListener("ended", restart)
     video.play().catch(() => setFilmState(false))
     return
   }
@@ -162,7 +173,7 @@ function film() {
 
   let lead = 0
   let handing = false
-  const HAND_AT = FADE_STARTS - LOOP_FADE
+  const handAt = () => filmEnd() - LOOP_FADE
 
   /* Only the OUTGOING reel fades, over an incoming one that is already fully
      opaque and underneath it. Fading both — the obvious way — lets the black
@@ -198,7 +209,7 @@ function film() {
 
   const watch = (v, i) => {
     const tick = (_, meta) => {
-      if (i === lead && !handing && meta.mediaTime >= HAND_AT) hand()
+      if (i === lead && !handing && meta.mediaTime >= handAt()) hand()
       v.requestVideoFrameCallback(tick)
     }
     v.requestVideoFrameCallback(tick)
