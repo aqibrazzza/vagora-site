@@ -1,0 +1,1261 @@
+{
+  "name": "VAGORA BRAND SYSTEM",
+  "version": "1.1.1",
+  "extractedFrom": "vagora-website v6 — src/styles/main.css :root and [data-surface=\"dark\"], index.html, src/main.js",
+  "extractedOn": "2026-09-06",
+  "authority": "design.md is canonical. Values marked status=extracted mirror production exactly; status=recommended are proposals from design.md not yet in production; status=notDefined records an open question. The brand system is versioned on its own; the website's version (package.json) is a separate number.",
+  "conventions": {
+    "status": [
+      "extracted",
+      "recommended",
+      "notDefined"
+    ],
+    "css": "Where a token has a `css` key it is the exact production value, including clamp() functions.",
+    "units": "px unless a css string says otherwise; em/rem are relative to 16px root.",
+    "binding": "Optional on a token. \"contextual\" means the value is a guide to be judged optically in context, not a fixed scale. It never replaces status."
+  },
+  "color": {
+    "surface": {
+      "light": {
+        "value": "#FFFFFF",
+        "css": "--surface-light",
+        "status": "extracted",
+        "note": "The page. Manifesto, both acts, console, handoff, FAQ."
+      },
+      "dark": {
+        "value": "#000000",
+        "css": "--surface-dark",
+        "status": "extracted",
+        "note": "Hero, the Vagora Mirror chapter, the ask, the footer. Pure black so black photography merges without an edge."
+      }
+    },
+    "ink": {
+      "value": "#0F0F0F",
+      "css": "--ink",
+      "status": "extracted",
+      "note": "Text and control colour only. Never a background surface."
+    },
+    "text": {
+      "onLight": {
+        "primary": {
+          "value": "#0F0F0F",
+          "css": "--text-primary",
+          "status": "extracted"
+        },
+        "secondary": {
+          "value": "rgba(15,15,15,0.62)",
+          "css": "--text-secondary",
+          "status": "extracted",
+          "note": "Ledes, FAQ answers, specification facts, notes."
+        },
+        "muted": {
+          "value": "rgba(15,15,15,0.45)",
+          "css": "--text-muted",
+          "status": "extracted"
+        },
+        "notation": {
+          "value": "rgba(15,15,15,0.55)",
+          "css": "--notation-ink",
+          "status": "extracted",
+          "note": "Every Fragment Mono element on a light surface."
+        },
+        "rule": {
+          "value": "rgba(15,15,15,0.10)",
+          "css": "--rule",
+          "status": "extracted"
+        },
+        "mediaGround": {
+          "value": "rgba(15,15,15,0.04)",
+          "css": "--media-ground",
+          "status": "extracted",
+          "note": "Behind images while they load."
+        }
+      },
+      "onDark": {
+        "primary": {
+          "value": "#FFFFFF",
+          "css": "--text-inverse",
+          "status": "extracted"
+        },
+        "secondary": {
+          "value": "rgba(255,255,255,0.68)",
+          "css": "--text-inverse-secondary",
+          "status": "extracted"
+        },
+        "muted": {
+          "value": "rgba(255,255,255,0.45)",
+          "css": "--text-inverse-muted",
+          "status": "extracted"
+        },
+        "notation": {
+          "value": "rgba(255,255,255,0.52)",
+          "css": "--notation-inverse",
+          "status": "extracted"
+        },
+        "rule": {
+          "value": "rgba(255,255,255,0.14)",
+          "css": "--rule-inverse",
+          "status": "extracted"
+        },
+        "mediaGround": {
+          "value": "rgba(255,255,255,0.06)",
+          "css": "--media-ground (dark scope)",
+          "status": "extracted"
+        }
+      }
+    },
+    "control": {
+      "bg": {
+        "value": "#0F0F0F",
+        "css": "--control-bg",
+        "status": "extracted",
+        "dark": "#FFFFFF",
+        "note": "Inverts inside [data-surface=\"dark\"]: white background, ink text."
+      },
+      "fg": {
+        "value": "#FFFFFF",
+        "css": "--control-fg",
+        "status": "extracted",
+        "dark": "#0F0F0F"
+      },
+      "hover": {
+        "value": "rgba(15,15,15,0.86)",
+        "css": "--control-hover",
+        "status": "extracted",
+        "dark": "rgba(255,255,255,0.86)"
+      },
+      "focus": {
+        "value": "#0F0F0F",
+        "css": "--focus",
+        "status": "extracted",
+        "note": "outline: 2px solid; outline-offset: 4px"
+      },
+      "controlOverlay": {
+        "value": "rgba(15,15,15,0.35)",
+        "css": "--frost",
+        "status": "extracted",
+        "note": "CONTROL CHROME ONLY. NEVER USE FOR CONTENT OR ANNOTATION SURFACES. The production CSS variable is named --frost; the token is controlOverlay."
+      },
+      "mediaControlOverlay": {
+        "value": "rgba(15,15,15,0.88)",
+        "css": ".hero__film-toggle background",
+        "status": "extracted",
+        "note": "CONTROL CHROME ONLY. NEVER USE FOR CONTENT OR ANNOTATION SURFACES. The same value as `dock`: the site has one blurred control chrome and both controls wear it. This is the one control placed over media, so its contrast is a property of the footage — measure the glyph against the pill (must clear 3:1; it is what carries the control) and the pill against the frame on the film it will sit over."
+      },
+      "dock": {
+        "value": "rgba(15,15,15,0.88)",
+        "css": ".dock background",
+        "status": "extracted",
+        "note": "LOCKED. Dark on every surface; backdrop-filter: blur(20px). CONTROL CHROME ONLY. NEVER USE FOR CONTENT OR ANNOTATION SURFACES."
+      }
+    },
+    "status": {
+      "note": "Functional UI colour, used only inside the console object's Live / Syncing / Offline pills. Not brand accents.",
+      "success": {
+        "value": "#0F7A52",
+        "bg": "#EAF5F0",
+        "css": "--status-success / --status-success-bg",
+        "status": "extracted"
+      },
+      "warning": {
+        "value": "#8A5A00",
+        "bg": "#F7F0E2",
+        "css": "--status-warning / --status-warning-bg",
+        "status": "extracted"
+      },
+      "critical": {
+        "value": "#C0342E",
+        "bg": "#FAECEB",
+        "css": "--status-critical / --status-critical-bg",
+        "status": "extracted"
+      }
+    },
+    "assetGround": {
+      "fleetUi": {
+        "value": "#141211",
+        "css": ".entry__media--ui background",
+        "status": "extracted",
+        "note": "The fleet UI capture's own ground so the asset is shown whole. Not a brand surface."
+      }
+    },
+    "shadow": {
+      "lift": {
+        "value": "0 -4px 16px rgba(0,0,0,0.05)",
+        "css": "--shadow-lift",
+        "status": "extracted"
+      },
+      "float": {
+        "value": "0 12px 32px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.14)",
+        "css": "--shadow-float",
+        "status": "extracted",
+        "note": "The dock only. Nothing else casts a shadow."
+      }
+    }
+  },
+  "typography": {
+    "family": {
+      "editorial": {
+        "value": "Switzer",
+        "css": "--sans",
+        "stack": "\"Switzer\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
+        "file": "assets/fonts/Switzer-Variable.woff2 (+ Switzer-VariableItalic.woff2, unused)",
+        "licence": "Fontshare Free Font License (LICENSES/Switzer-FFL.txt)",
+        "axes": "wght 100–900 (site uses 400, 450, 500)",
+        "display": "swap",
+        "status": "extracted",
+        "role": "The editorial voice: everything Vagora says and everything a person can act on."
+      },
+      "notation": {
+        "value": "Fragment Mono",
+        "css": "--mono",
+        "stack": "\"Fragment Mono\", \"SFMono-Regular\", Consolas, monospace",
+        "file": "assets/fonts/FragmentMono-Regular-latin.woff2",
+        "licence": "SIL OFL 1.1 (LICENSES/FragmentMono-OFL.txt)",
+        "weights": "400 only",
+        "status": "extracted",
+        "role": "The notation / system voice: eyebrows, indexes, labels, metadata. Never headings, buttons or body."
+      }
+    },
+    "weight": {
+      "display": {
+        "value": 500,
+        "dark": 450,
+        "css": "--w-display",
+        "status": "extracted"
+      },
+      "heading": {
+        "value": 500,
+        "dark": 450,
+        "css": "--w-heading",
+        "status": "extracted"
+      },
+      "medium": {
+        "value": 500,
+        "dark": 450,
+        "css": "--w-medium",
+        "status": "extracted",
+        "note": "Feature titles, buttons, dock, printed email."
+      },
+      "body": {
+        "value": 400,
+        "status": "extracted"
+      },
+      "mono": {
+        "value": 400,
+        "status": "extracted"
+      }
+    },
+    "scale": {
+      "display": {
+        "css": "clamp(3.75rem, 1.5rem + 7.5vw, 10rem)",
+        "min": 60,
+        "max": 160,
+        "lineHeight": 0.9,
+        "letterSpacing": "-0.045em",
+        "weight": "display",
+        "use": "The ask only",
+        "status": "extracted"
+      },
+      "lead": {
+        "css": "clamp(2.625rem, 1.5rem + 3.33vw, 5.25rem)",
+        "min": 42,
+        "max": 84,
+        "lineHeight": 0.94,
+        "letterSpacing": "-0.035em",
+        "weight": "heading",
+        "use": "The manifesto proposition only",
+        "status": "extracted"
+      },
+      "chapter": {
+        "css": "clamp(2.25rem, 1.4rem + 2.6vw, 4rem)",
+        "min": 36,
+        "max": 64,
+        "lineHeight": 0.98,
+        "letterSpacing": "-0.03em",
+        "weight": "heading",
+        "use": "Act one and Act two openings",
+        "status": "extracted"
+      },
+      "section": {
+        "css": "clamp(1.75rem, 1.2rem + 1.6vw, 3rem)",
+        "min": 28,
+        "max": 48,
+        "lineHeight": 1.02,
+        "letterSpacing": "-0.025em",
+        "weight": "heading",
+        "use": ".h2 / .h3 — the Mirror, the console, FAQ head",
+        "status": "extracted"
+      },
+      "feature": {
+        "css": "var(--type-body)",
+        "min": 18,
+        "max": 22,
+        "lineHeight": 1.25,
+        "letterSpacing": "-0.01em",
+        "weight": "medium",
+        "use": "Feature titles in both acts (body size at heading weight)",
+        "status": "extracted"
+      },
+      "body": {
+        "css": "clamp(1.125rem, 1.05rem + 0.25vw, 1.375rem)",
+        "min": 18,
+        "max": 22,
+        "lineHeight": 1.42,
+        "letterSpacing": "0",
+        "weight": "body",
+        "use": "Ledes, FAQ questions (at heading weight), printed email, large button",
+        "status": "extracted"
+      },
+      "small": {
+        "css": "clamp(1rem, 0.97rem + 0.1vw, 1.0625rem)",
+        "min": 16,
+        "max": 17,
+        "lineHeight": 1.4,
+        "letterSpacing": "0",
+        "weight": "body",
+        "use": "Feature bodies, RETAIL IMPACT statements, facts, answers, notes, buttons, colophon",
+        "status": "extracted"
+      },
+      "label": {
+        "css": "0.875rem",
+        "min": 14,
+        "max": 14,
+        "lineHeight": 1.2,
+        "labelLineHeight": 1.25,
+        "letterSpacing": "0.02em",
+        "weight": "mono",
+        "family": "notation",
+        "transform": "uppercase (labels) / none (indexes)",
+        "use": "Every Fragment Mono element; status pills",
+        "status": "extracted"
+      }
+    },
+    "outsideTheSystem": {
+      "dock": {
+        "css": "clamp(15px, 14.6px + 0.1vw, 16px)",
+        "weight": 500,
+        "status": "extracted"
+      },
+      "metricValue": {
+        "css": "clamp(2.5rem, 1.5rem + 2.4vw, 4rem)",
+        "lineHeight": 0.96,
+        "letterSpacing": "-0.035em",
+        "weight": "heading",
+        "status": "extracted"
+      },
+      "curtainTagline": {
+        "value": "fitted to viewport width by script",
+        "status": "extracted"
+      },
+      "footerWordmark": {
+        "value": "SVG vagora-wordmark-on-dark.svg at 100% width",
+        "status": "extracted"
+      }
+    },
+    "measure": {
+      "reading": {
+        "value": "42rem",
+        "css": "--reading-max",
+        "status": "extracted"
+      },
+      "copy": {
+        "value": "30rem",
+        "css": "--copy-max",
+        "status": "extracted"
+      },
+      "annotation": {
+        "value": "34ch",
+        "status": "extracted"
+      },
+      "annotationWide": {
+        "css": "clamp(280px, 16.5vw, 320px)",
+        "status": "extracted"
+      },
+      "manifesto": {
+        "value": "24ch",
+        "status": "extracted"
+      },
+      "mirrorHeading": {
+        "value": "21ch",
+        "status": "extracted"
+      },
+      "mirrorLede": {
+        "value": "40ch",
+        "status": "extracted"
+      },
+      "askTitle": {
+        "value": "10ch",
+        "status": "extracted"
+      },
+      "consoleIntro": {
+        "css": "clamp(340px, 26vw, 480px) (≥1024) / 360px",
+        "status": "extracted"
+      }
+    },
+    "wrap": {
+      "headings": {
+        "value": "balance",
+        "status": "extracted"
+      },
+      "prose": {
+        "value": "pretty",
+        "status": "extracted"
+      },
+      "numbers": {
+        "value": "tabular-nums",
+        "status": "extracted"
+      }
+    },
+    "eyebrow": {
+      "gap": {
+        "value": 24,
+        "css": "--eyebrow-gap: var(--space-4)",
+        "status": "extracted"
+      },
+      "lift": {
+        "display": {
+          "css": "max(0px, calc(0.09em - 5px))",
+          "status": "extracted"
+        },
+        "lead": {
+          "css": "max(0px, calc(0.05em - 1.4px))",
+          "status": "extracted"
+        },
+        "chapter": {
+          "css": "max(0px, calc(0.045em - 1.2px))",
+          "status": "extracted"
+        }
+      }
+    },
+    "italic": {
+      "status": "notDefined",
+      "note": "Switzer Italic is loaded but never used in production."
+    }
+  },
+  "space": {
+    "scale": {
+      "1": 8,
+      "2": 12,
+      "3": 16,
+      "4": 24,
+      "5": 32,
+      "6": 48,
+      "7": 64,
+      "8": 96,
+      "9": 128,
+      "10": 160,
+      "status": "extracted"
+    },
+    "section": {
+      "sm": {
+        "css": "clamp(72px, 7vw, 112px)",
+        "status": "extracted"
+      },
+      "md": {
+        "css": "clamp(96px, 9vw, 152px)",
+        "status": "extracted"
+      },
+      "lg": {
+        "css": "clamp(120px, 11vw, 192px)",
+        "status": "extracted"
+      }
+    },
+    "pageGutter": {
+      "css": "clamp(1.5rem, 1rem + 1.1vw, 3rem)",
+      "min": 24,
+      "max": 48,
+      "at1440": 31.84,
+      "status": "extracted"
+    },
+    "featureStepGap": {
+      "css": "clamp(var(--space-8), 12vw, var(--space-10))",
+      "status": "extracted"
+    },
+    "annotationRhythm": {
+      "index_title": 12,
+      "title_body": 16,
+      "body_impact": "clamp(32px, 1.9vw, 48px)",
+      "impactLabel_statement": 8,
+      "status": "extracted"
+    },
+    "chapterHeadGap": {
+      "css": "clamp(48px, 5vw, 128px)",
+      "status": "extracted"
+    },
+    "stageBreath": {
+      "css": "clamp(24px, 1.25vw, 32px)",
+      "status": "extracted"
+    }
+  },
+  "layout": {
+    "maxWidth": {
+      "value": null,
+      "status": "extracted",
+      "note": "No global max-width and no column grid. Copy is bounded by measure."
+    },
+    "localStages": {
+      "mirror": {
+        "css": "min(calc(100% - 2 * var(--page-x)), 1680px)",
+        "status": "extracted"
+      },
+      "mediaPlane": {
+        "css": "clamp(720px, 60.5vw, 1440px)",
+        "status": "extracted"
+      }
+    },
+    "mediaPlane": {
+      "width": {
+        "css": "clamp(720px, 60.5vw, 1440px)",
+        "status": "extracted"
+      },
+      "height": {
+        "css": "clamp(520px, 71svh, 940px)",
+        "status": "extracted"
+      },
+      "stickyTop": {
+        "css": "calc((100svh - var(--media-h)) / 2)",
+        "status": "extracted"
+      },
+      "stepMinHeight": {
+        "value": "80svh",
+        "status": "extracted"
+      },
+      "inactiveOpacity": {
+        "value": 0.35,
+        "status": "extracted"
+      }
+    },
+    "mediaRatio": {
+      "narrow": "4 / 5",
+      "from640": "4 / 3",
+      "from900": "16 / 10",
+      "uiCaptureFrom640": "16 / 9",
+      "product": "4 / 5",
+      "status": "extracted"
+    },
+    "mirror": {
+      "productHeight": {
+        "css": "clamp(560px, 80svh, 1040px)",
+        "status": "extracted"
+      },
+      "productWidthNarrow": {
+        "css": "min(118vw, calc(84svh * 4 / 5))",
+        "status": "extracted"
+      },
+      "edgeMask": {
+        "x": "transparent 0, rgba(0,0,0,.4) 10%, #000 26%, #000 82%, rgba(0,0,0,.4) 92%, transparent",
+        "y": "transparent 0, #000 6%, #000 90%, rgba(0,0,0,.5) 95%, transparent",
+        "status": "extracted"
+      }
+    },
+    "handoffHeight": {
+      "css": "clamp(420px, 70svh, 900px)",
+      "objectPosition": "52% 42%",
+      "status": "extracted"
+    },
+    "heroObjectPosition": {
+      "default": "50% 50%",
+      "maxAspect6by5": "41% 50%",
+      "maxAspect31by50": "29% 50%",
+      "status": "extracted",
+      "note": "Aspect-keyed crop for a 16:9 film in a full-viewport hero. Anchored on the subject: the Mirror occupies the frame's 19-42% and the customer stops at 50-63%, so the story lives in the left two thirds and centring is right only once the slice is wide enough to hold it."
+    },
+    "faqGrid": {
+      "css": "minmax(0, 5fr) minmax(0, 7fr)",
+      "headSticky": "clamp(var(--space-8), 14svh, 140px)",
+      "status": "extracted"
+    },
+    "consoleGrid": {
+      "css": "clamp(340px, 26vw, 480px) minmax(0, 1fr)",
+      "status": "extracted"
+    }
+  },
+  "radius": {
+    "media": {
+      "value": 0,
+      "css": "--radius-media",
+      "status": "extracted"
+    },
+    "control": {
+      "value": 8,
+      "css": "--radius-control",
+      "status": "extracted"
+    },
+    "pill": {
+      "value": 999,
+      "css": "--radius-pill",
+      "status": "extracted"
+    }
+  },
+  "breakpoints": {
+    "values": {
+      "dockBrand": 460,
+      "mediaRatio1": 640,
+      "twoColumn": 700,
+      "mediaRatio2": 900,
+      "consoleRow": 1024,
+      "wideStage": "1100 (and min-height 600)",
+      "mirrorWide": 1200,
+      "specFour": 1280,
+      "status": "extracted"
+    },
+    "wideStageQuery": {
+      "value": "(min-width: 1100px) and (min-height: 600px)",
+      "status": "extracted"
+    },
+    "qaViewports": {
+      "value": [
+        "360x800",
+        "390x844",
+        "768x1024",
+        "1200x720",
+        "1366x768",
+        "1440x900",
+        "1920x1080",
+        "2560x1440"
+      ],
+      "status": "extracted"
+    }
+  },
+  "motion": {
+    "duration": {
+      "fast": {
+        "value": 180,
+        "css": "--duration-fast",
+        "status": "extracted"
+      },
+      "base": {
+        "value": 320,
+        "css": "--duration-base",
+        "status": "extracted"
+      },
+      "slow": {
+        "value": 700,
+        "css": "--duration-slow",
+        "status": "extracted"
+      },
+      "stateChange": {
+        "value": 300,
+        "status": "extracted",
+        "note": "Media plane crossfade."
+      },
+      "headingReveal": {
+        "value": 1150,
+        "status": "extracted"
+      },
+      "exposure": {
+        "value": 850,
+        "status": "extracted",
+        "note": "The Mirror product resolving."
+      },
+      "narrowImageOpen": {
+        "value": 1150,
+        "status": "extracted"
+      },
+      "curtainLift": {
+        "value": 780,
+        "status": "extracted"
+      }
+    },
+    "easing": {
+      "standard": {
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "css": "--ease-standard",
+        "status": "extracted"
+      },
+      "arrive": {
+        "value": "expo.out",
+        "status": "extracted",
+        "note": "GSAP EASE for arrivals."
+      },
+      "scrub": {
+        "value": "none",
+        "lag": "0.5–0.7",
+        "status": "extracted"
+      },
+      "curtain": {
+        "value": "power1.inOut",
+        "status": "extracted"
+      },
+      "narrowImage": {
+        "value": "power2.out",
+        "status": "extracted"
+      }
+    },
+    "quietReveal": {
+      "translateY": 10,
+      "duration": 700,
+      "siblingDelays": [
+        80,
+        160,
+        240
+      ],
+      "status": "extracted"
+    },
+    "headingReveal": {
+      "from": "yPercent 120, opacity 0",
+      "stagger": 0.035,
+      "status": "extracted"
+    },
+    "manifestoScrub": {
+      "unlit": 0.18,
+      "start": "top 45%",
+      "end": "bottom 30%",
+      "status": "extracted"
+    },
+    "stageActivationBand": {
+      "start": "top 72%",
+      "end": "bottom 28%",
+      "status": "extracted"
+    },
+    "annotationOpacity": {
+      "leave": 200,
+      "arrive": 300,
+      "arriveDelay": 260,
+      "status": "extracted"
+    },
+    "takeover": {
+      "heroHold": "200svh",
+      "actHold": "100svh (measured)",
+      "actAnchor": "100svh - act height (measured)",
+      "status": "extracted"
+    },
+    "heroAnswer": {
+      "scale": 1.025,
+      "brightness": 0.88,
+      "status": "extracted"
+    },
+    "pointer": {
+      "product": "±8px x / ±5px y",
+      "console": "±3° y / ±2.4° x",
+      "magnetic": 0.3,
+      "cursor": 12,
+      "status": "extracted"
+    },
+    "reducedMotion": {
+      "value": "remove, not shorten: no Lenis, no curtain, no scrub, no split, final states on first paint",
+      "status": "extracted"
+    },
+    "smoothScroll": {
+      "engine": "Lenis",
+      "lerp": 0.09,
+      "status": "extracted"
+    },
+    "dprCap": {
+      "value": 1.75,
+      "status": "extracted"
+    }
+  },
+  "components": {
+    "button": {
+      "padding": "1.15em 1.6em",
+      "gap": "0.7em",
+      "iconSize": "1.1em",
+      "hoverIconOffset": "2px, -2px",
+      "activeScale": 0.97,
+      "disabledOpacity": 0.4,
+      "large": {
+        "padding": "1.3em 2em",
+        "size": "body"
+      },
+      "status": "extracted"
+    },
+    "dock": {
+      "linkHeight": "clamp(48px, 46px + 0.45vw, 52px)",
+      "padding": 4,
+      "linkPadding": "clamp(10px, 4px + 1.1vw, 20px)",
+      "inset": "calc(max(1vw, 16px) + env(safe-area-inset-bottom, 0px))",
+      "blur": 20,
+      "mark": "17×33 (11×21 below 460)",
+      "locked": true,
+      "status": "extracted"
+    },
+    "pill": {
+      "padding": "4px 10px",
+      "dot": 6,
+      "blink": "1.4s (syncing)",
+      "status": "extracted"
+    },
+    "filmToggle": {
+      "size": 44,
+      "icon": 16,
+      "status": "extracted"
+    },
+    "copyControl": {
+      "size": 40,
+      "icon": 16,
+      "status": "extracted"
+    },
+    "surface": {
+      "border": "1px solid var(--line)",
+      "padding": "clamp(24px, 2.2vw, 48px)",
+      "status": "extracted"
+    },
+    "hairline": {
+      "value": "1px solid var(--line)",
+      "status": "extracted"
+    }
+  },
+  "iconography": {
+    "family": "Phosphor",
+    "licence": "MIT (c) Phosphor Icons",
+    "philosophy": "functional punctuation, not illustration",
+    "status": "extracted",
+    "statusNote": "Phosphor is the Vagora icon family and is what the website ships: the five production interface icons are Phosphor Regular (see production). No other icon family is used.",
+    "role": "Functional visual notation — the same technical register as Fragment Mono, drawn instead of written. Switzer is the human/editorial voice; Fragment Mono is written technical notation.",
+    "usedFor": [
+      "controls",
+      "navigation",
+      "actions",
+      "statuses",
+      "compact technical UI"
+    ],
+    "neverUsedFor": [
+      "feature illustrations",
+      "marketing decoration",
+      "icon cards",
+      "visual filler",
+      "generic SaaS feature symbols"
+    ],
+    "primaryWeights": {
+      "switzerPairing": "regular",
+      "monoPairing": "light",
+      "rule": "Weight follows the TYPOGRAPHIC CONTEXT, not the size. Beside Switzer (buttons, navigation, interactive controls, compact actions, links with icons) use Regular — Switzer carries more visual mass and Regular reads as part of the same control. Beside Fragment Mono, or standing alone as technical notation, use Light — it matches Mono's quieter technical voice.",
+      "exception": "Per symbol and per context, after visual review, when a glyph is unusually dense or unusually weak. Never a default and never a global override.",
+      "status": "extracted"
+    },
+    "defaultStyles": [
+      "regular",
+      "light"
+    ],
+    "excludedStyles": {
+      "value": [
+        "thin",
+        "bold",
+        "fill",
+        "duotone"
+      ],
+      "note": "Not used by default. Another style is admissible only where a genuine interaction or state requires it and the result still belongs to the system."
+    },
+    "approvedSizes": {
+      "value": [
+        16,
+        20,
+        24
+      ],
+      "status": "recommended",
+      "binding": "contextual",
+      "note": "The sizes the production contexts call for, not a rigid scale. Below the CTA case, test optically against Switzer and the surrounding UI rather than applying a table."
+    },
+    "ctaButton": {
+      "size": 24,
+      "weight": "regular",
+      "status": "extracted",
+      "note": "The one fixed size/weight pairing, as in production: .btn svg is 1.1em and resolves to ~24px on .btn--lg; the glyph is Phosphor Regular arrow-up-right."
+    },
+    "geometry": {
+      "grid": 256,
+      "delivery": "filled outline paths, fill=currentColor",
+      "strokeEquivalentOn256Grid": {
+        "thin": 8,
+        "light": 12,
+        "regular": 16,
+        "bold": 24
+      },
+      "renderedAt24px": {
+        "thin": 0.75,
+        "light": 1.125,
+        "regular": 1.5,
+        "bold": 2.25
+      },
+      "terminals": "round, drawn as arcs in the path",
+      "note": "Phosphor bakes weight into path geometry rather than exposing stroke-width, so weight is chosen by importing the right asset — which is why it is an authoring decision per icon and per context. Colour still follows currentColor."
+    },
+    "coreSet": {
+      "note": "A small working set, not a catalogue. Add a symbol only when a real control needs one. The first five (arrow-up-right, play, pause, copy, check) are extracted — in production; the rest are recommended.",
+      "icons": [
+        {
+          "name": "arrow-up-right",
+          "use": "primary button; an action that leaves the page"
+        },
+        {
+          "name": "arrow-right",
+          "use": "next / advance"
+        },
+        {
+          "name": "arrow-down",
+          "use": "scroll or download affordance, where genuinely needed"
+        },
+        {
+          "name": "caret-right",
+          "use": "chevron: disclosure, breadcrumbs, compact navigation"
+        },
+        {
+          "name": "x",
+          "use": "close"
+        },
+        {
+          "name": "plus",
+          "use": "expand, if a disclosure pattern is introduced"
+        },
+        {
+          "name": "minus",
+          "use": "collapse, if a disclosure pattern is introduced"
+        },
+        {
+          "name": "play",
+          "use": "media control"
+        },
+        {
+          "name": "pause",
+          "use": "media control"
+        },
+        {
+          "name": "copy",
+          "use": "copy to clipboard"
+        },
+        {
+          "name": "check",
+          "use": "copy-done state"
+        },
+        {
+          "name": "list",
+          "use": "menu, where a menu exists"
+        },
+        {
+          "name": "arrow-square-out",
+          "use": "external link, when it must be distinguished from arrow-up-right"
+        },
+        {
+          "name": "corners-out",
+          "use": "expand to full screen, where needed"
+        }
+      ],
+      "status": "recommended"
+    },
+    "accessibility": "Icons never carry meaning alone: every icon sits with a visible text label or an aria-label.",
+    "production": {
+      "status": "extracted",
+      "family": "Phosphor Regular",
+      "delivery": "inlined SVG <symbol> in index.html, viewBox 0 0 256 256, fill=currentColor",
+      "grid": 256,
+      "weight": "regular (16-unit stroke equivalent)",
+      "set": [
+        {
+          "name": "arrow-up-right",
+          "where": "primary button",
+          "size": "1.1em (~24px on .btn--lg)"
+        },
+        {
+          "name": "copy",
+          "where": "address copy control",
+          "size": "16px"
+        },
+        {
+          "name": "check",
+          "where": "address copy control, done state",
+          "size": "16px"
+        },
+        {
+          "name": "play",
+          "where": "hero film toggle",
+          "size": "16px"
+        },
+        {
+          "name": "pause",
+          "where": "hero film toggle",
+          "size": "16px"
+        }
+      ],
+      "licence": "LICENSES/Phosphor-MIT.txt",
+      "note": "Every production icon sits beside Switzer, so every one is Regular — the weight rule applied. No other icon library is loaded, referenced or attributed on the site."
+    },
+    "notDefined": [
+      "whether a filled style is ever admitted for a selected state",
+      "whether 20px earns a fixed context of its own"
+    ]
+  },
+  "product": {
+    "name": "The Vagora Mirror",
+    "naming": {
+      "use": [
+        "the Vagora Mirror",
+        "the mirror",
+        "a mirror",
+        "every mirror"
+      ],
+      "never": [
+        "unit",
+        "kiosk",
+        "terminal",
+        "station",
+        "device",
+        "screen (as the noun)",
+        "smart mirror",
+        "magic mirror",
+        "digital signage"
+      ],
+      "status": "extracted"
+    },
+    "source": "assets/imagery/vagora-mirror-dark.jpeg — the production product photograph. It is the visual source of truth for every generated image.",
+    "status": "extracted",
+    "hardware": {
+      "display": {
+        "size": "49-inch",
+        "orientation": "portrait",
+        "aspect": "close to 9:16"
+      },
+      "frame": {
+        "finish": "matte black",
+        "shape": "rectangular",
+        "corners": "square, architectural",
+        "depth": "real depth; visible thickness at a three-quarter angle",
+        "never": [
+          "rounded corners",
+          "hairline bezel",
+          "thin television on a stand",
+          "wall-mounted screen",
+          "plain wall mirror"
+        ]
+      },
+      "base": {
+        "form": "substantial black lower cabinet, wider and deeper than the display column",
+        "upperFace": "pronounced sloped wedge running down toward the front; reads lighter than the vertical body in the production photograph because it faces the light",
+        "front": "recessed handle slots",
+        "casters": "four small caster wheels underneath, visible at the corners",
+        "never": [
+          "removed",
+          "redesigned",
+          "reduced to a pedestal",
+          "casters removed"
+        ],
+        "upperFaceMaterial": {
+          "status": "notDefined",
+          "note": "Whether the sloped face is a separate material or colour from the body is not defined. Describe the geometry (the slope), not a pale panel, and never instruct a model to add one."
+        }
+      },
+      "sensor": {
+        "model": "Microsoft Kinect v2",
+        "form": "long, low, horizontal black sensor bar with a visible lens cluster and a perforated end panel",
+        "mounting": "short black bracket projecting horizontally outward from the frame",
+        "side": "VIEWER-RIGHT edge of the display frame",
+        "height": "approximately mid-display height (measured at ~49% of frame height in the production photograph)",
+        "never": [
+          "on top of the display",
+          "centred above the screen",
+          "embedded inside the bezel",
+          "on the left side",
+          "restyled as a generic webcam",
+          "accompanied by a second camera"
+        ]
+      },
+      "surface": {
+        "logo": "none on the front",
+        "cables": "none exposed",
+        "controls": "no buttons, keypad or touch controls on the frame"
+      }
+    },
+    "screen": {
+      "principle": "The screen is NOT a mirror reflection. Vagora performs live 3D virtual try-on and that must be visually obvious.",
+      "rule": "PHYSICAL OUTFIT ≠ VIRTUAL OUTFIT. The customer standing in front of the Mirror wears one real outfit; the screen shows that same customer, full-length, wearing a visibly different outfit they are not physically wearing. Prefer a strongly obvious difference — a different garment type and/or a clearly different colour. Type AND colour is the safest default, not a requirement: a colourway comparison is valid as long as the difference is unmistakable.",
+      "failureMode": "The single most common failure is the on-screen outfit matching the physical outfit. If they match, the image reads as an ordinary mirror and the product's proposition disappears. Check this before anything else.",
+      "examples": [
+        {
+          "real": "white top and black trousers",
+          "screen": "the same customer in a yellow dress"
+        },
+        {
+          "real": "a neutral suit",
+          "screen": "the same customer in a blue coat"
+        },
+        {
+          "real": "a black jacket",
+          "screen": "the same customer in the same jacket, clearly in olive — a colourway comparison"
+        }
+      ],
+      "ui": {
+        "thumbnails": "2–4 small garment or colourway options, compactly placed near one screen edge",
+        "selection": "exactly one visibly selected with a restrained outline or highlight; the others stay secondary",
+        "correspondence": "the selected thumbnail IS the garment rendered on the customer's body",
+        "story": "several options available → one selected → the selected garment rendered on the customer",
+        "never": [
+          "dashboard UI",
+          "floating holograms",
+          "sci-fi HUD elements",
+          "excessive labels",
+          "giant buttons",
+          "colourful app-style controls",
+          "complex ecommerce UI"
+        ]
+      }
+    },
+    "interaction": {
+      "principle": "Vagora is not a touch device.",
+      "distance": "approximately 1.5–2 metres from the Vagora Mirror, at a comfortable hands-free viewing distance",
+      "bodyLanguage": [
+        "standing comfortably",
+        "observing the virtual outfit",
+        "small posture adjustments",
+        "turning slightly",
+        "looking at the screen",
+        "subtle natural hand and arm movement"
+      ],
+      "never": [
+        "standing inches from the display",
+        "tapping the screen",
+        "swiping the screen",
+        "touching UI controls",
+        "exaggerated Minority-Report gestures",
+        "leaning forward toward the screen like a kiosk"
+      ],
+      "gestures": "If a gesture is shown it stays restrained and must never imply touchscreen use.",
+      "status": "extracted"
+    },
+    "mustAlwaysFeel": [
+      "physical",
+      "freestanding",
+      "substantial",
+      "architectural",
+      "deployable in a real retail store"
+    ],
+    "promptClauses": {
+      "status": "recommended",
+      "usage": "Fixed text, canonical in design.md §19 (the paragraphs headed THE PRODUCT, THE SCREEN, INTERACTION and NEVER). Paste verbatim into image prompts in this order: subject → environment → product → screen → interaction → composition → camera → light → grade → realism → negative.",
+      "product": "a freestanding Vagora Mirror: a 49-inch portrait display in a matte-black rectangular frame with square architectural corners and real depth, rising from a substantial black lower cabinet whose upper face is a pronounced sloped wedge running down toward the front, with recessed handle slots on the cabinet front and four small caster wheels underneath so the unit reads as freestanding and movable; a black Microsoft Kinect v2 — a long low horizontal sensor bar with a visible lens cluster — mounted on a short black bracket projecting horizontally outward from the VIEWER-RIGHT edge of the frame at approximately mid-display height, never on top of the unit and never on the left; no logo on the front, no exposed cables, no buttons or touch controls on the frame",
+      "screen": "the customer standing in front of the Mirror is wearing one real outfit, and the screen shows that same customer full-length wearing a visibly different outfit they are not physically wearing — the physical outfit and the virtual outfit must never match, so make the difference obvious at a glance, a different garment type and/or a clearly different colour; near one edge of the screen are 2 to 4 small garment or colourway thumbnails with exactly one visibly selected by a restrained outline, and that selected thumbnail is the garment rendered on the customer's body",
+      "interaction": "the customer stands approximately 1.5–2 metres from the Vagora Mirror at a comfortable hands-free viewing distance, standing comfortably and observing their virtual outfit, turning slightly, with subtle natural hand and arm movement; never touching, tapping or swiping the screen, never leaning toward it, never standing against the glass",
+      "negative": "do not alter the mirror's proportions, do not make it a wall mirror or a wall-mounted screen or a thin television on a stand, do not remove or redesign the base, do not remove the caster wheels, do not move the Kinect sensor on top of or above or inside the frame or to the left side, do not turn the Kinect into a generic webcam, no additional cameras, no touch buttons, no keyboard, no exposed cables, no invented logo, do not round the frame corners; no hologram, no floating HUD, no sci-fi interface, no giant buttons, no colourful app-style controls, no dashboard UI, no neon, no lens flare, no text overlay, no watermark, no crowd, no smiling at camera; the on-screen outfit must never match the customer's physical outfit",
+      "videoLock": "Treat the Vagora Mirror, the Kinect v2 hardware and the screen UI as locked reference elements. Do not redesign, morph, relocate or animate the hardware or the interface: the mirror's proportions, the frame, the base, the caster wheels, the Kinect v2 and its mounting position, the UI layout and the selected garment state must all stay exactly as they are in the source image. Keep the Vagora screen interface and all garment-selection UI visually unchanged throughout the shot. Animate only believable human movement — the customer's posture, a slight turn, small head movement, natural observation — unless otherwise specified. The real person's clothing and the virtually rendered clothing on the screen must remain visibly different for the whole clip.",
+      "videoApproachShots": "The customer may walk toward the Mirror but must stop at a comfortable hands-free interaction distance and never walk right up to the display. No reaching for the screen at the end of the move."
+    }
+  },
+  "assets": {
+    "logo": {
+      "status": "extracted",
+      "note": "Four logo versions, each supplied for a light and a dark surface. -on-dark and -on-light name THE SURFACE the artwork is for: -on-dark is white, -on-light is #0F0F0F. Nothing outside this list is an approved Vagora logo.",
+      "directory": "assets/brand/logo/",
+      "versions": {
+        "verticalLockup": {
+          "role": "primary",
+          "viewBox": "0 0 272 308",
+          "onDark": "vagora-lockup-vertical-on-dark.svg",
+          "onLight": "vagora-lockup-vertical-on-light.svg",
+          "use": "The default full logo wherever there is enough vertical space: presentations, marketing collateral, social, campaign, title and closing compositions, print, event materials, general brand identification."
+        },
+        "horizontalLockup": {
+          "role": "secondary",
+          "viewBox": "0 0 450 186",
+          "onDark": "vagora-lockup-horizontal-on-dark.svg",
+          "onLight": "vagora-lockup-horizontal-on-light.svg",
+          "use": "Only when vertical space is genuinely constrained: shallow headers, narrow strips, landscape areas with limited height, compact navigation."
+        },
+        "brandmark": {
+          "role": "compact identity",
+          "viewBox": "0 0 124 240",
+          "onDark": "vagora-brandmark-on-dark.svg",
+          "onLight": "vagora-brandmark-on-light.svg",
+          "use": "Favicons, app icons, avatars, compact product and interface identity, small square or circular areas, very small branded controls. Not the default stand-in for the full logo in an ordinary marketing layout.",
+          "production": "Painted with currentColor through a CSS mask in the dock and preloader; the mask uses alpha only, so either file works as the mask source."
+        },
+        "wordmark": {
+          "role": "display / editorial",
+          "viewBox": "0 0 450 127",
+          "onDark": "vagora-wordmark-on-dark.svg",
+          "onLight": "vagora-wordmark-on-light.svg",
+          "use": "Sparingly, as a dominant typographic object: a large website footer or end composition, an editorial brand moment, an oversized campaign treatment, a selected presentation title or closing moment. Never routine identification, never repeated across a piece."
+        }
+      },
+      "avatars": {
+        "status": "extracted",
+        "dark": "assets/brand/avatar/vagora-avatar-mark-dark.png",
+        "light": "assets/brand/avatar/vagora-avatar-mark-light.png",
+        "size": "512 × 512",
+        "note": "The brandmark on a filled tile — pure #000000 or #FFFFFF ground. Favicons and platform avatars."
+      },
+      "hierarchy": {
+        "status": "extracted",
+        "rule": "Choose logo variants by hierarchy, not convenience.",
+        "order": [
+          "verticalLockup — default",
+          "horizontalLockup — when vertical height is genuinely constrained",
+          "brandmark — icon-scale or avatar-scale",
+          "wordmark — a rare dominant editorial object"
+        ],
+        "perComposition": "One logo version per composition, once. Two versions never appear together."
+      },
+      "surfaceRule": {
+        "status": "extracted",
+        "light": "use the -on-light artwork (#0F0F0F)",
+        "dark": "use the -on-dark artwork (white)",
+        "never": "Recolouring a version, or adding an outline, glow, shadow or plate to make the wrong one work. Every version exists for both surfaces."
+      },
+      "inProduction": {
+        "status": "extracted",
+        "dockMark": "brandmark, 17×33px (11×21px under 460px), currentColor mask",
+        "preloaderMark": "brandmark, 42–50px wide, 34:66 ratio",
+        "footerWordmark": "vagora-wordmark-on-dark.svg at 100% of the content width on black, left-aligned",
+        "favicons": "the avatar marks, light or dark by prefers-color-scheme",
+        "lockupsUsed": "none — the site has no composition that identifies the brand with a full logo"
+      }
+    },
+    "imagery": {
+      "features": [
+        "feature-try-on.webp",
+        "feature-catalogue.webp",
+        "feature-outfit.webp",
+        "feature-made-to-order.webp",
+        "feature-scene.webp"
+      ],
+      "business": [
+        "biz-carryover.webp",
+        "biz-intelligence.webp",
+        "biz-fleet.webp"
+      ],
+      "handoff": "store-handoff.webp",
+      "product": "vagora-mirror-dark.jpeg (1024×1280)",
+      "masters": "1920×1080 unless noted"
+    },
+    "video": {
+      "hero": [
+        "hero-video.webm",
+        "hero-video-web.mp4",
+        "hero-poster.webp"
+      ],
+      "encoding": "Audio stripped, faststart. Only one of webm/mp4 is ever fetched.",
+      "status": "extracted",
+      "masters": "hero-video.mp4 (the main white-studio film, 1280×720, not shipped) and new-hero-video.mp4 (the provisional film currently encoded for the site, 1024×576, not shipped)"
+    },
+    "tagline": "Beyond the Mirror",
+    "contact": "hi@vagoramirror.com",
+    "logoGuidelines": {
+      "status": "recommended",
+      "note": "Proposed in design.md §01, not approved: the supplied artwork carries no clear-space or minimum-size specification.",
+      "clearSpace": {
+        "brandmark": "half the mark's height on every side",
+        "lockupsAndWordmark": "the height of the capital V on every side"
+      },
+      "minimumSize": {
+        "digital": {
+          "brandmark": "11 × 21px",
+          "verticalLockup": "90px wide",
+          "horizontalLockup": "120px wide",
+          "wordmark": "120px wide"
+        },
+        "print": {
+          "brandmark": "6mm tall",
+          "verticalLockup": "22mm wide",
+          "horizontalLockup": "30mm wide",
+          "wordmark": "30mm wide"
+        },
+        "belowMinimum": "Move down the hierarchy to the brandmark rather than shrinking a lockup."
+      },
+      "placement": "In a margin, aligned to the grid's edge, once per surface — found, not featured. The wordmark, when used, is a dominant object.",
+      "notDefined": [
+        "clear space and minimum sizes await approval",
+        "the logo in motion beyond the dock tilt and the preloader fade",
+        "a one-colour print build of the avatar tiles",
+        "retailer co-branding lock-ups"
+      ]
+    }
+  }
+}

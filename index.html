@@ -3,6 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      /* The preloader is built by the module, so it cannot exist until the
+         module has downloaded and run — and until then the finished page
+         paints: hero, dock and all, for a beat, before the black curtain
+         drops over it and reveals it again. This paints the black in the
+         parser instead, so the first frame the reader sees already belongs to
+         the preloader. main.js removes `booting` the moment the real curtain
+         is in place, and the timeout is the failsafe: a module that never
+         arrives can never leave the page black. Reduced motion opts out of
+         the shield in CSS, so it is unaffected. */
+      document.documentElement.classList.add("js", "booting")
+      setTimeout(function () {
+        document.documentElement.classList.remove("booting")
+      }, 4000)
+    </script>
     <title>Vagora — The in-store try-on mirror</title>
     <meta
       name="description"
@@ -40,35 +55,41 @@
   <body>
     <!--
       Asset provenance
-      · Film (hero-video), poster, renders, logo: Vagora. The renders are
-        concept renders of the Mirror in a store, not photographs of an
-        installation. The hero film is the client's own studio footage:
-        hero-video.mp4 is the master as delivered and is NOT shipped;
-        hero-video.webm / hero-video-web.mp4 are the web encodes of it
-        (audio stripped, faststart) and are what the page loads.
-      · Switzer: Fontshare Free Font Licence (assets/fonts/LICENSE-Switzer-FFL.txt).
-      · Icons: Solar by 480 Design, CC BY 4.0, via Iconify (@iconify-json/solar),
-        inlined below as symbols.
+      · Logos: the approved Vagora logo family in assets/brand/logo — vertical
+        lockup (primary), horizontal lockup (secondary), brandmark and wordmark,
+        each supplied for a light and a dark surface. This page uses three of
+        them: the brandmark as a CSS mask in the dock and preloader, the
+        wordmark-on-dark in the footer, and the avatar marks as favicons.
+      · Film, poster, renders: Vagora. The renders are concept renders
+        of the Mirror in a store, not photographs of an installation. The hero
+        film is the client's own footage: new-hero-video.mp4 is the current
+        master as delivered and is NOT shipped; hero-video.webm /
+        hero-video-web.mp4 are the web encodes of it (audio stripped,
+        faststart) and are what the page loads. hero-video.mp4 is the previous
+        master, kept but unreferenced.
+      · Switzer: Fontshare Free Font Licence; Fragment Mono: SIL OFL 1.1;
+        Phosphor Icons: MIT — all three licences in LICENSES/.
+      · Icons: Phosphor Icons, Regular weight, 256 grid, inlined below as symbols.
       Evidence
       · No customer, store, pilot result or uplift figure appears on this page
         because none is evidenced yet. The console figures are sample data and
         say so on the asset.
     -->
     <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
-      <symbol id="i-arrow-up-right" viewBox="0 0 24 24">
-        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M18 15V6H9" />
+      <symbol id="i-arrow-up-right" viewBox="0 0 256 256">
+        <path fill="currentColor" d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z" />
       </symbol>
-      <symbol id="i-copy" viewBox="0 0 24 24">
-        <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z" /><path d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5" /></g>
+      <symbol id="i-copy" viewBox="0 0 256 256">
+        <path fill="currentColor" d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z" />
       </symbol>
-      <symbol id="i-check" viewBox="0 0 24 24">
-        <g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10" /><path stroke-linecap="round" stroke-linejoin="round" d="M8.5 12.5L10.5 14.5L15.5 9.5" /></g>
+      <symbol id="i-check" viewBox="0 0 256 256">
+        <path fill="currentColor" d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z" />
       </symbol>
-      <symbol id="i-play" viewBox="0 0 24 24">
-        <path fill="none" stroke="currentColor" stroke-width="1.5" d="M20.4086 9.35258C22.5305 10.5065 22.5305 13.4935 20.4086 14.6474L7.59662 21.6145C5.53435 22.736 3 21.2763 3 18.9671L3 5.0329C3 2.72368 5.53435 1.26402 7.59661 2.38548L20.4086 9.35258Z" />
+      <symbol id="i-play" viewBox="0 0 256 256">
+        <path fill="currentColor" d="M232.4,114.49,88.32,26.35a16,16,0,0,0-16.2-.3A15.86,15.86,0,0,0,64,39.87V216.13A15.94,15.94,0,0,0,80,232a16.07,16.07,0,0,0,8.36-2.35L232.4,141.51a15.81,15.81,0,0,0,0-27ZM80,215.94V40l143.83,88Z" />
       </symbol>
-      <symbol id="i-pause" viewBox="0 0 24 24">
-        <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6C2 4.11438 2 3.17157 2.58579 2.58579C3.17157 2 4.11438 2 6 2C7.88562 2 8.82843 2 9.41421 2.58579C10 3.17157 10 4.11438 10 6V18C10 19.8856 10 20.8284 9.41421 21.4142C8.82843 22 7.88562 22 6 22C4.11438 22 3.17157 22 2.58579 21.4142C2 20.8284 2 19.8856 2 18V6Z" /><path d="M14 6C14 4.11438 14 3.17157 14.5858 2.58579C15.1716 2 16.1144 2 18 2C19.8856 2 20.8284 2 21.4142 2.58579C22 3.17157 22 4.11438 22 6V18C22 19.8856 22 20.8284 21.4142 21.4142C20.8284 22 19.8856 22 18 22C16.1144 22 15.1716 22 14.5858 21.4142C14 20.8284 14 19.8856 14 18V6Z" /></g>
+      <symbol id="i-pause" viewBox="0 0 256 256">
+        <path fill="currentColor" d="M200,32H160a16,16,0,0,0-16,16V208a16,16,0,0,0,16,16h40a16,16,0,0,0,16-16V48A16,16,0,0,0,200,32Zm0,176H160V48h40ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Zm0,176H56V48H96Z" />
       </symbol>
     </svg>
 
@@ -93,7 +114,7 @@
               autoplay
               preload="auto"
               poster="/assets/video/hero-poster.webp"
-              aria-label="A customer walking up to a Vagora Mirror in a studio, the mirror rendering the look on him as he stops in front of it"
+              aria-label="A customer at a Vagora Mirror in a waterfront store at dusk, choosing a jacket from the colourways on screen and seeing it render on himself"
               data-hero-video>
               <source src="/assets/video/hero-video.webm" type="video/webm" />
               <source src="/assets/video/hero-video-web.mp4" type="video/mp4" />
@@ -627,7 +648,7 @@
       <div class="footer__wordmask">
         <img
           class="footer__word"
-          src="/assets/brand/logo/display-vagora-only.svg"
+          src="/assets/brand/logo/vagora-wordmark-on-dark.svg"
           width="450"
           height="127"
           alt="Vagora"

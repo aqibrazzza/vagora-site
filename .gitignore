@@ -1,14 +1,5 @@
 node_modules/
 dist/
 .DS_Store
-
-# Working files — screenshots, check renders, archives. Not the site.
-Claude outputs/
+Thumbs.db
 *.zip
-
-# Superseded by the Vite rebuild. Kept on disk, out of the repo: none of
-# these is referenced by index.html and none reaches dist/.
-reference/
-tokens/
-/robots.txt
-src/modules/hero-gl.js

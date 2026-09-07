@@ -400,7 +400,7 @@ p {
 
 /* Reveal: single pass, once. This is the page's QUIET grammar — supporting
    copy settling into place, never a section's main event. The events are
-   authored per chapter in src/main.js; see MOTION.md. Keep the distance
+   authored per chapter in src/main.js; see brand-system/design.md §10. Keep the distance
    short: a long travel here is what makes a page read as fade-up-everywhere. */
 .js .reveal {
   opacity: 0;
@@ -656,6 +656,26 @@ p {
 }
 
 /* ── Curtain (JS-only preloader) ────────────────────────────────────────── */
+/* The boot shield. The curtain below is built by the module and so cannot
+   exist at first paint; without this the page would show itself, be covered,
+   and be revealed again. The inline script in <head> sets `booting` during
+   parsing, so the first painted frame is already black; intro() removes it in
+   the same frame the curtain lands, and both are the same colour, so the
+   handover is invisible. Under reduced motion there is no preloader, so there
+   is no shield either. */
+@media (prefers-reduced-motion: no-preference) {
+  .js.booting {
+    background: var(--surface-dark);
+  }
+  .js.booting::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 89; /* under the curtain, over everything the page has painted */
+    background: var(--surface-dark);
+    pointer-events: none;
+  }
+}
 .curtain {
   position: fixed;
   inset: 0;
@@ -707,6 +727,13 @@ p {
   bottom: 1.5svh;
   overflow: hidden;
   padding: 0.06em 0 0.26em;
+  /* Hidden until fitLine() has measured it and the letters have been put below
+     the mask. The size below is only a fallback, so painting the line before
+     the fit runs shows the phrase at the wrong size, unmasked, for as long as
+     the font wait takes — a flash of a small, finished-looking tagline before
+     the real one rises. Layout still resolves while hidden, so the measurement
+     is unaffected; intro() reveals it in the same frame it sets the from-state. */
+  visibility: hidden;
   color: var(--text-inverse);
   font-weight: 500;
   font-size: 8vw; /* replaced by the measured fit before the reveal runs */
@@ -729,8 +756,8 @@ p {
 .mark {
   display: inline-block;
   background: currentColor;
-  -webkit-mask: url("/assets/brand/logo/vagora-brandmark-dark.svg") center / contain no-repeat;
-  mask: url("/assets/brand/logo/vagora-brandmark-dark.svg") center / contain no-repeat;
+  -webkit-mask: url("/assets/brand/logo/vagora-brandmark-on-dark.svg") center / contain no-repeat;
+  mask: url("/assets/brand/logo/vagora-brandmark-on-dark.svg") center / contain no-repeat;
 }
 
 /* ── Hero — the film takes the whole viewport. ──────────────────────────── */
@@ -780,28 +807,37 @@ p {
      of the frame survives depends on the SCREEN'S proportion, not its width —
      a 16:9 desktop keeps all of it, a phone keeps a quarter. So the crop is
      keyed to aspect ratio, and the anchor is chosen from where the subject
-     actually is: the Mirror occupies the frame's 19–42% and the customer
-     stops at 50–63%, so the whole story lives in the left two thirds and
-     centring is only correct once the slice is wide enough to hold it. */
+     actually is.
+
+     This film is two shots framed differently, and that is what the anchors
+     have to reconcile. The wide shot puts the Mirror at 25–48% of the frame
+     and the customer at 71–89%; the cut at 1.6s moves in, and the Mirror runs
+     12–45% with the customer at 62–82%. The action spans two thirds of the
+     frame in one shot and seven tenths in the other, so centring is correct
+     only where the slice is wide enough to hold nearly all of it. */
   object-position: 50% 50%;
   will-change: transform;
 }
-/* Portrait tablets and square-ish screens keep a slice of roughly 42–68%:
-   wide enough for the Mirror and the customer together, but only if it is
-   anchored on them rather than on the middle of an empty studio. */
+/* Portrait tablets and square-ish screens keep about 42% of the frame — too
+   little for the Mirror and the customer together in either shot. Anchored at
+   31% the slice is 18–60%: the Mirror is whole in both shots, sensor arm
+   included, and in the closer shot the customer's outstretched hand reaches
+   into the frame from the right. */
 @media (max-aspect-ratio: 6 / 5) {
   .hero__media video,
   .hero__media img {
-    object-position: 41% 50%;
+    object-position: 31% 50%;
   }
 }
-/* Phones keep about a quarter of the frame — too little for both. It holds
-   the Mirror whole, which is the product and the thing the screen is
-   rendering onto; the customer enters at the edge of it. */
+/* Phones keep about a quarter. Anchored at 28% the slice is 21–46%: the whole
+   Mirror in the wide shot — frame, screen, colourways, base and casters — and
+   in the closer shot the render at full height inside its bezel with the hand
+   entering beside it. The product and what it is rendering, which is the
+   story; the customer's own body is what a quarter of a frame gives up. */
 @media (max-aspect-ratio: 31 / 50) {
   .hero__media video,
   .hero__media img {
-    object-position: 29% 50%;
+    object-position: 28% 50%;
   }
 }
 .hero__film-toggle {
@@ -813,14 +849,21 @@ p {
   border-radius: var(--radius-pill);
   display: grid;
   place-items: center;
+  /* The site's control chrome, exactly as the dock wears it: ink at 88% with a
+     20px backdrop blur and a white glyph. One blurred overlay value serves both
+     controls, so the only two pieces of chrome on the page read as one family.
+
+     This control is the one with nothing behind it but the film, so its
+     contrast is a property of the footage. Measured over every frame of the
+     current film: the glyph is 17.6–19.3:1 inside the pill at all sizes, and
+     the pill is 1.0–2.8:1 against the frame — on the darkest passages the pill
+     merges into the film and the glyph carries the control on its own, which is
+     also how the dock behaves over this hero (1.2–2.1:1). Over the white-studio
+     film this reads as intended everywhere. If a future film makes the glyph
+     itself hard to find, change the film's treatment or the control's position
+     — not this colour, which belongs to the system. */
   color: var(--text-inverse);
-  /* A heavier wash than the dock's --frost, and only here. The dock carries
-     its own dark pill wherever it goes; this control has nothing behind it but
-     the film, and the film is now a white studio. At the shared 0.35 the pill
-     measured 2.4–3.0:1 against the studio — under the 3:1 a non-text control
-     needs. At 0.55 it is 4.0:1 on the brightest part of the frame, and the
-     white glyph inside it 4.8:1. The dock's token is untouched. */
-  background: rgba(15, 15, 15, 0.55);
+  background: rgba(15, 15, 15, 0.88);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   opacity: 0;

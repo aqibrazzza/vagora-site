@@ -1,10 +1,28 @@
-# Vagora — marketing site (v6)
+# Vagora
 
-Start with `PROJECT.md` — the durable record of what exists, what is frozen and what is pending. `DIRECTION.md` holds the art direction.
+The Vagora marketing website (v6) and the **Vagora Brand System v1.1.1** that was extracted from it. One repository, two things:
 
-A Vite project. The page is `index.html`; styles in `src/styles/main.css`; behaviour in `src/main.js` with the accessible text splitter in `src/modules/split.js`. Brand, imagery, fonts and the intro film stay in `assets/` (the same folder as before); Vite bundles whatever the page references into `dist/assets` with hashed names. `public/` holds the files that must keep their exact path (`robots.txt`, the share card).
+| | Where | Start with |
+|---|---|---|
+| **The brand system** — for anyone making something new for Vagora: a web section, imagery, a video, a deck, a banner, a poster, a social post | `brand-system/` | `brand-system/README.md`, then `brand-system/design.md` |
+| **The website** — the production site itself | `index.html`, `src/`, `assets/`, `public/` | `index.html` (the copy and structure; the source comments explain each decision), then `src/styles/main.css` and `src/main.js`. The art direction and motion system it follows are documented in `brand-system/design.md` §05–§11. |
 
-## Run
+## Layout
+
+```
+brand-system/          the brand system — design.md (canonical), design-system.html
+                       (visual manual), design-tokens.json (values), CHANGELOG.md
+index.html             the page; all copy lives here
+src/                   main.js (behaviour), modules/ (text splitter, refraction), styles/main.css
+assets/                brand/ (marks, lockups, avatars) · fonts/ · imagery/ · video/
+                       — shared by the site and the brand system; Vite bundles what the page references
+public/                robots.txt and the share card, which must keep their exact paths
+LICENSES/              Switzer (Fontshare FFL), Fragment Mono (SIL OFL 1.1), Phosphor Icons (MIT)
+```
+
+`assets/video/` holds the film master the site currently runs (`new-hero-video.mp4`), the web encodes the page loads, and `hero-film-still.webp` — a frame of the white-studio film that the brand system's visual manual uses. Only the encodes and the poster are shipped.
+
+## Running the site
 
 ```
 npm install
@@ -13,25 +31,12 @@ npm run build     # production build → dist/
 npm run preview   # serve dist/ locally
 ```
 
-`dist/` is self-contained and relative-pathed (`base: "./"`), so it deploys to a domain root or a subfolder without a rebuild.
+`dist/` is ignored by git; build it where you deploy. It is relative-pathed (`base: "./"`), so it deploys to a domain root or a subfolder without a rebuild.
 
-## Stack
+## Using the brand system
 
-- GSAP 3 + ScrollTrigger for all choreography.
-- Lenis as the single smooth-scroll engine (bypassed under `prefers-reduced-motion`).
-- No WebGL. The hero is the intro film with a poster as its static first frame.
-- One typeface: Switzer (Fontshare FFL, in `assets/fonts`), weights 400/500/600, stepping down one on dark fields.
-- Design foundations live at the top of `src/styles/main.css`: one monochrome colour family (light and dark worlds, alphas of ink/white only), six type tiers (display / section / large / body / functional / label), one page gutter, a spacing vocabulary and three section rhythms, reading widths, sharp media by default, and shared motion primitives. See `DIRECTION.md` → Foundations.
-- Icons: Solar (CC BY 4.0), inlined as SVG symbols in `index.html`.
+Open `brand-system/design-system.html` in a browser to see the system; read `brand-system/design.md` for every rule and its authority (ESTABLISHED / DERIVED / IMPLEMENTATION / NEW RECOMMENDATION / NOT YET DEFINED). For AI work, §19 of `design.md` holds the image and video blocks and §20 the copywriting block, ready to paste into a model. The manual depends on `assets/` by relative path, so keep the repository together rather than copying `brand-system/` out on its own.
 
-## Art direction
+## Evidence rules
 
-See `DIRECTION.md`.
-
-## Evidence rules carried over from v5
-
-No customer, store, pilot result or uplift figure appears on the page because none is evidenced yet. The console panel is sample data and is labelled so on the asset and in its accessible name. The imagery is concept renders (noted in the source).
-
-## Superseded files
-
-`tokens/` and `reference/` belong to the v5 static site and are not used by the v6 build. Keep them if you still use the internal reference surfaces; otherwise both can go. `assets/` is shared by both and stays.
+No customer, store, pilot result or uplift figure appears anywhere because none is evidenced yet. The console figures are sample data and are labelled as such on the asset. The feature imagery is concept renders. Do not invent numbers, customers or partners in anything made from this repository.

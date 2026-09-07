@@ -303,10 +303,15 @@ function fitLine(line) {
 async function intro() {
   const dock = $(".dock")
   if (reduced) {
+    html.classList.remove("booting")
     dock.classList.add("is-in")
     return
   }
   const curtain = buildCurtain()
+  // The shield and the curtain are the same black, and the curtain is now in
+  // the document, so dropping the shield here is invisible — and it must be
+  // dropped, or it would outlive the curtain's lift and hold the page dark.
+  html.classList.remove("booting")
   const line = $(".curtain__line", curtain)
   const chars = $$(".curtain__ch", curtain)
   const mark = $(".mark", curtain)
@@ -314,6 +319,14 @@ async function intro() {
   window.scrollTo(0, 0)
   await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))])
   fitLine(line)
+  /* Measure, then hide the letters, then reveal the line — in that order, in one
+     frame. The line is `visibility: hidden` in CSS until here because everything
+     before this point would paint it at its fallback size with the letters at
+     rest: a small, static tagline flashing in the corner before the real one
+     rises. The from-state is set here rather than left to the timeline's own
+     fromTo (which lands a beat later) so the reveal below has nothing to undo. */
+  gsap.set(chars, { yPercent: 130 })
+  line.style.visibility = "visible"
 
   /* THE EXIT IS ONE GESTURE: the black panel carries the whole composition
      upward and the hero is revealed underneath it.
