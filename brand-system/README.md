@@ -17,10 +17,10 @@ The complete Vagora brand, visual, verbal, imagery, interface and motion system,
 
 ## Opening and sharing the visual manual
 
-`design-system.html` has no external dependencies and no build step, but it references the website's own assets by relative path. There is no portable single-file copy; to share it, share these directories together, at these relative positions:
+`design-system.html` has no external dependencies and no build step, but it references the repository's shared asset library by relative path (`../assets/`). There is no portable single-file copy; to share it, share these directories together, at these relative positions:
 
 ```
-vagora-website/
+<repository root>/
   assets/fonts/      Switzer-Variable.woff2, FragmentMono-Regular-latin.woff2
                      (+ their licence files)
   assets/imagery/    the feature, business, handoff and product photographs
@@ -35,7 +35,7 @@ vagora-website/
     README.md
 ```
 
-The simplest way to share it is the whole repository. If you must share less, everything else (`src/`, `dist/`, `public/`, `node_modules/`, and the rest of `assets/video/`) can be left out, but if any of the directories above moves relative to `brand-system/`, the manual loses its fonts, photographs or marks.
+The simplest way to share it is the whole repository. If you must share less, everything else (`projects/`, and the rest of `assets/video/`) can be left out, but if any of the directories above moves relative to `brand-system/`, the manual loses its fonts, photographs or marks.
 
 Open it directly from disk, or serve the repository root (`python3 -m http.server`) and visit `/brand-system/design-system.html`. It works with JavaScript off; the script only drives the motion demonstrations and the contents highlight.
 
@@ -58,7 +58,7 @@ For imagery alone, paste the image block from §19 into the image model's system
 ## What is and is not in production
 
 - Everything marked ESTABLISHED SYSTEM RULE or IMPLEMENTATION DETAIL is on the live site.
-- **Phosphor Icons** is the icon family and is what the website ships: its five interface icons (`arrow-up-right`, `copy`, `check`, `play`, `pause`) are Phosphor Regular, inlined in `index.html`. The Light half of the two-weight rule, the wider core set, the logo system's clear-space and size rules, the Product Accuracy Checklist, the AI blocks and every non-web format rule are NEW RECOMMENDATIONS.
+- **Phosphor Icons** is the icon family and is what the website ships: its five interface icons (`arrow-up-right`, `copy`, `check`, `play`, `pause`) are Phosphor Regular, inlined in `projects/website/index.html`. The Light half of the two-weight rule, the wider core set, the logo system's clear-space and size rules, the Product Accuracy Checklist, the AI blocks and every non-web format rule are NEW RECOMMENDATIONS.
 - The hero film documented in §07 is the main white-studio film. The live site is running a provisional replacement while that film is being finished, so the hero, its crop anchors and its film-toggle colour differ from what the document records.
 - Appendix A of `design.md` lists what the site does not define (italic use, a light-surface wordmark, forms, charts, print black, whether the cabinet's sloped face is a separate material, and so on). Decide those deliberately and record them there.
 

@@ -1,9 +1,9 @@
 {
   "name": "VAGORA BRAND SYSTEM",
   "version": "1.1.1",
-  "extractedFrom": "vagora-website v6 — src/styles/main.css :root and [data-surface=\"dark\"], index.html, src/main.js",
+  "extractedFrom": "the production website (v6), now at projects/website/ — src/styles/main.css :root and [data-surface=\"dark\"], index.html, src/main.js",
   "extractedOn": "2026-09-06",
-  "authority": "design.md is canonical. Values marked status=extracted mirror production exactly; status=recommended are proposals from design.md not yet in production; status=notDefined records an open question. The brand system is versioned on its own; the website's version (package.json) is a separate number.",
+  "authority": "design.md is canonical. Values marked status=extracted mirror production exactly; status=recommended are proposals from design.md not yet in production; status=notDefined records an open question. The brand system is versioned on its own; the website's version (projects/website/package.json) is a separate number.",
   "conventions": {
     "status": [
       "extracted",
@@ -937,7 +937,7 @@
     "production": {
       "status": "extracted",
       "family": "Phosphor Regular",
-      "delivery": "inlined SVG <symbol> in index.html, viewBox 0 0 256 256, fill=currentColor",
+      "delivery": "inlined SVG <symbol> in projects/website/index.html, viewBox 0 0 256 256, fill=currentColor",
       "grid": 256,
       "weight": "regular (16-unit stroke equivalent)",
       "set": [

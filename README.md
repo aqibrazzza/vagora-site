@@ -1,41 +1,79 @@
 # Vagora
 
-The Vagora marketing website (v6) and the **Vagora Brand System v1.1.1** that was extracted from it. One repository, two things:
+This repository is the Vagora workspace. It contains:
 
-| | Where | Start with |
-|---|---|---|
-| **The brand system** — for anyone making something new for Vagora: a web section, imagery, a video, a deck, a banner, a poster, a social post | `brand-system/` | `brand-system/README.md`, then `brand-system/design.md` |
-| **The website** — the production site itself | `index.html`, `src/`, `assets/`, `public/` | `index.html` (the copy and structure; the source comments explain each decision), then `src/styles/main.css` and `src/main.js`. The art direction and motion system it follows are documented in `brand-system/design.md` §05–§11. |
-
-## Layout
+- the canonical **Vagora brand system** (v1.1.1)
+- the **approved reusable assets** — logos, fonts, imagery, film
+- the **production website**
+- **Vagora creative and product projects**, as they are made
 
 ```
-brand-system/          the brand system — design.md (canonical), design-system.html
-                       (visual manual), design-tokens.json (values), CHANGELOG.md
-index.html             the page; all copy lives here
-src/                   main.js (behaviour), modules/ (text splitter, refraction), styles/main.css
-assets/                brand/ (marks, lockups, avatars) · fonts/ · imagery/ · video/
-                       — shared by the site and the brand system; Vite bundles what the page references
-public/                robots.txt and the share card, which must keep their exact paths
-LICENSES/              Switzer (Fontshare FFL), Fragment Mono (SIL OFL 1.1), Phosphor Icons (MIT)
+/
+├── README.md              this map
+├── brand-system/          the brand system — design.md (canonical), design-system.html
+│                          (visual manual), design-tokens.json (values), CHANGELOG.md
+├── assets/                the one approved asset library, used by everything below
+│   ├── brand/             logo/ (the eight approved logo artworks) · avatar/ (favicon tiles)
+│   ├── fonts/             Switzer, Fragment Mono
+│   ├── imagery/           the feature, business, handoff and product photographs
+│   └── video/             the hero film encodes, its poster, its master, one film still
+├── LICENSES/              Switzer (Fontshare FFL), Fragment Mono (SIL OFL 1.1), Phosphor Icons (MIT)
+└── projects/
+    └── website/           the production website — a Vite project
 ```
 
-`assets/video/` holds the film master the site currently runs (`new-hero-video.mp4`), the web encodes the page loads, and `hero-film-still.webp` — a frame of the white-studio film that the brand system's visual manual uses. Only the encodes and the poster are shipped.
+## Where to go
 
-## Running the site
+| I want to... | Go to |
+| --- | --- |
+| Understand the Vagora brand | `/brand-system/` |
+| Create anything on-brand | Read `/brand-system/design.md` first |
+| See the visual brand manual | `/brand-system/design-system.html` (open it in a browser) |
+| Use exact design values | `/brand-system/design-tokens.json` |
+| Find approved logos, images, fonts, product assets | `/assets/` |
+| Work on the production website | `/projects/website/` |
+| Create new Vagora work | `/projects/` |
+
+## Website development
+
+Open the repository **root** in VS Code. Then:
 
 ```
-npm install
-npm run dev       # local dev server
-npm run build     # production build → dist/
-npm run preview   # serve dist/ locally
+cd projects/website
+npm ci
+npm run dev
 ```
 
-`dist/` is ignored by git; build it where you deploy. It is relative-pathed (`base: "./"`), so it deploys to a domain root or a subfolder without a rebuild.
+Build:
 
-## Using the brand system
+```
+npm run build
+```
 
-Open `brand-system/design-system.html` in a browser to see the system; read `brand-system/design.md` for every rule and its authority (ESTABLISHED / DERIVED / IMPLEMENTATION / NEW RECOMMENDATION / NOT YET DEFINED). For AI work, §19 of `design.md` holds the image and video blocks and §20 the copywriting block, ready to paste into a model. The manual depends on `assets/` by relative path, so keep the repository together rather than copying `brand-system/` out on its own.
+`dist/` and `node_modules/` are generated inside `projects/website/` and are ignored by git; build where you deploy. The built site is relative-pathed (`base: "./"`), so it deploys to a domain root or a subfolder without a rebuild.
+
+The website has no assets of its own. It references the repository's `/assets/` library by relative path (`../../assets/...`), and Vite bundles what the page uses into `dist/assets/` with hashed names at build time. Put a new image, font or film in `/assets/`, never in the project.
+
+Git lives at the repository root and works from any folder inside it: `git status` in `projects/website/` reports on the same repository. There is exactly one repository — no nested `.git`, no submodules.
+
+## Projects
+
+`/projects/` holds actual Vagora work. The website is the first permanent project. Future work goes in a category folder that is created when the first real project of that kind exists — not before:
+
+```
+/projects/presentations/[project-name]/
+/projects/social/[project-name]/
+/projects/events/[project-name]/
+/projects/print/[project-name]/
+/projects/campaigns/[project-name]/
+/projects/mirror-ui/
+```
+
+Every project draws on `/brand-system/` for its rules and `/assets/` for its material. Brand rules are not copied into project folders; the brand system stays canonical.
+
+The instruction for any new piece of work, for a person or an AI, is:
+
+> Read the Vagora brand system and use approved Vagora assets from `/assets/` where relevant. Create [TASK]. Save the project in `/projects/[CATEGORY]/[PROJECT-NAME]/`.
 
 ## Evidence rules
 

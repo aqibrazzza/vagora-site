@@ -1,6 +1,6 @@
 # Vagora — Design System
 
-**VAGORA BRAND SYSTEM v1.1.1** — canonical brand, visual, verbal, imagery, interface and motion system, extracted from the finished Vagora website (site v6, September 2026). The brand system is versioned on its own; the website's version (`package.json`) is a separate number.
+**VAGORA BRAND SYSTEM v1.1.1** — canonical brand, visual, verbal, imagery, interface and motion system, extracted from the finished Vagora website (site v6, September 2026). The brand system is versioned on its own; the website's version (`projects/website/package.json`) is a separate number. The website lives at `projects/website/` and consumes the same root `assets/` library this document names.
 
 This document is the source of truth. `design-tokens.json` carries the same values for machines; `design-system.html` shows them. If any derivative file disagrees with this one, this one wins — unless the production website has since been intentionally changed, in which case the website wins and this document must be updated to match it.
 
@@ -702,7 +702,7 @@ Stroke equivalents on the 256 grid: Thin 8 · **Light 12** · **Regular 16** · 
 
 ### In production
 
-**ESTABLISHED SYSTEM RULE.** The website ships Phosphor Regular. Five interface icons are inlined as SVG symbols in `index.html`, on the 256 grid with `fill="currentColor"`: `arrow-up-right` (primary button, `1.1em` ≈ 24px on `.btn--lg`), `copy` and `check` (address copy control, 16px), `play` and `pause` (hero film toggle, 16px). Each sits beside Switzer, so each is Regular — the weight rule above, applied. No other icon library is loaded, referenced or attributed anywhere on the site.
+**ESTABLISHED SYSTEM RULE.** The website ships Phosphor Regular. Five interface icons are inlined as SVG symbols in `projects/website/index.html`, on the 256 grid with `fill="currentColor"`: `arrow-up-right` (primary button, `1.1em` ≈ 24px on `.btn--lg`), `copy` and `check` (address copy control, 16px), `play` and `pause` (hero film toggle, 16px). Each sits beside Switzer, so each is Regular — the weight rule above, applied. No other icon library is loaded, referenced or attributed anywhere on the site.
 
 **NOT YET DEFINED.** Whether a filled style is ever admitted for a selected state; whether 20px earns a fixed context of its own.
 
