@@ -1,6 +1,6 @@
 # Vagora — Design System
 
-**VAGORA BRAND SYSTEM v1.1.1** — canonical brand, visual, verbal, imagery, interface and motion system, extracted from the finished Vagora website (site v6, September 2026). The brand system is versioned on its own; the website's version (`projects/website/package.json`) is a separate number. The website lives at `projects/website/` and consumes the same root `assets/` library this document names.
+**VAGORA BRAND SYSTEM v1.2.0** — canonical brand, visual, verbal, imagery, interface and motion system, extracted from the finished Vagora website (site v6, September 2026). The brand system is versioned on its own; the website's version (`projects/website/package.json`) is a separate number. The website lives at `projects/website/` and consumes the same root `assets/` library this document names.
 
 This document is the source of truth. `design-tokens.json` carries the same values for machines; `design-system.html` shows them. If any derivative file disagrees with this one, this one wins — unless the production website has since been intentionally changed, in which case the website wins and this document must be updated to match it.
 
@@ -279,12 +279,12 @@ Note for accuracy: the brief that commissioned this document described the palet
 | Lead | `--type-lead` | `clamp(2.625rem, 1.5rem + 3.33vw, 5.25rem)` — 42 → 84px | 0.94 | −0.035em | 500 | The manifesto proposition only |
 | Chapter | `--type-chapter` | `clamp(2.25rem, 1.4rem + 2.6vw, 4rem)` — 36 → 64px | 0.98 | −0.03em | 500 | The two act openings |
 | Section | `--type-section` | `clamp(1.75rem, 1.2rem + 1.6vw, 3rem)` — 28 → 48px | 1.02 | −0.025em | 500 (450 dark) | `.h2` / `.h3`: the Mirror, the console, FAQ head |
-| Feature | (body tier) | 18 → 22px | 1.25 | −0.01em | 500 | Feature titles in both acts |
+| Feature | `--type-feature` | `clamp(1.25rem, 1.1rem + 0.45vw, 1.75rem)` — 20 → 28px | 1.25 | −0.01em | 500 | Feature titles in both acts (v1.2.0: its own tier, one step above body; previously set at body size) |
 | Body | `--type-body` | `clamp(1.125rem, 1.05rem + 0.25vw, 1.375rem)` — 18 → 22px | 1.42 | 0 | 400 | Ledes, FAQ questions (at 500), the printed email, large button |
 | Small | `--type-small` | `clamp(1rem, 0.97rem + 0.1vw, 1.0625rem)` — 16 → 17px | 1.40 | 0 | 400 | Feature bodies, RETAIL IMPACT statements, facts, answers, notes, buttons, colophon |
 | Label | `--type-label` | `0.875rem` — 14px fixed | 1.20–1.25 | 0.02em | 400 | Every Fragment Mono element; pills |
 
-The brief's "roughly 84 / 64 / 48 / 22 / 17 / 14" is the maximum of lead / chapter / section / body / small / label. The display tier (160) exists above them and is used once.
+The brief's "roughly 84 / 64 / 48 / 22 / 17 / 14" is the maximum of lead / chapter / section / body / small / label. The display tier (160) exists above them and is used once. The feature tier (28 max) sits between section and body: at 2560 the stack reads 48 → 28 → 22 → 17, so a feature title is one clear step above the copy beneath it, and its maximum is the section tier's minimum, so the scale has no gap and no overlap.
 
 **ESTABLISHED SYSTEM RULE.** Headings weigh 500 on light surfaces and 450 on dark (white blooms on black; the lighter weight compensates). Body is 400 everywhere. Nothing on the site is bold (600+). **WHY:** scale creates authority; weight is refinement. **AVOID:** 600–700 weights; light weights (300) for display; mixed weights inside one heading.
 
@@ -296,7 +296,7 @@ The brief's "roughly 84 / 64 / 48 / 22 / 17 / 14" is the maximum of lead / chapt
 
 - Headings: `text-wrap: balance` — and where a break matters it is authored with `<br />`.
 - Ledes, bodies, facts, answers, notes: `text-wrap: pretty` (no widows).
-- Reading measure `--reading-max: 42rem` (ledes, answers); compact measure `--copy-max: 30rem` (notes); annotation blocks `34ch`; feature copy column 280–320px on wide layouts; manifesto `24ch`; Mirror heading `21ch`, Mirror lede `40ch`; ask title `10ch`.
+- Reading measure `--reading-max: 42rem` (ledes, answers); compact measure `--copy-max: 30rem` (notes); annotation blocks `34ch`; feature copy column 280–340px on wide layouts; manifesto `24ch`; Mirror heading `21ch`, Mirror lede `40ch`; ask title `10ch`.
 - Numbers use `font-variant-numeric: tabular-nums` (`.num`) wherever they sit in a column or a sequence.
 
 **WHY:** balance keeps headings shaped; pretty keeps paragraphs from ending on one word; tight measures keep copy beside its object instead of running under it.
@@ -353,7 +353,7 @@ When any condition fails, do not force the type onto the picture. Use one of two
 
 - Grid: `minmax(0,1fr) | var(--media-w)` where `--media-w: clamp(720px, 60.5vw, 1440px)`; column gap `--breath: clamp(24px, 1.25vw, 32px)`; padding-left = gutter; the media plane runs to the right viewport edge.
 - Media plane: `--media-h: clamp(520px, 71svh, 940px)`, sharp corners (`--radius-media: 0`), `position: sticky; top: (100svh − media-h)/2` — vertically centred in the viewport.
-- Rail: five steps, each `min-height: 80svh`, content vertically centred; the annotation block `280–320px` wide (`clamp(280px, 16.5vw, 320px)`), **centred in the whitespace between the gutter and the image's left edge, with its text left-aligned**. Inactive steps at 35% opacity; the active one at 100%.
+- Rail: five steps, each `min-height: 80svh`, content vertically centred; the annotation block `280–340px` wide (`clamp(280px, 16.5vw, 340px)`), **centred in the whitespace between the gutter and the image's left edge, with its text left-aligned**. Inactive steps at 35% opacity; the active one at 100%.
 - The first step is padded down by `stick-top + 16svh` so State 01 reaches reading position only after the opening has cleared.
 
 ### Act two — the same system mirrored
@@ -390,7 +390,7 @@ When any condition fails, do not force the type onto the picture. Use one of two
 
 **ESTABLISHED SYSTEM RULE.** The site is fluid, not stepped: type, gutters, section rhythm and media sizes are `clamp()` functions of viewport width (and height, for media). Breakpoints exist only where a *layout* must change: `460` (dock brand cell), `640` (media ratio 4/5 → 4/3; metrics 2-up), `700` (manifesto meta and specification 1 → 2 columns), `900` (media ratio → 16/10; FAQ two columns; chapter openings one row), `1024` (console one row), `1100 + min-height 600` (the sticky feature system exists), `1200`, `1280` (specification four columns).
 
-**ESTABLISHED SYSTEM RULE — height sensitivity.** Media heights are `svh`-based and the sticky stage only exists when the viewport is at least 600px tall. A 1200×720 or 1366×768 laptop must still show the held Act one composition whole; that is tested, not assumed. Everything uses `svh`, never `vh`, so mobile browser chrome never causes a jump.
+**ESTABLISHED SYSTEM RULE — height sensitivity.** Media heights are `svh`-based and the sticky stage only exists when the viewport is at least 600px tall. A 1200×720 or 1366×768 laptop must still show the held Mirror composition whole; that is tested, not assumed. Everything uses `svh`, never `vh`, so mobile browser chrome never causes a jump.
 
 **ESTABLISHED SYSTEM RULE — differential scaling.** Between 1440 and 2560 the media stage grows fastest, headings moderately, body barely, gutters slightly. A large monitor gets a larger picture and more air, not larger paragraphs.
 
@@ -722,13 +722,13 @@ Stroke equivalents on the 256 grid: Thin 8 · **Light 12** · **Regular 16** · 
 
 **ESTABLISHED SYSTEM RULE — reversible by construction.** Takeovers are CSS composition (`position: sticky` + negative margins), not pinned timelines, so scrolling back simply reverses them; page height is never changed by motion.
 
-**DERIVED PRINCIPLE — the takeover is a signature, not the only door.** The pinned takeover is Vagora's high-intensity transition, used selectively — twice on the whole site, each time to change world (black ↔ white). Ordinary document-flow transitions and quiet handoffs between sections of the same surface are equally valid Vagora motion; most chapters simply follow one another. The vocabulary below is the default for new work. A technique outside it may be earned by a new surface when the established grammar cannot do the job, provided it keeps these principles — anchor first, one event per chapter, reversible, small — and is then recorded here.
+**DERIVED PRINCIPLE — the takeover is a signature, not the only door.** The pinned takeover is Vagora's high-intensity transition, used selectively — twice on the whole site, each time a black world is held while a white one rises over it (hero → manifesto, Mirror → act two); the site's one white → black change, act one → Mirror, is a plain change of surface at the boundary. Ordinary document-flow transitions and quiet handoffs between sections of the same surface are equally valid Vagora motion; most chapters simply follow one another. The vocabulary below is the default for new work. A technique outside it may be earned by a new surface when the established grammar cannot do the job, provided it keeps these principles — anchor first, one event per chapter, reversible, small — and is then recorded here.
 
 ### The vocabulary
 
 | Pattern | What it is | Where | Values |
 |---|---|---|---|
-| **Pinned section transition (takeover)** | The site's signature transition, used for its two changes of world. The outgoing world is held by `position: sticky`; the incoming world is pulled up by an equal negative margin and painted above it. One clean full-width plane; no mask, no wipe. | Hero → Manifesto (white over black); Act one → Mirror (black over white) | Hero: scope 200svh, manifesto `margin-top: −100svh`. Act one: `--act-anchor = 100svh − act height`, `--act-hold = 100svh`. ESTABLISHED |
+| **Pinned section transition (takeover)** | The site's signature transition, used for its two changes of world. The outgoing world is held by `position: sticky`; the incoming world is pulled up by an equal negative margin and painted above it. One clean full-width plane; no mask, no wipe. | Hero → Manifesto (white over black); Mirror → Act two (white over black). Act one hands to the Mirror in plain flow. | Hero: scope 200svh, manifesto `margin-top: −100svh`. Mirror: `--mirror-anchor = 100svh − chapter height`, `--mirror-hold = 100svh`, act two `margin-top: −100svh`. ESTABLISHED (v1.2.0: the second takeover moved from the act one → Mirror seam to the Mirror → act two seam) |
 | **Pinned reveal** | While a held world is being covered, it answers minimally: the film scales 1 → 1.025 and dims to 0.88 brightness, scrubbed. | Hero, wide layouts only | ESTABLISHED |
 | **Scroll-driven takeover of a proposition** | Words light from 18% to 100% opacity as the reader scrolls (`top 45%` → `bottom 30%`); then the block yields upward (−24…−70px, to 45% opacity) as the next chapter arrives. | Manifesto | ESTABLISHED |
 | **Sticky media stage** | One image plane fixed at viewport centre while an annotation rail scrolls beside it; the state changes when a block's top crosses 72% of the viewport (and back at the same band). State change 300ms crossfade, or a refraction wave where WebGL is available. Annotation leaves in 200ms, arrives in 300ms after a 260ms delay. | Both acts | ESTABLISHED |
@@ -783,7 +783,7 @@ Every component below exists on the site. Values are production values.
 
 ```
 (01)                       ← Fragment Mono 14, notation colour, tabular, parentheses
-The garment, rendered on   ← Switzer 18–22, 500, lh 1.25, ls −0.01em, balance
+The garment, rendered on   ← Switzer 20–28 (feature tier), 500, lh 1.25, ls −0.01em, balance
 the customer in live 3D.
 It tracks the customer's   ← Switzer 16–17, 400, lh 1.4, pretty, full ink
 movement in real time…
@@ -793,7 +793,7 @@ Staff fetch a piece the    ← Switzer 16–17, 400, full ink
 customer has already seen…
 ```
 
-Internal rhythm 12 / 16 / 24 / 8; `max-width: 34ch`; wide layouts 280–320px wide, centred in the whitespace, text left-aligned. Inactive at 35% opacity on the sticky stage; full on narrow layouts. **AVOID:** icons in the block; a "learn more" link; grey body text; more than one paragraph of body.
+Internal rhythm 12 / 16 / 24 / 8; `max-width: 34ch`; wide layouts 280–340px wide, centred in the whitespace, text left-aligned. Inactive at 35% opacity on the sticky stage; full on narrow layouts. **AVOID:** icons in the block; a "learn more" link; grey body text; more than one paragraph of body.
 
 ### RETAIL IMPACT
 
@@ -1027,7 +1027,7 @@ For each medium: what remains constant, what the medium forces to change, then t
 
 **Whitespace.** The section rhythms and the annotation block's internal rhythm, as the site. A new section earns its own whitespace by having fewer things in it, not by more padding.
 
-**Colour.** White by default. Black for a product moment or an ask, and as a whole surface — on the site it arrives by takeover; a page may also simply change surface at a section boundary — never a black panel inside a white section.
+**Colour.** White by default. Black for a product moment or an ask, and as a whole surface — on the site the Mirror's black arrives by a plain change of surface and the white after it by takeover; a page may do either at a section boundary — never a black panel inside a white section.
 
 **Copy amount.** Title ≤9 words · lede ≤25 · annotation body ≤40 · RETAIL IMPACT ≤25. A section that needs more copy needs to be two sections.
 
@@ -1278,7 +1278,7 @@ The five modes below are the whole social vocabulary; the visual manual shows on
 
 Each recipe names the dominant object, the small object, and the rule that decides their placement.
 
-**Image-dominant.** Photograph to one viewport/page edge at ≥60% of the width; annotation block (index, title, body, impact) centred in the remaining whitespace, text left-aligned, ≤320px wide; chapter eyebrow above the whole. Mirror the side when the recipe repeats. *(Both acts.)*
+**Image-dominant.** Photograph to one viewport/page edge at ≥60% of the width; annotation block (index, title, body, impact) centred in the remaining whitespace, text left-aligned, ≤340px wide; chapter eyebrow above the whole. Mirror the side when the recipe repeats. *(Both acts.)*
 
 **Type-dominant.** One proposition at lead tier, `24ch`, top-left anchored with the eyebrow a gutter's distance from the surface's edge; three hairline facts beneath at small tier in a 3-column row; nothing else on the surface. *(Manifesto.)*
 

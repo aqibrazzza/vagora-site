@@ -1,6 +1,6 @@
 {
   "name": "VAGORA BRAND SYSTEM",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "extractedFrom": "the production website (v6), now at projects/website/ — src/styles/main.css :root and [data-surface=\"dark\"], index.html, src/main.js",
   "extractedOn": "2026-09-06",
   "authority": "design.md is canonical. Values marked status=extracted mirror production exactly; status=recommended are proposals from design.md not yet in production; status=notDefined records an open question. The brand system is versioned on its own; the website's version (projects/website/package.json) is a separate number.",
@@ -287,13 +287,13 @@
         "status": "extracted"
       },
       "feature": {
-        "css": "var(--type-body)",
-        "min": 18,
-        "max": 22,
+        "css": "clamp(1.25rem, 1.1rem + 0.45vw, 1.75rem)",
+        "min": 20,
+        "max": 28,
         "lineHeight": 1.25,
         "letterSpacing": "-0.01em",
         "weight": "medium",
-        "use": "Feature titles in both acts (body size at heading weight)",
+        "use": "Feature titles in both acts. Its own tier since v1.2.0 (previously body size at heading weight); one step above body, its maximum meets the section tier's minimum.",
         "status": "extracted"
       },
       "body": {
@@ -368,7 +368,7 @@
         "status": "extracted"
       },
       "annotationWide": {
-        "css": "clamp(280px, 16.5vw, 320px)",
+        "css": "clamp(280px, 16.5vw, 340px)",
         "status": "extracted"
       },
       "manifesto": {
@@ -716,8 +716,9 @@
     },
     "takeover": {
       "heroHold": "200svh",
-      "actHold": "100svh (measured)",
-      "actAnchor": "100svh - act height (measured)",
+      "mirrorHold": "100svh (measured)",
+      "mirrorAnchor": "100svh - Mirror chapter height (measured)",
+      "note": "Hero → Manifesto and Mirror → Act two. Act one hands to the Mirror in plain flow (v1.2.0).",
       "status": "extracted"
     },
     "heroAnswer": {

@@ -1,6 +1,6 @@
-# VAGORA BRAND SYSTEM v1.1.1
+# VAGORA BRAND SYSTEM v1.2.0
 
-The complete Vagora brand, visual, verbal, imagery, interface and motion system, extracted from the finished website (site v6, September 2026). The brand system carries its own version — v1.1.1 across `design.md`, `design-system.html` and `design-tokens.json` — separate from the website's version in `package.json`. Use it to make anything new for Vagora — a page, a post, a deck, a sheet, a screen — so it looks, reads and moves like the site.
+The complete Vagora brand, visual, verbal, imagery, interface and motion system, extracted from the finished website (site v6, September 2026). The brand system carries its own version — v1.2.0 across `design.md`, `design-system.html` and `design-tokens.json` — separate from the website's version in `package.json`. Use it to make anything new for Vagora — a page, a post, a deck, a sheet, a screen — so it looks, reads and moves like the site.
 
 ## Files
 

@@ -2,7 +2,7 @@
 
 This repository is the Vagora workspace. It contains:
 
-- the canonical **Vagora brand system** (v1.1.1)
+- the canonical **Vagora brand system** (v1.2.0)
 - the **approved reusable assets** — logos, fonts, imagery, film
 - the **production website**
 - **Vagora creative and product projects**, as they are made

@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex" />
 <link rel="icon" href="data:," />
 <!--
-  Vagora — design-system.html · VAGORA BRAND SYSTEM v1.1.1
+  Vagora — design-system.html · VAGORA BRAND SYSTEM v1.2.0
   A standalone visual manual. Canonical rules live in design.md; this page shows them.
 
   Dependencies (all relative to this file, all in the website repository):
@@ -44,6 +44,7 @@
   --type-lead: clamp(2.625rem, 1.5rem + 3.33vw, 5.25rem);
   --type-chapter: clamp(2.25rem, 1.4rem + 2.6vw, 4rem);
   --type-section: clamp(1.75rem, 1.2rem + 1.6vw, 3rem);
+  --type-feature: clamp(1.25rem, 1.1rem + 0.45vw, 1.75rem);
   --type-body: clamp(1.125rem, 1.05rem + 0.25vw, 1.375rem);
   --type-small: clamp(1rem, 0.97rem + 0.1vw, 1.0625rem);
   --type-label: 0.875rem;
@@ -81,7 +82,7 @@ pre { white-space: pre-wrap; line-height: 1.5; padding: var(--space-4); border: 
 .lead { font-size: var(--type-lead); font-weight: var(--w-heading); line-height: var(--lh-lead); letter-spacing: var(--ls-lead); }
 .chapter { font-size: var(--type-chapter); font-weight: var(--w-heading); line-height: var(--lh-chapter); letter-spacing: var(--ls-chapter); }
 .h2, .h3 { font-size: var(--type-section); font-weight: var(--w-heading); line-height: var(--lh-section); letter-spacing: var(--ls-section); text-wrap: balance; }
-.feature { font-size: var(--type-body); font-weight: var(--w-medium); line-height: 1.25; letter-spacing: -0.01em; text-wrap: balance; }
+.feature { font-size: var(--type-feature); font-weight: var(--w-medium); line-height: 1.25; letter-spacing: -0.01em; text-wrap: balance; }
 .lede { font-size: var(--type-body); line-height: var(--lh-body); font-weight: 400; text-wrap: pretty; }
 .small { font-size: var(--type-small); line-height: var(--lh-small); }
 .eyebrow, .notation { font-family: var(--mono); font-size: var(--type-label); line-height: 1.25; font-weight: 400; letter-spacing: .02em; color: var(--notation); }
@@ -381,7 +382,7 @@ td code { color: var(--text); }
 .impact .notation { text-transform: uppercase; }
 .impact p { color: var(--text); text-wrap: pretty; }
 .annot-demo { display: grid; gap: var(--space-6); align-items: center; }
-@media (min-width: 900px) { .annot-demo { grid-template-columns: minmax(0, 1fr) 60%; } .annot-demo .annot { margin-inline: auto; width: clamp(280px, 16.5vw, 320px); max-width: 100%; } }
+@media (min-width: 900px) { .annot-demo { grid-template-columns: minmax(0, 1fr) 60%; } .annot-demo .annot { margin-inline: auto; width: clamp(280px, 16.5vw, 340px); max-width: 100%; } }
 .annot-demo .frame { aspect-ratio: 16 / 10; overflow: hidden; background: var(--media-ground); }
 .annot-demo .frame img { width: 100%; height: 100%; object-fit: cover; }
 .dock-demo { display: grid; place-items: center; padding: var(--space-7) var(--space-4); background: repeating-linear-gradient(45deg, rgba(15,15,15,.03) 0 12px, transparent 12px 24px); border: 1px solid var(--line); }
@@ -465,8 +466,8 @@ td code { color: var(--text); }
 .replay { align-self: start; font-family: var(--mono); font-size: 12px; letter-spacing: .02em; text-transform: uppercase; color: var(--notation); background: none; border: 1px solid var(--line); border-radius: var(--radius-pill); padding: 6px 12px; cursor: pointer; justify-self: start; }
 .takeover { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); }
 .takeover .world { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; letter-spacing: .02em; }
-.takeover .world--held { background: #fff; color: var(--notation); }
-.takeover .world--next { background: #000; color: var(--notation-inverse); transform: translateY(100%); }
+.takeover .world--held { background: #000; color: var(--notation-inverse); }
+.takeover .world--next { background: #fff; color: var(--notation); transform: translateY(100%); }
 .js .takeover.is-in .world--next { animation: takeover 1.6s cubic-bezier(.45, 0, .55, 1) .3s forwards; }
 @keyframes takeover { to { transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) {
@@ -487,7 +488,7 @@ td code { color: var(--text); }
 <header class="cover" data-surface="dark">
   <div style="display:flex;justify-content:space-between;align-items:start;gap:24px">
     <img class="cover__lockup" src="../assets/brand/logo/vagora-lockup-vertical-on-dark.svg" width="272" height="308" alt="Vagora Mirror" />
-    <span class="notation" style="color:var(--notation-inverse)">VAGORA BRAND SYSTEM v1.1.1 · EXTRACTED 2026-09</span>
+    <span class="notation" style="color:var(--notation-inverse)">VAGORA BRAND SYSTEM v1.2.0 · EXTRACTED 2026-09</span>
   </div>
   <div class="cover__title">
     <span class="eyebrow" style="color:var(--notation-inverse)">Vagora is</span>
@@ -895,7 +896,7 @@ editorial object                 WORDMARK</pre>
   <div class="spec-row"><div class="notation"><span>LEAD · 42 → 84PX</span><span>LH .94 · LS −.035EM · 500</span><span>THE MANIFESTO ONLY</span></div><p class="lead sample" style="max-width:24ch">An interactive mirror that helps customers discover more.</p></div>
   <div class="spec-row"><div class="notation"><span>CHAPTER · 36 → 64PX</span><span>LH .98 · LS −.03EM · 500</span><span>THE TWO ACT OPENINGS</span></div><p class="chapter sample">What happens<br />on the floor.</p></div>
   <div class="spec-row"><div class="notation"><span>SECTION · 28 → 48PX</span><span>LH 1.02 · LS −.025EM · 500 (450 DARK)</span><span>.H2 / .H3 — MIRROR, CONSOLE, FAQ</span></div><p class="h2 sample" style="max-width:21ch">An interactive mirror that starts by itself.</p></div>
-  <div class="spec-row"><div class="notation"><span>FEATURE · 18 → 22PX</span><span>LH 1.25 · LS −.01EM · 500</span><span>FEATURE TITLES · BODY SIZE AT HEADING WEIGHT</span></div><p class="feature sample" style="max-width:34ch">The garment, rendered on the customer in live 3D.</p></div>
+  <div class="spec-row"><div class="notation"><span>FEATURE · 20 → 28PX</span><span>LH 1.25 · LS −.01EM · 500</span><span>FEATURE TITLES · ONE STEP ABOVE BODY</span></div><p class="feature sample" style="max-width:34ch">The garment, rendered on the customer in live 3D.</p></div>
   <div class="spec-row"><div class="notation"><span>BODY · 18 → 22PX</span><span>LH 1.42 · LS 0 · 400</span><span>LEDES, FAQ QUESTIONS (500), LARGE BUTTON</span></div><p class="lede sample" style="max-width:var(--reading-max)">Five things your customers can do with Vagora that aren’t possible anywhere else on your floor.</p></div>
   <div class="spec-row"><div class="notation"><span>SMALL · 16 → 17PX</span><span>LH 1.40 · LS 0 · 400</span><span>FEATURE BODIES, IMPACT, FACTS, ANSWERS, BUTTONS</span></div><p class="small sample" style="max-width:34ch">It tracks the customer’s movement in real time, so the garment responds as they move.</p></div>
   <div class="spec-row"><div class="notation"><span>LABEL · 14PX FIXED</span><span>LH 1.2–1.25 · LS .02EM · 400 · MONO</span><span>EVERY FRAGMENT MONO ELEMENT · PILLS</span></div><p class="notation sample" style="display:flex;gap:24px;flex-wrap:wrap"><span>ACT ONE · ON THE FLOOR</span><span>(01)</span><span>RETAIL IMPACT</span><span>ESTATE OVERVIEW</span></p></div>
@@ -903,7 +904,7 @@ editorial object                 WORDMARK</pre>
   <div class="grid2" style="margin-top:var(--space-7)">
     <div>
       <div class="rule-head" style="margin-top:0"><span class="notation">WRAPPING AND MEASURE <span class="tag">Established</span></span></div>
-      <p class="prose">Headings <code>balance</code>, with breaks authored by <code>&lt;br&gt;</code> where they matter. Prose <code>pretty</code>. Numbers tabular. Measures: reading 42rem · copy 30rem · annotation 34ch (280–320px wide) · manifesto 24ch · Mirror heading 21ch, lede 40ch · ask 10ch.</p>
+      <p class="prose">Headings <code>balance</code>, with breaks authored by <code>&lt;br&gt;</code> where they matter. Prose <code>pretty</code>. Numbers tabular. Measures: reading 42rem · copy 30rem · annotation 34ch (280–340px wide) · manifesto 24ch · Mirror heading 21ch, lede 40ch · ask 10ch.</p>
       <div class="rule-head"><span class="notation">EYEBROW → HEADING <span class="tag">Established</span></span></div>
       <p class="prose">One site-wide gap (24px) corrected per tier — display lifts by <code>0.09em − 5px</code>, lead <code>0.05em − 1.4px</code>, chapter <code>0.045em − 1.2px</code> — so the <em>seen</em> gap is equal at every scale. Sections never set their own.</p>
     </div>
@@ -949,7 +950,7 @@ editorial object                 WORDMARK</pre>
         <div class="headline" style="left:5%;top:11%;width:34%"><i></i><i style="width:60%"></i></div>
         <div class="plane photo" style="left:39.5%;top:14.5%;right:0;height:71%;background-image:url(../assets/imagery/feature-try-on.webp)"></div>
         <div class="copy" style="left:11%;top:44%;width:22%"><i class="mono"></i><i style="margin-top:3px"></i><i style="width:80%"></i><i style="width:90%;height:2px;margin-top:4px"></i><i class="rule"></i><i class="mono"></i><i style="height:2px;width:90%"></i></div>
-        <div class="label" style="left:5%;bottom:5%">ACT ONE · PLANE RIGHT 60.5VW × 71SVH · RAIL LEFT 280–320PX</div>
+        <div class="label" style="left:5%;bottom:5%">ACT ONE · PLANE RIGHT 60.5VW × 71SVH · RAIL LEFT 280–340PX</div>
       </div>
       <p><strong>Act one.</strong> Media plane to the right viewport edge, sticky at viewport centre; annotation centred in the whitespace left of it, text left-aligned; inactive steps at 35%.</p>
     </div>
@@ -1029,7 +1030,7 @@ editorial object                 WORDMARK</pre>
     <div>
       <div class="rule-head" style="margin-top:0"><span class="notation">PRINCIPLES <span class="tag">Established</span></span></div>
       <ol class="list">
-        <li><span>01</span><span><strong>Height sensitivity.</strong> Media heights are svh-based; the sticky stage needs ≥600px tall; 1200×720 and 1366×768 must show the held Act one composition whole. svh everywhere, never vh.</span></li>
+        <li><span>01</span><span><strong>Height sensitivity.</strong> Media heights are svh-based; the sticky stage needs ≥600px tall; 1200×720 and 1366×768 must show the held Mirror composition whole. svh everywhere, never vh.</span></li>
         <li><span>02</span><span><strong>Differential scaling.</strong> 1440 → 2560: the stage grows fastest, headings moderately, body barely. A big monitor gets a bigger picture and more air, not bigger paragraphs.</span></li>
         <li><span>03</span><span><strong>Narrow is complete.</strong> Each feature becomes one in-flow scene: image (4/5 → 4/3 → 16/10), index, title, body, RETAIL IMPACT. The image opens from its centre as it enters. Nothing a reader needs is hidden.</span></li>
         <li><span>04</span><span><strong>QA viewports.</strong> 360×800 · 390×844 · 768×1024 · 1200×720 · 1366×768 · 1440×900 · 1920×1080 · 2560×1440. No overflow, no clipped glyphs, every reveal fires, the dock never covers a control at rest.</span></li>
@@ -1555,10 +1556,10 @@ editorial object                 WORDMARK</pre>
     <div class="motion-demo" data-demo>
       <span class="notation">THE TAKEOVER · THE SIGNATURE TRANSITION, USED TWICE · HELD WORLD STAYS · NEXT WORLD RISES OVER IT <span class="tag">Established</span></span>
       <div class="takeover" data-takeover>
-        <div class="world world--held">ACT ONE · HELD BY POSITION: STICKY</div>
-        <div class="world world--next">THE VAGORA MIRROR · PULLED UP BY THE SCOPE'S SURPLUS</div>
+        <div class="world world--held">THE VAGORA MIRROR · HELD BY POSITION: STICKY</div>
+        <div class="world world--next">ACT TWO · PULLED UP BY THE SCOPE'S SURPLUS</div>
       </div>
-      <p class="small muted">Hero → Manifesto (white over black) and Act one → Mirror (black over white) use the same three CSS rules. One clean plane; no mask, no wipe; reversible; page height unchanged.</p>
+      <p class="small muted">Hero → Manifesto and Mirror → Act two (both white over black) use the same three CSS rules; Act one hands to the Mirror in plain flow. One clean plane; no mask, no wipe; reversible; page height unchanged.</p>
       <button class="replay" type="button" data-replay>Replay</button>
     </div>
     <div class="motion-demo" data-demo>
@@ -1578,7 +1579,7 @@ editorial object                 WORDMARK</pre>
   <div class="tablewrap"><table>
     <thead><tr><th>Pattern</th><th>What it is</th><th>Where · values</th></tr></thead>
     <tbody>
-      <tr><td>Pinned section transition</td><td>Outgoing world held by <code>position: sticky</code>; incoming world pulled up by an equal negative margin and painted above it. One full-width plane.</td><td>Hero → Manifesto (scope 200svh); Act one → Mirror (anchor = 100svh − act height, hold 100svh)</td></tr>
+      <tr><td>Pinned section transition</td><td>Outgoing world held by <code>position: sticky</code>; incoming world pulled up by an equal negative margin and painted above it. One full-width plane.</td><td>Hero → Manifesto (scope 200svh); Mirror → Act two (anchor = 100svh − chapter height, hold 100svh)</td></tr>
       <tr><td>Pinned reveal</td><td>The held world answers minimally while covered: scale 1 → 1.025, brightness → 0.88, scrubbed.</td><td>Hero, wide only</td></tr>
       <tr><td>Scroll-driven proposition</td><td>Words light 18% → 100% as the reader scrolls; then the block yields upward and recedes to 45%.</td><td>Manifesto · top 45% → bottom 30%</td></tr>
       <tr><td>Sticky media stage</td><td>One plane fixed at viewport centre; state changes when a block's top crosses 72%; 300ms crossfade (or a refraction wave); annotation out 200ms, in 300ms after 260ms.</td><td>Both acts, ≥1100×600</td></tr>
@@ -1619,7 +1620,7 @@ editorial object                 WORDMARK</pre>
     </div>
     <div class="frame"><img src="../assets/imagery/feature-made-to-order.webp" alt="" loading="lazy" /></div>
   </div>
-  <p class="prose" style="margin-top:var(--space-4)">Index → 12 → title (body size, 500, lh 1.25, −.01em) → 16 → body (small, full ink) → 32/48 → RETAIL IMPACT label → 8 → statement. 34ch; 280–320px on wide layouts, centred in the whitespace, text left-aligned. No icon, no link, no grey body.</p>
+  <p class="prose" style="margin-top:var(--space-4)">Index → 12 → title (feature tier, 500, lh 1.25, −.01em) → 16 → body (small, full ink) → 32/48 → RETAIL IMPACT label → 8 → statement. 34ch; 280–340px on wide layouts, centred in the whitespace, text left-aligned. No icon, no link, no grey body.</p>
 
   <div class="grid2" style="margin-top:var(--space-7)">
     <div>
@@ -2035,7 +2036,7 @@ editorial object                 WORDMARK</pre>
         <div class="plane photo" style="left:40%;top:0;right:0;bottom:0;background-image:url(../assets/imagery/feature-outfit.webp)"></div>
         <div class="copy" style="left:10%;top:40%;width:22%"><i class="mono"></i><i></i><i style="width:80%"></i><i class="rule"></i><i class="mono"></i></div>
       </div>
-      <p><strong>Image-dominant.</strong> Photograph to one edge at ≥60%; annotation centred in the remaining whitespace, text left-aligned, ≤320px. Mirror the side when repeated.</p>
+      <p><strong>Image-dominant.</strong> Photograph to one edge at ≥60%; annotation centred in the remaining whitespace, text left-aligned, ≤340px. Mirror the side when repeated.</p>
     </div>
     <div class="recipe">
       <div class="diagram" aria-hidden="true">
@@ -2329,7 +2330,7 @@ Never mix them in one line.</pre>
 <footer class="foot" data-surface="dark">
   <img src="../assets/brand/logo/vagora-wordmark-on-dark.svg" width="450" height="127" alt="Vagora" loading="lazy" />
   <div class="foot__row small">
-    <p>© 2026 Vagora · VAGORA BRAND SYSTEM v1.1.1, extracted from the finished website.</p>
+    <p>© 2026 Vagora · VAGORA BRAND SYSTEM v1.2.0, extracted from the finished website.</p>
     <p class="notation" style="color:var(--notation-inverse)">DESIGN.MD IS CANONICAL · PRODUCTION WINS OVER ANY DESCRIPTION OF IT</p>
   </div>
 </footer>
