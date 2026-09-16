@@ -1193,7 +1193,7 @@
       "inProduction": {
         "status": "extracted",
         "dockMark": "brandmark, 17×33px (11×21px under 460px), currentColor mask",
-        "preloaderMark": "brandmark, 42–50px wide, 34:66 ratio",
+        "preloaderMark": "brandmark, as tall as the preloader tagline's cap height (measured by fitLine(); ≈126px at 1440, ≈227px at 2560; 2× the cap height at ≤480px — ≈68px at 390 — easing to 1× at 1100px), 34:66 ratio",
         "footerWordmark": "vagora-wordmark-on-dark.svg at 100% of the content width on black, left-aligned",
         "favicons": "the avatar marks, light or dark by prefers-color-scheme",
         "lockupsUsed": "none — the site has no composition that identifies the brand with a full logo"

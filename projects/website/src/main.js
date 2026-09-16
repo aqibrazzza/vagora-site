@@ -266,7 +266,7 @@ function buildCurtain() {
    sit within ~10px of the edge without the tail ever being cropped. */
 let metricsCtx = null
 
-function fitLine(line) {
+function fitLine(line, mark) {
   const inner = $(".curtain__inner", line)
   if (!inner) return
 
@@ -289,6 +289,18 @@ function fitLine(line) {
   const desc = m.fontBoundingBoxDescent
   const inkDesc = m.actualBoundingBoxDescent
   if (!(asc + desc) || !isFinite(inkDesc)) return
+
+  // 3 — the mark: as tall as the phrase's capitals, measured from the same
+  // font at the same size, so the two read as one composition. On a phone the
+  // phrase is small and the same rule leaves the mark at ~34px, which is too
+  // little presence for a title card, so the mark is TWICE the cap height
+  // there, easing back to exactly the cap height by the wide breakpoint:
+  // 2× at ≤480px, 1× at ≥1100px, linear between.
+  if (mark) {
+    const cap = metricsCtx.measureText("H").actualBoundingBoxAscent
+    const boost = 1 + Math.min(1, Math.max(0, (1100 - innerWidth) / 620))
+    if (cap > 0) mark.style.height = Math.round(cap * boost) + "px"
+  }
 
   const box = inner.getBoundingClientRect()
   const baseline = box.top + (lh - (asc + desc)) / 2 + asc
@@ -318,7 +330,7 @@ async function intro() {
   lenis && lenis.stop()
   window.scrollTo(0, 0)
   await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))])
-  fitLine(line)
+  fitLine(line, mark)
   /* Measure, then hide the letters, then reveal the line — in that order, in one
      frame. The line is `visibility: hidden` in CSS until here because everything
      before this point would paint it at its fallback size with the letters at
@@ -352,7 +364,12 @@ async function intro() {
      top edge, so it is never sliced and never leaves an empty black phase. */
   const carry = line.getBoundingClientRect().bottom + 30
   const D = 0.78 // the panel's whole lift
-  const OUT = 1.55 // the title card has been read
+  /* The card is read in order: the mark alone, then the phrase, then the exit.
+     MARK is how long the mark takes to resolve; the phrase begins only once it
+     has settled, and OUT — the title card has been read — moves out with it. */
+  const MARK = 1.2 // the mark's arrival: one unhurried breath, no dead tail
+  const LINE = 1.05 // the phrase begins as the mark's last, imperceptible settle ends
+  const OUT = LINE + 1.35 // the title card has been read
   /* power1, not power2: a cubic in-out spends a fifth of its duration on the
      last few per cent of travel, which strands a clean black slab on screen
      long after the phrase has gone. The quadratic keeps the tail moving. */
@@ -365,9 +382,17 @@ async function intro() {
     // in front of a finished hero unable to move.
     onComplete: () => gsap.set(reels, { clearProps: "transform" }),
   })
-  tl.to(mark, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0)
-    // Out of the bottom edge, left to right, inside a mask that never moves.
-    .fromTo(chars, { yPercent: 130 }, { yPercent: 0, duration: 0.8, ease: EASE, stagger: 0.018 }, 0.22)
+  // 1 · The mark alone on black, resolving in place with nothing else on the
+  //     screen yet. The exposure, paced to read as a breath: the light comes
+  //     up over 1s on a gentle in-out (an expo would have it there almost at
+  //     once, which reads as static; longer than this and the tail reads as
+  //     nothing happening) while the mark settles from a little larger over
+  //     1.2s, so it is still, just, arriving as the phrase begins.
+  tl.fromTo(mark, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: "power1.inOut" }, 0)
+    .fromTo(mark, { scale: 1.06 }, { scale: 1, duration: MARK, ease: "power2.out" }, 0)
+    // 2 · Once it has settled, the phrase: out of the bottom edge, left to
+    //     right, inside a mask that never moves.
+    .fromTo(chars, { yPercent: 130 }, { yPercent: 0, duration: 0.8, ease: EASE, stagger: 0.018 }, LINE)
 
     // The panel and everything standing on it start together and share a curve.
     .to(curtain, { clipPath: "inset(0 0 100% 0)", duration: D, ease: LIFT }, OUT)

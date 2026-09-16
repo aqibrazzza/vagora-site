@@ -687,12 +687,17 @@ p {
   pointer-events: none;
 }
 .curtain .mark {
-  /* A deliberate brand mark, not an interface icon: 42px on a phone, ~46px on
-     a normal desktop, 50px at 2560, on one curve rather than breakpoints. The
-     height follows the artwork's own ratio so it can never be distorted. */
-  width: clamp(42px, 40.5px + 0.37vw, 50px);
+  /* A deliberate brand mark, not an interface icon. Its height is the CAP
+     HEIGHT of the tagline beneath it — the two are one composition, and the
+     eye reads the phrase by its capitals, not by its line box — so the mark
+     is sized where the phrase is sized: fitLine() measures the fitted font's
+     "H" and writes the height in pixels (≈230px at 2560, ≈130px at 1440);
+     on a phone it is twice the cap height (≈68px at 390), easing to 1× by
+     1100px. The value below is only the pre-measurement fallback.
+     The width follows the artwork's own ratio so it can never be distorted. */
+  height: clamp(80px, 9vw, 230px);
   aspect-ratio: 34 / 66;
-  height: auto;
+  width: auto;
   color: var(--text-inverse);
   opacity: 0;
 

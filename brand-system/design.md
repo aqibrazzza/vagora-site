@@ -102,7 +102,7 @@ Remove any one of the three and it stops being Vagora: without fashion it become
 
 #### What the site proves
 
-**ESTABLISHED SYSTEM RULE.** The website uses three of the eight, each correctly by the hierarchy above: the **brandmark** in the dock at **17 × 33px** (11 × 21px under 460px) and in the preloader at 42–50px wide — compact interface identity, painted with `currentColor` through a CSS mask; the **wordmark-on-dark** closing the footer at **100% of the content width** on black, left-aligned, as the page's last dominant object — the display use; and the **avatar marks** as the favicons, light or dark by colour scheme. No lockup appears on the site, because the site has no composition that identifies the brand with a full logo — the wordmark and the mark do that work in their own places. Two logo versions never appear in one composition.
+**ESTABLISHED SYSTEM RULE.** The website uses three of the eight, each correctly by the hierarchy above: the **brandmark** in the dock at **17 × 33px** (11 × 21px under 460px) and in the preloader at the height of the tagline's capitals — measured from the fitted type, ≈126px at 1440, ≈227px at 2560; twice the cap height on a phone (≈68px at 390), easing to 1× by 1100px, because the phrase is small there and the mark needs presence — compact interface identity, painted with `currentColor` through a CSS mask; the **wordmark-on-dark** closing the footer at **100% of the content width** on black, left-aligned, as the page's last dominant object — the display use; and the **avatar marks** as the favicons, light or dark by colour scheme. No lockup appears on the site, because the site has no composition that identifies the brand with a full logo — the wordmark and the mark do that work in their own places. Two logo versions never appear in one composition.
 
 #### For AI and for anyone briefing a new piece
 
@@ -126,7 +126,7 @@ So: a slide deck, a social post, a billboard, a brochure, a landing page, an eve
 
 **AVOID:** stretching, squashing, cropping or rotating any version; outlines, glows, shadows, gradients or plates behind it; altering the spacing between the mark and the type, or rebuilding a lockup from the brandmark and type; the brandmark used everywhere in place of the full logo; the wordmark as routine identity; two or more logo versions in one composition to "show the brand"; a logo on every slide or frame; a tagline attached to any version; a version recoloured to anything but its two supplied artworks.
 
-**NOT YET DEFINED.** Clear space and minimum sizes (recommended above, awaiting approval); the logo in motion beyond the dock's −24° hover tilt and the preloader's fade; a one-colour print build (100K or spot) of the avatar tiles; co-branding lock-ups with a retailer.
+**NOT YET DEFINED.** Clear space and minimum sizes (recommended above, awaiting approval); the logo in motion beyond the dock's −24° hover tilt and the preloader's exposure; a one-colour print build (100K or spot) of the avatar tiles; co-branding lock-ups with a retailer.
 
 ---
 
@@ -737,7 +737,7 @@ Stroke equivalents on the 256 grid: Thin 8 · **Light 12** · **Regular 16** · 
 | **Exposure** | An object resolves in place with no travel: scale 1.045 → 1 with opacity over 0.85s. | The Mirror product | ESTABLISHED |
 | **Plane arrival** | An object rotates out of a 7° offset plane and settles flat, scrubbed between `top 92%` and `top 42%`. | The console | ESTABLISHED |
 | **Pointer depth** | Fine pointers only, additive, bounded: ±8px on the product; ±3°/2.4° tilt on the console; 0.3× magnetic pull on the primary button; a 12px difference-blend cursor dot. | Mirror, console, ask | ESTABLISHED |
-| **Preloader** | Black curtain, the mark fades in, "Beyond the Mirror" rises character by character sized to the viewport, then the whole panel lifts out of the top in 0.78s (`power1.inOut`) and scrolling is handed back the instant the black clears. | Once per load | ESTABLISHED |
+| **Preloader** | Black curtain. In order: the mark alone resolves in place — slowly, as one breath: opacity over 1s on `power1.inOut`, scale 1.06 → 1 over 1.2s on `power2.out` — and settles; only then "Beyond the Mirror" rises character by character, sized to the viewport; then the whole panel lifts out of the top in 0.78s (`power1.inOut`) and scrolling is handed back the instant the black clears. The mark is as tall as the phrase's capitals (twice that on a phone, easing to 1× by 1100px), so the two read as one composition at every width. | Once per load | ESTABLISHED |
 | **Dock** | Rises after the curtain; scrollspy lights the section covering the 35–65% band of the viewport; link labels flip on hover; the mark tilts −24° on hover. | Always | ESTABLISHED |
 
 ### Timing tokens
@@ -851,7 +851,7 @@ It is the one control ever placed over media, so its contrast is a property of t
 
 ### Preloader and cursor
 
-**ESTABLISHED SYSTEM RULE.** Curtain: black, the mark, the tagline "Beyond the Mirror" fitted to the viewport width and placed by its ink 8–12px from the bottom edge. Cursor: a 12px dot in `mix-blend-mode: difference`, fine pointers only, grows on links.
+**ESTABLISHED SYSTEM RULE.** Curtain: black; the mark, sized to the cap height of the tagline and lifted a little above centre against the phrase's mass; the tagline "Beyond the Mirror" fitted to the viewport width and placed by its ink 8–12px from the bottom edge. The mark arrives first and alone; the phrase follows once it has settled. Cursor: a 12px dot in `mix-blend-mode: difference`, fine pointers only, grows on links.
 
 ### Things the site deliberately does not have
 
