@@ -162,13 +162,6 @@
            impact lines are kept in the markup but withheld from presentation
            (hidden, data-impact-withheld). -->
 
-      <!-- ACT ONE → THE VAGORA MIRROR: the hero's takeover, said again.
-           The scope is one screen taller than the act (the hold below), so
-           the act can stop once its final composition is on the screen; the
-           Mirror is pulled back up by exactly that surplus, so its black
-           starts at the bottom edge of the held act and rises over it until
-           it fills the viewport. Net page height is unchanged. -->
-      <div class="floor-scope">
       <section class="section floor" id="floor" aria-labelledby="floor-h">
         <!-- data-enter="late" on the WHOLE opening, not on parts of it. The
              three arrive together, exactly as act two's do — the eyebrow
@@ -354,11 +347,6 @@
           </div>
         </div>
       </section>
-        <!-- The hold. Real space, cancelled exactly by the Mirror's pull, so
-             the page is no longer than it was. Zero until the score measures
-             the screen, which is what keeps this page whole without script. -->
-        <div class="floor-hold" aria-hidden="true"></div>
-      </div>
 
       <!-- ══ THE VAGORA MIRROR ══ Not an act: the physical product that
            connects the shopper's experience (Act one) with what the retailer
@@ -372,6 +360,15 @@
            container is video-ready: swap the <img> for
            <video class="object__media" autoplay muted playsinline loop
            poster="…"> and nothing else changes. No scripted wake here. -->
+      <!-- THE VAGORA MIRROR → ACT TWO: the hero's takeover, said again.
+           Act one hands to the Mirror in plain flow — a change of surface at
+           a section boundary. The Mirror is then HELD: the scope is one
+           screen taller than the chapter (the hold below), so the chapter can
+           stop once its final composition is on the screen; act two is pulled
+           back up by exactly that surplus, so its white starts at the bottom
+           edge of the held black and rises over it until it fills the
+           viewport. Net page height is unchanged. -->
+      <div class="mirror-scope">
       <section class="section mirror" data-surface="dark" aria-labelledby="mirror-h">
         <div class="mirror__stage">
           <div class="mirror__body">
@@ -405,6 +402,11 @@
           </ol>
         </div>
       </section>
+        <!-- The hold. Real space, cancelled exactly by act two's pull, so the
+             page is no longer than it was. Zero until the score measures the
+             screen, which is what keeps this page whole without script. -->
+        <div class="mirror-hold" aria-hidden="true"></div>
+      </div>
 
       <!-- ══ ACT TWO · IN THE BUSINESS ══ Act one's system, mirrored.
            Same markup shape, same tokens, same state machine: wide viewports

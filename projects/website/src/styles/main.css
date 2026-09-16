@@ -1,6 +1,6 @@
 /* ==========================================================================
    Vagora — v6 site styles · design foundations
-   One monochrome colour family, six typography tiers, one page gutter,
+   One monochrome colour family, eight typography tiers, one page gutter,
    one spacing vocabulary, sharp editorial media, bounded fluid scaling.
    Foundations create consistency; the art direction of each chapter sits
    on top of them and is not what this file decides.
@@ -88,6 +88,7 @@
   --type-lead: clamp(2.625rem, 1.5rem + 3.33vw, 5.25rem); /* 84 max — the proposition */
   --type-chapter: clamp(2.25rem, 1.4rem + 2.6vw, 4rem); /* 64 max — an act opening */
   --type-section: clamp(1.75rem, 1.2rem + 1.6vw, 3rem); /* 48 max — a section heading */
+  --type-feature: clamp(1.25rem, 1.1rem + 0.45vw, 1.75rem); /* 20 → 28 — feature titles: one step above body, meets the section floor */
   --type-body: clamp(1.125rem, 1.05rem + 0.25vw, 1.375rem);
   --type-small: clamp(1rem, 0.97rem + 0.1vw, 1.0625rem);
   --type-label: 0.875rem;
@@ -1000,52 +1001,17 @@ p {
      the image — 24px on a normal desktop, 32px at 2560. */
   --head-gap: clamp(var(--space-6), 5vw, var(--space-9));
   --breath: clamp(var(--space-4), 1.25vw, var(--space-5));
-  /* The annotation column: 280px on a normal desktop, 320px at 2560. */
-  --annot-w: clamp(280px, 16.5vw, 320px);
+  /* The annotation column: 280px on a normal desktop, 340px at 2560. */
+  --annot-w: clamp(280px, 16.5vw, 340px);
   --stick-top: calc((100svh - var(--media-h)) / 2);
   padding-top: var(--section-md);
   padding-bottom: var(--section-md);
 }
 
 /* ── ACT ONE → THE VAGORA MIRROR ──────────────────────────────────────────
-   The hero's takeover, said a second time on purpose, and by the same three
-   rules: the outgoing world is HELD by `position: sticky`, the incoming one
-   is PULLED BACK UP by exactly the scope's surplus and PAINTED ABOVE it. The
-   site now has one grammar for a change of world:
-
-     THE HELD WORLD STAYS · THE NEXT WORLD ARRIVES OVER IT FROM BELOW
-
-   The one difference is the anchor. The hero is exactly one screen tall, so
-   `top: 0` holds it. Act one is many screens tall, so holding its TOP would
-   freeze its opening; what has to be held is its LAST screen, and the anchor
-   for that is `100svh − the act's own height` — a number CSS cannot express
-   about a content-sized element, so the score measures it once and writes it
-   into --act-anchor (see actHold() in src/main.js). Everything else here is
-   the same primitive: no pinning library, no transforms, no scripted frames.
-
-   The moment it lands on is not tuned. The media plane's own sticky run ends
-   when the stage's box runs out beneath it, and that is the same scroll
-   position at which the act's foot reaches the foot of the screen — so the
-   act stops at exactly its resolved composition: the plane at its held
-   position, the final annotation centred beside it, neither able to travel
-   any further up.
-
-   The hold is real space (.floor-hold) and the Mirror's pull cancels it
-   exactly, so the page is not one pixel longer than before — nothing is
-   trapped and no scrolling is invented. Both numbers are zero until the score
-   measures the screen, so with no script the page is simply the page. And it
-   reverses by construction: there is no state anywhere in it. */
-.floor-scope {
-  position: relative;
-}
-.floor-hold {
-  height: var(--act-hold, 0px);
-}
-.floor {
-  position: sticky;
-  top: var(--act-anchor, auto);
-  z-index: 0;
-}
+   A plain change of surface at a section boundary: act one ends, the
+   Mirror's black begins. Nothing is held here — the takeover that used to
+   sit at this seam now belongs to the Mirror itself (see .mirror-scope). */
 
 /* Chapter opening — stacked: label, title, statement. On narrow screens the
    first state's image follows directly and is the introductory image. */
@@ -1109,7 +1075,7 @@ p {
 .step__title,
 .entry__title {
   text-wrap: balance;
-  font-size: var(--type-body);
+  font-size: var(--type-feature);
   font-weight: var(--w-medium);
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -1281,15 +1247,40 @@ p {
    beneath both — one structural rule, four territories. No card, border,
    shadow, glow or backing panel anywhere. The .object container is
    video-ready: the same box takes a <video class="object__media">. */
+/* ── THE VAGORA MIRROR → ACT TWO ──────────────────────────────────────────
+   The hero's takeover, said a second time on purpose, and by the same three
+   rules: the outgoing world is HELD by `position: sticky`, the incoming one
+   is PULLED BACK UP by exactly the scope's surplus and PAINTED ABOVE it. The
+   site has one grammar for a change of world:
+
+     THE HELD WORLD STAYS · THE NEXT WORLD ARRIVES OVER IT FROM BELOW
+
+   The one difference from the hero is the anchor. The hero is exactly one
+   screen tall, so `top: 0` holds it. The Mirror chapter is usually taller
+   than a screen, so holding its TOP would freeze its opening; what has to be
+   held is its LAST screen, and the anchor for that is `100svh − the
+   chapter's own height` — a number CSS cannot express about a content-sized
+   element, so the score measures it once and writes it into --mirror-anchor
+   (see mirrorHold() in src/main.js). Everything else is the same primitive:
+   no pinning library, no transforms, no scripted frames.
+
+   The hold is real space (.mirror-hold) and act two's pull cancels it
+   exactly, so the page is not one pixel longer than before — nothing is
+   trapped and no scrolling is invented. Both numbers are zero until the score
+   measures the screen, so with no script the page is simply the page. And it
+   reverses by construction: there is no state anywhere in it. */
+.mirror-scope {
+  position: relative;
+}
+.mirror-hold {
+  height: var(--mirror-hold, 0px);
+}
 .mirror {
   --media-h: clamp(560px, 80svh, 1040px);
-  /* Rises over the held act one: pulled up by exactly the scope's surplus,
-     and painted above it. Its own black IS the surface that takes the
-     viewport — one clean full-width plane, exactly as the manifesto's white
-     is over the hero. Nothing about the chapter's own composition changes. */
-  margin-top: calc(var(--act-hold, 0px) * -1);
-  position: relative;
-  z-index: 1;
+  /* The held world. Its black stays while act two's white rises over it. */
+  position: sticky;
+  top: var(--mirror-anchor, auto);
+  z-index: 0;
   overflow: clip;
   padding-block: var(--section-md) var(--section-lg);
 }
@@ -1467,12 +1458,20 @@ p {
    difference from Act one: the media plane runs to the LEFT viewport edge
    and the narrative rail sits on the right. */
 .business {
+  /* Rises over the held Mirror: pulled up by exactly the scope's surplus,
+     and painted above it. Its own white IS the surface that takes the
+     viewport — one clean full-width plane, exactly as the manifesto's white
+     is over the hero. Nothing about the act's own composition changes. */
+  margin-top: calc(var(--mirror-hold, 0px) * -1);
+  position: relative;
+  z-index: 1;
+  background: var(--surface-light);
   --media-w: clamp(720px, 60.5vw, 1440px);
   --media-h: clamp(520px, 71svh, 940px);
   --head-gap: clamp(var(--space-6), 5vw, var(--space-9));
   --breath: clamp(var(--space-4), 1.25vw, var(--space-5));
-  /* The annotation column: 280px on a normal desktop, 320px at 2560. */
-  --annot-w: clamp(280px, 16.5vw, 320px);
+  /* The annotation column: 280px on a normal desktop, 340px at 2560. */
+  --annot-w: clamp(280px, 16.5vw, 340px);
   --stick-top: calc((100svh - var(--media-h)) / 2);
   padding-top: var(--section-md);
   padding-bottom: var(--section-md);

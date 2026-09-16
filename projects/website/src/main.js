@@ -27,8 +27,8 @@ const EASE = "expo.out"
 
 /* Every gsap.matchMedia context, so teardown can revert them. */
 const contexts = []
-/* The act one → Mirror hold's own release (see actHold). */
-let releaseActHold = null
+/* The Mirror → act two hold's own release (see mirrorHold). */
+let releaseMirrorHold = null
 
 /* Elements with an authored entrance of their own. They must never also be
    picked up by the quiet `.reveal` pass, or two systems drive one property. */
@@ -759,24 +759,25 @@ function ledger() {
   })
 }
 
-/* ── ACT ONE → THE VAGORA MIRROR ────────────────────────────────────────────
-   The whole transition is three CSS rules (see .floor-scope in main.css): the
-   act is held by `position: sticky`, the Mirror is pulled back up by the
+/* ── THE VAGORA MIRROR → ACT TWO ────────────────────────────────────────────
+   The whole transition is three CSS rules (see .mirror-scope in main.css):
+   the Mirror is held by `position: sticky`, act two is pulled back up by the
    scope's surplus and painted above it. The same takeover the hero makes into
    the manifesto — one grammar for a change of world, used twice on purpose.
+   Act one hands to the Mirror in plain flow.
 
    This function contributes the one number CSS cannot state about a
-   content-sized element: where a section many screens tall must be anchored
-   so that its LAST screen is what holds. That anchor is `screen − the act's
-   own height`, and the hold below it is one screen. Both are written as
-   custom properties and both are zero until they are written, so with no
-   script the page is simply the page.
+   content-sized element: where a section taller than a screen must be
+   anchored so that its LAST screen is what holds. That anchor is `screen −
+   the chapter's own height`, and the hold below it is one screen. Both are
+   written as custom properties and both are zero until they are written, so
+   with no script the page is simply the page.
 
    Nothing here animates and nothing here runs per frame. It is measurement,
    once, and again whenever the layout is refreshed. */
-function actHold() {
-  const scope = $(".floor-scope")
-  const act = $(".floor")
+function mirrorHold() {
+  const scope = $(".mirror-scope")
+  const act = $(".mirror")
   if (!scope || !act) return
 
   // The screen, as the stylesheet means it: 100svh, not innerHeight — on a
@@ -790,18 +791,18 @@ function actHold() {
     const screen = Math.round(probe.getBoundingClientRect().height) || innerHeight
     probe.remove()
     const h = Math.round(act.getBoundingClientRect().height)
-    html.style.setProperty("--act-hold", screen + "px")
-    // Never positive: a positive anchor would hold the act's opening instead
-    // of its close, which is the one thing this must not do.
-    html.style.setProperty("--act-anchor", Math.min(0, screen - h) + "px")
+    html.style.setProperty("--mirror-hold", screen + "px")
+    // Never positive: a positive anchor would hold the chapter's opening
+    // instead of its close, which is the one thing this must not do.
+    html.style.setProperty("--mirror-anchor", Math.min(0, screen - h) + "px")
   }
 
   measure()
   ScrollTrigger.addEventListener("refreshInit", measure)
   return () => {
     ScrollTrigger.removeEventListener("refreshInit", measure)
-    html.style.removeProperty("--act-hold")
-    html.style.removeProperty("--act-anchor")
+    html.style.removeProperty("--mirror-hold")
+    html.style.removeProperty("--mirror-anchor")
   }
 }
 
@@ -834,13 +835,11 @@ function storeImage() {
    settle with no travel, under 900ms — and the figure's edge mask does the
    rest, so it reads as light finding an object rather than a card arriving.
 
-   The product does NOT wait for the takeover to finish. The chapter's black
-   rises over the held act one carrying its own composition with it, so the
-   product's frame arrives on the screen while the takeover is still running:
-   the reveal is asked for as that frame comes up, and it is established well
-   before the black has taken the viewport. Nothing here drives the takeover —
-   the takeover is two CSS rules — and there is no interval of empty black to
-   fill.
+   The chapter arrives in plain flow after act one, so the product's frame
+   is asked for as it comes up the screen, like every other object on the
+   page. The takeover this chapter makes into act two — its black held while
+   the white rises over it — is two CSS rules (see .mirror-scope) and nothing
+   here drives it.
 
    The order after that is the chapter's argument, so it is authored as an
    order rather than left to four elements meeting the viewport in whatever
@@ -867,9 +866,7 @@ function mirror() {
   const timers = []
   const at = (ms, fn) => timers.push(setTimeout(fn, ms))
 
-  /* Asked for by the product's own frame as it comes up the screen, which is
-     about a third of the way into the takeover — so it resolves as the black
-     arrives with it, rather than after the black has finished. */
+  /* Asked for by the product's own frame as it comes up the screen. */
   ScrollTrigger.create({
     trigger: object,
     start: "top 88%",
@@ -877,12 +874,11 @@ function mirror() {
     onEnter: () => gsap.to(object, { scale: 1, opacity: 1, duration: 0.85, ease: EASE }),
   })
 
-  /* The words wait for the black to have the screen. Deliberately not the
-     chapter's exact top edge — a boundary a smoothed scroll can stop a pixel
-     short of is a boundary that sometimes never arrives. */
+  /* The words arrive as the annotation comes up the screen — the quiet
+     reveal's own band — one restrained run: label, heading, statement, rail. */
   ScrollTrigger.create({
-    trigger: scope,
-    start: "top 6%",
+    trigger: body || scope,
+    start: "top 78%",
     once: true,
     onEnter: () => {
       eyebrow && at(0, () => eyebrow.classList.add("is-in"))
@@ -1155,7 +1151,7 @@ async function boot() {
   floor()
   ledger()
   narrowScore()
-  releaseActHold = actHold()
+  releaseMirrorHold = mirrorHold()
   mirror()
   consoleObject()
   storeImage()
@@ -1192,8 +1188,8 @@ window.__vagoraST = ScrollTrigger
 window.__vagoraDestroy = () => {
   contexts.forEach((mm) => mm.revert())
   contexts.length = 0
-  releaseActHold && releaseActHold()
-  releaseActHold = null
+  releaseMirrorHold && releaseMirrorHold()
+  releaseMirrorHold = null
   ScrollTrigger.getAll().forEach((s) => s.kill())
   lenis && lenis.destroy()
 }
