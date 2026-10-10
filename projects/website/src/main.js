@@ -32,7 +32,8 @@ let releaseMirrorHold = null
 
 /* Elements with an authored entrance of their own. They must never also be
    picked up by the quiet `.reveal` pass, or two systems drive one property. */
-const CLAIMED = ".console__object, .handoff__frame, .mirror__spec, .mirror__body"
+const CLAIMED =
+  ".console__object, .handoff__frame, .mirror__spec, .mirror__body"
 
 /* ── Smooth scroll: Lenis is the only engine on the page ────────────────── */
 let lenis = null
@@ -99,7 +100,10 @@ let leadReel = video
 function film() {
   const setFilmState = (playing) => {
     filmToggle.dataset.state = playing ? "playing" : "paused"
-    filmToggle.setAttribute("aria-label", playing ? "Pause the film" : "Play the film")
+    filmToggle.setAttribute(
+      "aria-label",
+      playing ? "Pause the film" : "Play the film",
+    )
   }
   // The control speaks for the film, not for one element: pause stops every
   // reel, play resumes the one that is actually on screen.
@@ -122,7 +126,9 @@ function film() {
     return
   }
 
-  const canCrossfade = matchMedia(WIDE).matches && typeof video.requestVideoFrameCallback === "function"
+  const canCrossfade =
+    matchMedia(WIDE).matches &&
+    typeof video.requestVideoFrameCallback === "function"
 
   if (!canCrossfade) {
     /* One decoder: cut at the last frame the film actually presents. Note the
@@ -244,7 +250,9 @@ function buildCurtain() {
   // One span per character so the rise can read left to right. The curtain is
   // aria-hidden in full, so nothing here reaches assistive technology.
   inner.innerHTML = [...TAGLINE]
-    .map((ch) => `<span class="curtain__ch">${ch === " " ? "&nbsp;" : ch}</span>`)
+    .map(
+      (ch) => `<span class="curtain__ch">${ch === " " ? "&nbsp;" : ch}</span>`,
+    )
     .join("")
   line.appendChild(inner)
   c.innerHTML = '<span class="mark"></span>'
@@ -329,7 +337,10 @@ async function intro() {
   const mark = $(".mark", curtain)
   lenis && lenis.stop()
   window.scrollTo(0, 0)
-  await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))])
+  await Promise.race([
+    document.fonts.ready,
+    new Promise((r) => setTimeout(r, 1500)),
+  ])
   fitLine(line, mark)
   /* Measure, then hide the letters, then reveal the line — in that order, in one
      frame. The line is `visibility: hidden` in CSS until here because everything
@@ -388,25 +399,57 @@ async function intro() {
   //     once, which reads as static; longer than this and the tail reads as
   //     nothing happening) while the mark settles from a little larger over
   //     1.2s, so it is still, just, arriving as the phrase begins.
-  tl.fromTo(mark, { opacity: 0 }, { opacity: 1, duration: 1.0, ease: "power1.inOut" }, 0)
-    .fromTo(mark, { scale: 1.06 }, { scale: 1, duration: MARK, ease: "power2.out" }, 0)
+  tl.fromTo(
+    mark,
+    { opacity: 0 },
+    { opacity: 1, duration: 1.0, ease: "power1.inOut" },
+    0,
+  )
+    .fromTo(
+      mark,
+      { scale: 1.06 },
+      { scale: 1, duration: MARK, ease: "power2.out" },
+      0,
+    )
     // 2 · Once it has settled, the phrase: out of the bottom edge, left to
     //     right, inside a mask that never moves.
-    .fromTo(chars, { yPercent: 130 }, { yPercent: 0, duration: 0.8, ease: EASE, stagger: 0.018 }, LINE)
+    .fromTo(
+      chars,
+      { yPercent: 130 },
+      { yPercent: 0, duration: 0.8, ease: EASE, stagger: 0.018 },
+      LINE,
+    )
 
     // The panel and everything standing on it start together and share a curve.
-    .to(curtain, { clipPath: "inset(0 0 100% 0)", duration: D, ease: LIFT }, OUT)
+    .to(
+      curtain,
+      { clipPath: "inset(0 0 100% 0)", duration: D, ease: LIFT },
+      OUT,
+    )
     .to(line, { y: -carry, duration: D, ease: LIFT }, OUT)
     .to(mark, { y: -carry, duration: D, ease: LIFT }, OUT)
     // The mark leaves while it is still mid-field, so it is never cut in half.
-    .to(mark, { opacity: 0, duration: D * 0.24, ease: "power2.in" }, OUT + D * 0.2)
+    .to(
+      mark,
+      { opacity: 0, duration: D * 0.24, ease: "power2.in" },
+      OUT + D * 0.2,
+    )
     // The slip: composed on yPercent so it adds to the carry rather than
     // fighting it, and the phrase is off the top before the last black edge.
-    .to(line, { yPercent: -80, duration: D * 0.2, ease: "power2.in" }, OUT + D * 0.74)
+    .to(
+      line,
+      { yPercent: -80, duration: D * 0.2, ease: "power2.in" },
+      OUT + D * 0.74,
+    )
 
     // The preloader reveal IS the hero's entrance. All the film adds is a
     // settle so small it reads as the image coming to rest, not as an entrance.
-    .fromTo(reels, { scale: 1.015 }, { scale: 1, duration: 1.2, ease: EASE }, OUT)
+    .fromTo(
+      reels,
+      { scale: 1.015 },
+      { scale: 1, duration: 1.2, ease: EASE },
+      OUT,
+    )
     .add(() => {
       curtain.remove()
       lenis && lenis.start()
@@ -435,7 +478,12 @@ function heroScroll() {
         scale: 1.025,
         filter: "brightness(0.88)",
         ease: "none",
-        scrollTrigger: { trigger: heroScope, start: "top top", end: "bottom bottom", scrub: true },
+        scrollTrigger: {
+          trigger: heroScope,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true,
+        },
       },
     )
     return () => {
@@ -479,7 +527,9 @@ function reveals() {
   /* Headings are claimed the same way copy is — one owner per element,
      always. Nothing claims a heading today: every section title on the page,
      both acts included, arrives through this one pass and looks like it. */
-  const heads = $$(".split-ready:not([data-scrub])").filter((el) => !claimed(el))
+  const heads = $$(".split-ready:not([data-scrub])").filter(
+    (el) => !claimed(el),
+  )
   if (reduced) {
     $$(".reveal").forEach((el) => el.classList.add("is-in"))
     $$(".split-ready").forEach((el) => el.classList.add("is-in"))
@@ -502,8 +552,11 @@ function reveals() {
     })
   }
   const io = new IntersectionObserver(enter, { rootMargin: "0px 0px -12% 0px" })
-  const ioLate = new IntersectionObserver(enter, { rootMargin: "0px 0px -52% 0px" })
-  const watch = (el) => (el.closest("[data-enter='late']") ? ioLate : io).observe(el)
+  const ioLate = new IntersectionObserver(enter, {
+    rootMargin: "0px 0px -52% 0px",
+  })
+  const watch = (el) =>
+    (el.closest("[data-enter='late']") ? ioLate : io).observe(el)
   items.forEach(watch)
   heads.filter((el) => !el.closest(".hero")).forEach(watch)
 }
@@ -542,7 +595,10 @@ function manifesto() {
     trigger: el,
     start: "bottom 62%",
     once: true,
-    onEnter: () => meta.forEach((m, i) => setTimeout(() => m.classList.add("is-in"), i * 90)),
+    onEnter: () =>
+      meta.forEach((m, i) =>
+        setTimeout(() => m.classList.add("is-in"), i * 90),
+      ),
   })
 }
 
@@ -580,7 +636,12 @@ function chapterHandoff() {
       y: -rise,
       opacity: 0.45,
       ease: "none",
-      scrollTrigger: { trigger: text, start: "bottom 28%", end: "bottom -14%", scrub: 0.5 },
+      scrollTrigger: {
+        trigger: text,
+        start: "bottom 28%",
+        end: "bottom -14%",
+        scrub: 0.5,
+      },
     },
   )
 
@@ -594,7 +655,12 @@ function chapterHandoff() {
         y: -rise * 0.62,
         opacity: 0.5,
         ease: "none",
-        scrollTrigger: { trigger: text, start: "bottom 12%", end: "bottom -30%", scrub: 0.5 },
+        scrollTrigger: {
+          trigger: text,
+          start: "bottom 12%",
+          end: "bottom -30%",
+          scrub: 0.5,
+        },
       },
     )
   }
@@ -638,7 +704,12 @@ function chapterHandoff() {
           {
             y: 0,
             ease: "none",
-            scrollTrigger: { trigger: stage, start: "top 42%", end: "top 12%", scrub: 0.6 },
+            scrollTrigger: {
+              trigger: stage,
+              start: "top 42%",
+              end: "top 12%",
+              scrub: 0.6,
+            },
           },
         ),
       )
@@ -680,7 +751,9 @@ function stickyStage({ rail, stage, plane, state }) {
     /* The plane's transition — a wave of refraction, or the authored wipe
        where WebGL cannot be trusted. Under reduced motion neither exists: the
        state simply is what it is, and CSS carries the change. */
-    const media = reduced ? null : createMediaTransition({ mount: planeEl, images: states, gsap })
+    const media = reduced
+      ? null
+      : createMediaTransition({ mount: planeEl, images: states, gsap })
     const apply = (i) => {
       items.forEach((s, k) => s.classList.toggle("is-active", k === i))
       states.forEach((img, k) => img.classList.toggle("is-active", k === i))
@@ -697,7 +770,10 @@ function stickyStage({ rail, stage, plane, state }) {
       // was also active, which blanked the stage.
       states.forEach((img, k) => img.classList.toggle("is-leaving", k === prev))
       clearTimeout(leaveTimer)
-      leaveTimer = setTimeout(() => states.forEach((img) => img.classList.remove("is-leaving")), 320)
+      leaveTimer = setTimeout(
+        () => states.forEach((img) => img.classList.remove("is-leaving")),
+        320,
+      )
     }
     const triggers = items.map((item, i) => {
       const block = $("[data-step-block], [data-entry-block]", item) || item
@@ -809,11 +885,13 @@ function mirrorHold() {
   // phone those differ by the toolbar, and every other hold on this page is
   // written in svh.
   const probe = document.createElement("div")
-  probe.style.cssText = "position:absolute;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none"
+  probe.style.cssText =
+    "position:absolute;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none"
 
   const measure = () => {
     scope.appendChild(probe)
-    const screen = Math.round(probe.getBoundingClientRect().height) || innerHeight
+    const screen =
+      Math.round(probe.getBoundingClientRect().height) || innerHeight
     probe.remove()
     const h = Math.round(act.getBoundingClientRect().height)
     html.style.setProperty("--mirror-hold", screen + "px")
@@ -842,7 +920,12 @@ function storeImage() {
   gsap.to(frame, {
     clipPath: "inset(0% 0% 0% 0%)",
     ease: "none",
-    scrollTrigger: { trigger: frame, start: "top bottom", end: "top 35%", scrub: 0.6 },
+    scrollTrigger: {
+      trigger: frame,
+      start: "top bottom",
+      end: "top 35%",
+      scrub: 0.6,
+    },
   })
   gsap.fromTo(
     img,
@@ -850,7 +933,12 @@ function storeImage() {
     {
       yPercent: 0,
       ease: "none",
-      scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: true },
+      scrollTrigger: {
+        trigger: frame,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
     },
   )
 }
@@ -896,7 +984,8 @@ function mirror() {
     trigger: object,
     start: "top 88%",
     once: true,
-    onEnter: () => gsap.to(object, { scale: 1, opacity: 1, duration: 0.85, ease: EASE }),
+    onEnter: () =>
+      gsap.to(object, { scale: 1, opacity: 1, duration: 0.85, ease: EASE }),
   })
 
   /* The words arrive as the annotation comes up the screen — the quiet
@@ -909,10 +998,15 @@ function mirror() {
       eyebrow && at(0, () => eyebrow.classList.add("is-in"))
       head && at(110, () => revealWords(head))
       lede && at(200, () => lede.classList.add("is-in"))
-      spec && at(640, () => gsap.to(spec, { autoAlpha: 1, y: 0, duration: 1, ease: EASE }))
+      spec &&
+        at(640, () =>
+          gsap.to(spec, { autoAlpha: 1, y: 0, duration: 1, ease: EASE }),
+        )
     },
   })
-  addEventListener("pagehide", () => timers.forEach(clearTimeout), { once: true })
+  addEventListener("pagehide", () => timers.forEach(clearTimeout), {
+    once: true,
+  })
 
   if (!finePointer) return
   // A little depth, once it is standing there. Bounded to a few pixels.
@@ -956,7 +1050,12 @@ function consoleObject() {
       scale: 1,
       opacity: 1,
       ease: "power2.out",
-      scrollTrigger: { trigger: obj, start: "top 92%", end: "top 42%", scrub: 0.7 },
+      scrollTrigger: {
+        trigger: obj,
+        start: "top 92%",
+        end: "top 42%",
+        scrub: 0.7,
+      },
     },
   )
 
@@ -964,7 +1063,12 @@ function consoleObject() {
   const rx = gsap.quickTo(obj, "rotateX", { duration: 1, ease: "power3.out" })
   const ry = gsap.quickTo(obj, "rotateY", { duration: 1, ease: "power3.out" })
   let settled = false
-  ScrollTrigger.create({ trigger: obj, start: "top 42%", once: true, onEnter: () => (settled = true) })
+  ScrollTrigger.create({
+    trigger: obj,
+    start: "top 42%",
+    once: true,
+    onEnter: () => (settled = true),
+  })
   let queued = false
   obj.addEventListener(
     "pointermove",
@@ -1001,7 +1105,12 @@ function closing() {
       yPercent: 0,
       scale: 1,
       ease: "none",
-      scrollTrigger: { trigger: mask, start: "top 96%", end: "bottom 88%", scrub: 0.7 },
+      scrollTrigger: {
+        trigger: mask,
+        start: "top 96%",
+        end: "bottom 88%",
+        scrub: 0.7,
+      },
     },
   )
 }
@@ -1050,7 +1159,9 @@ function narrowScore() {
    more attention than a persistent navigation should. */
 function dock() {
   const links = $$(".dock a[data-spy]")
-  const targets = links.map((l) => document.getElementById(l.dataset.spy)).filter(Boolean)
+  const targets = links
+    .map((l) => document.getElementById(l.dataset.spy))
+    .filter(Boolean)
   const track = () => {
     const top = innerHeight * 0.35,
       bottom = innerHeight * 0.65
@@ -1059,14 +1170,19 @@ function dock() {
       lastPassed = null
     targets.forEach((t) => {
       const r = t.getBoundingClientRect()
-      const cover = Math.max(0, Math.min(r.bottom, bottom) - Math.max(r.top, top))
+      const cover = Math.max(
+        0,
+        Math.min(r.bottom, bottom) - Math.max(r.top, top),
+      )
       if (cover > bestCover) {
         bestCover = cover
         best = t.id
       }
       if (r.top <= innerHeight / 2) lastPassed = t.id
     })
-    links.forEach((l) => l.classList.toggle("is-active", l.dataset.spy === (best || lastPassed)))
+    links.forEach((l) =>
+      l.classList.toggle("is-active", l.dataset.spy === (best || lastPassed)),
+    )
   }
   addEventListener("scroll", track, { passive: true })
   addEventListener("resize", track)
@@ -1151,7 +1267,10 @@ function copyAddress() {
 /* ── Boot ───────────────────────────────────────────────────────────────── */
 async function boot() {
   if (reduced) {
-    await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))])
+    await Promise.race([
+      document.fonts.ready,
+      new Promise((r) => setTimeout(r, 1500)),
+    ])
     splitAll()
   }
   // One broken part must never take the page down with it: before this guard
@@ -1166,7 +1285,10 @@ async function boot() {
   if (reduced) await introDone
   else {
     // Split the rest of the page while the intro plays, then wire the scroll.
-    await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))])
+    await Promise.race([
+      document.fonts.ready,
+      new Promise((r) => setTimeout(r, 1500)),
+    ])
     splitAll()
   }
   heroScroll()
@@ -1189,7 +1311,10 @@ async function boot() {
 
   // Media and fonts change layout after first paint.
   $$("img").forEach((img) => {
-    if (!img.complete) img.addEventListener("load", () => ScrollTrigger.refresh(), { once: true })
+    if (!img.complete)
+      img.addEventListener("load", () => ScrollTrigger.refresh(), {
+        once: true,
+      })
   })
   let lastW = innerWidth
   let t

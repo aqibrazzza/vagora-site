@@ -104,7 +104,9 @@
            while the white manifesto surface — pulled up by an equal negative
            margin — rises over it. Net page height is unchanged, and the
            handoff works with no JavaScript at all. -->
-      <div class="hero-scope">
+
+           <!-- old video -->
+      <!-- <div class="hero-scope">
         <header class="hero" id="top" data-surface="dark">
           <div class="hero__media" data-hero-media>
             <video
@@ -126,7 +128,65 @@
             <svg class="ic-play" aria-hidden="true"><use href="#i-play" /></svg>
           </button>
         </header>
-      </div>
+      </div> -->
+
+
+
+<div class="hero-scope">
+  <header class="hero" id="top" data-surface="dark">
+    <div class="hero__media" data-hero-media>
+      <video
+        muted
+        loop
+        playsinline
+        autoplay
+        preload="auto"
+        aria-label="Product walkthrough demo of Vagora Mirror"
+        data-hero-video
+        style="width: 100%; height: 100%; object-fit: cover; object-position: center;"
+      >
+        <!-- Portrait video for mobile screens -->
+        <source
+          src="../../assets/video/hero-video-portrait.webm"
+          type="video/webm"
+          media="(max-width: 767px)"
+        />
+
+        <!-- Landscape video for desktop and larger screens -->
+        <source
+          src="../../assets/video/hero-video-landscape.webm"
+          type="video/webm"
+        />
+      </video>
+    </div>
+
+    <style>
+      @media (max-width: 767px) {
+        .hero-scope .hero__media video {
+          object-fit: contain !important;
+          object-position: center;
+        }
+      }
+    </style>
+
+    <button
+      class="hero__film-toggle"
+      type="button"
+      data-state="playing"
+      aria-label="Pause the film"
+      data-film-toggle
+    >
+      <svg class="ic-pause" aria-hidden="true">
+        <use href="#i-pause" />
+      </svg>
+      <svg class="ic-play" aria-hidden="true">
+        <use href="#i-play" />
+      </svg>
+    </button>
+  </header>
+</div>
+
+
 
       <!-- ══ MANIFESTO ══ -->
       <section class="section manifesto container" aria-labelledby="manifesto-h">

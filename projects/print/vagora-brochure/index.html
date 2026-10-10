@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Vagora — tri-fold brochure · design reference</title>
+    <!--
+  VAGORA TRI-FOLD BROCHURE — DESIGN REFERENCE (not press-ready artwork)
+  =====================================================================
+  Two artboards, each one flat A4 landscape sheet: 297 × 210 mm trim, 3 mm bleed
+  all round (303 × 216 mm). Three conceptual panels of 99 mm.
+
+  NON-PRINTING NOTE FOR THE ILLUSTRATOR DESIGNER
+  This is a CONCEPT DIELINE with three equal 99 mm panels. In a roll (letter) fold
+  the panel that folds in — here the OUTSIDE LEFT panel (intro) and its back, the
+  INSIDE LEFT panel — is normally made 1.5–3 mm narrower so it tucks in cleanly.
+  Confirm the exact fold allowance with the printer before final artwork and
+  move both fold positions accordingly. No allowance has been baked in here.
+
+  All measurements are in mm; type is in pt. Fonts and imagery are the
+  repository's own (/assets/), referenced relatively so the file opens from
+  /projects/print/vagora-brochure/. Everything on the artboards is print
+  discipline: no effects, no interaction, CMYK-managed by the designer/printer.
+  Image crops are stated beside each image as source-pixel rectangles of the
+  1920 × 1080 master so they can be reproduced exactly.
+-->
+    <style>
+      /* ---------- fonts (repository assets) ---------- */
+      @font-face {
+        font-family: "Switzer";
+        src: url("../../../assets/fonts/Switzer-Variable.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "Fragment Mono";
+        src: url("../../../assets/fonts/FragmentMono-Regular-latin.woff2")
+          format("woff2");
+        font-weight: 400;
+        font-display: swap;
+      }
+
+      /* ---------- brand values (design-tokens.json v1.2.0) ---------- */
+      :root {
+        --white: #ffffff;
+        --black: #000000;
+        --ink: #0f0f0f;
+        --text-2: rgba(15, 15, 15, 0.62);
+        --notation: rgba(15, 15, 15, 0.55);
+        --rule: rgba(15, 15, 15, 0.1);
+        --inv-2: rgba(255, 255, 255, 0.68);
+        --notation-inv: rgba(255, 255, 255, 0.52);
+        --rule-inv: rgba(255, 255, 255, 0.14);
+        --sans:
+          "Switzer", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        --mono: "Fragment Mono", "SFMono-Regular", Consolas, monospace;
+
+        /* sheet */
+        --bleed: 3mm;
+        --trim-w: 297mm;
+        --trim-h: 210mm;
+        --panel: 99mm;
+        --safe: 10mm;
+        /* guides */
+        --g-trim: #0f0f0f;
+        --g-bleed: #c0342e;
+        --g-fold: #1d3fa8;
+        --g-safe: #0f7a52;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        background: #e9e9e9;
+        color: var(--ink);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3,
+      p,
+      ol,
+      ul {
+        margin: 0;
+      }
+      ol,
+      ul {
+        padding: 0;
+        list-style: none;
+      }
+
+      /* ---------- the viewer chrome (never part of the artwork) ---------- */
+      .bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        align-items: center;
+        padding: 10px 20px;
+        background: var(--white);
+        border-bottom: 1px solid var(--rule);
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--notation);
+      }
+      .bar strong {
+        color: var(--ink);
+        font-weight: 400;
+      }
+      .bar label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+      .bar .zoom button {
+        font: inherit;
+        text-transform: inherit;
+        background: none;
+        border: 1px solid var(--rule);
+        padding: 4px 8px;
+        cursor: pointer;
+        color: var(--ink);
+      }
+      .bar .zoom button.is-on {
+        background: var(--ink);
+        color: var(--white);
+        border-color: var(--ink);
+      }
+      .bar .sw {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        vertical-align: -1px;
+        margin-right: 2px;
+      }
+      .note {
+        max-width: 1123px;
+        margin: 18px auto 0;
+        padding: 0 20px;
+        font-family: var(--mono);
+        font-size: 11px;
+        line-height: 1.5;
+        letter-spacing: 0.02em;
+        color: var(--notation);
+        text-transform: uppercase;
+      }
+      .note b {
+        font-weight: 400;
+        color: var(--ink);
+      }
+
+      .boards {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        padding: 20px 20px 80px;
+      }
+      .board-wrap {
+        transform-origin: top center;
+      }
+      .board-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--notation);
+        margin: 0 0 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* ---------- the artboard: trim + bleed ---------- */
+      .board {
+        position: relative;
+        width: calc(var(--trim-w) + 2 * var(--bleed));
+        height: calc(var(--trim-h) + 2 * var(--bleed));
+        background: var(--white);
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+      }
+      /* three panels, each 99 mm of trim; panels extend into the bleed at the outer edges */
+      .panel {
+        position: absolute;
+        top: var(--bleed);
+        height: var(--trim-h);
+        width: var(--panel);
+        overflow: hidden;
+      }
+      .panel--1 {
+        left: var(--bleed);
+      }
+      .panel--2 {
+        left: calc(var(--bleed) + var(--panel));
+      }
+      .panel--3 {
+        left: calc(var(--bleed) + 2 * var(--panel));
+      }
+      /* a panel that must bleed past the sheet's outer edge extends by 3 mm on that side */
+      .panel--1.bleeds {
+        left: 0;
+        width: calc(var(--panel) + var(--bleed));
+        padding-left: var(--bleed);
+      }
+      .panel--3.bleeds {
+        width: calc(var(--panel) + var(--bleed));
+      }
+      .panel.bleeds-y {
+        top: 0;
+        height: calc(var(--trim-h) + 2 * var(--bleed));
+      }
+
+      /* ---------- type (print sizes chosen for a 99 mm panel read in the hand) ---------- */
+      .mono {
+        font-family: var(--mono);
+        font-size: 7.5pt;
+        line-height: 1.25;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: var(--notation);
+      }
+      .dark .mono {
+        color: var(--notation-inv);
+      }
+      .eyebrow {
+        margin-bottom: 4.5mm;
+      }
+      .display {
+        font-size: 34pt;
+        line-height: 0.92;
+        letter-spacing: -0.04em;
+        font-weight: 450;
+        text-wrap: balance;
+      }
+      .lead {
+        font-size: 17pt;
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+      .section {
+        font-size: 17pt;
+        line-height: 1.02;
+        letter-spacing: -0.025em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+      .statement {
+        font-size: 26pt;
+        line-height: 1;
+        letter-spacing: -0.025em;
+        font-weight: 450;
+        text-wrap: balance;
+      }
+      .lede {
+        font-size: 10pt;
+        line-height: 1.4;
+        color: var(--text-2);
+        text-wrap: pretty;
+      }
+      .feature {
+        font-size: 11pt;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        font-weight: 500;
+        text-wrap: balance;
+      }
+      .body {
+        font-size: 9pt;
+        line-height: 1.4;
+        text-wrap: pretty;
+      }
+      .small {
+        font-size: 9pt;
+        line-height: 1.4;
+        color: var(--text-2);
+        text-wrap: pretty;
+      }
+      .dark {
+        background: var(--black);
+        color: var(--white);
+      }
+      .dark .lede,
+      .dark .small {
+        color: var(--inv-2);
+      }
+      .dark .display,
+      .dark .section,
+      .dark .statement {
+        font-weight: 450;
+      }
+
+      /* annotation block: index → title → body → (impact) — internal rhythm 3 / 4 / 6 / 2 mm */
+      .annot {
+        display: flex;
+        flex-direction: column;
+      }
+      .annot .idx {
+        margin-bottom: 2mm;
+      }
+      .annot .feature {
+        margin-bottom: 2.5mm;
+      }
+      .annot + .annot {
+        margin-top: 4.5mm;
+      }
+
+      /* hairline list */
+      .facts {
+        border-top: 0.25pt solid var(--rule);
+      }
+      .facts li {
+        padding: 3.5mm 0;
+        border-bottom: 0.25pt solid var(--rule);
+      }
+      .facts .feature {
+        margin-bottom: 1.5mm;
+      }
+      .facts .idx {
+        margin-bottom: 1.5mm;
+      }
+      .dark .facts,
+      .dark .facts li {
+        border-color: var(--rule-inv);
+      }
+
+      /* ---------- media ---------- */
+      .photo {
+        position: absolute;
+        overflow: hidden;
+      }
+      .photo img {
+        position: absolute;
+        display: block;
+      }
+
+      /* ==================================================================
+   OUTSIDE SHEET  ·  [ fold-in / intro ]  [ back / CTA ]  [ front cover ]
+   ================================================================== */
+
+      /* — FOLD-IN · INTRO (outside left; folds in, may be narrower) — */
+      .intro {
+        padding: var(--safe) 12mm var(--safe) var(--safe);
+      }
+      .intro .lead {
+        margin: 0 0 8mm;
+        max-width: 76mm;
+      }
+      .intro .body {
+        max-width: 72mm;
+        margin-bottom: 10mm;
+      }
+      .intro .facts {
+        max-width: 76mm;
+      }
+
+      /* — BACK · CTA (outside middle): the ask — black, centred, the only centred composition — */
+      .ask {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: var(--safe);
+      }
+      .ask .display {
+        margin: 0 0 9mm;
+      }
+      .ask .contact {
+        font-size: 13pt;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+      .ask .contact span {
+        display: block;
+      }
+      .ask .small {
+        max-width: 60mm;
+        margin-top: 6mm;
+      }
+      .ask .lockup {
+        position: absolute;
+        left: 50%;
+        bottom: 14mm;
+        transform: translateX(-50%);
+        width: 22mm;
+        height: auto;
+      }
+
+      /* — FRONT COVER (outside right): one photograph, one black field, the lockup, one line — */
+      .cover .photo {
+        left: 0;
+        top: 0;
+        width: calc(var(--panel) + var(--bleed));
+        height: calc(103mm + var(--bleed));
+      }
+      /* crop: master 1920×1080 → x 840–1910, full height (1070 × 1080 ⇒ 102 × 103 mm incl. bleed) */
+      .cover .photo img {
+        height: 100%;
+        width: auto;
+        left: 0;
+        top: 0;
+        transform: translateX(calc(-840 / 1920 * 100%));
+      }
+      .cover .field {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(103mm + var(--bleed));
+        bottom: 0;
+        padding: 12mm var(--safe) 13mm;
+      }
+      .cover .lockup {
+        width: 24mm;
+        height: auto;
+        display: block;
+      }
+      .cover .statement {
+        position: absolute;
+        left: var(--safe);
+        right: 8mm;
+        bottom: 13mm;
+      }
+
+      /* ==================================================================
+   INSIDE SHEET  ·  one composition across three panels
+   ================================================================== */
+      .inside .photo {
+        left: 0;
+        top: 0;
+        width: calc(2 * var(--panel) + var(--bleed));
+        height: calc(122mm + var(--bleed));
+      }
+      /* crop: master 1920×1080 → x 183–1920, full height (1737 × 1080 ⇒ 201 × 125 mm incl. bleed);
+   the fold at 102 mm from the sheet's left edge lands at x ≈ 1064 — the empty floor between
+   the customer's hand and the customer, so nothing important crosses it. */
+      .inside .photo img {
+        height: 100%;
+        width: auto;
+        left: 0;
+        top: 0;
+        transform: translateX(calc(-183 / 1920 * 100%));
+      }
+      .inside .col {
+        position: absolute;
+        left: var(--safe);
+        right: 8mm;
+      }
+      .inside .col--under {
+        top: 130mm;
+        bottom: 22mm;
+      }
+      .inside .col--full {
+        top: var(--safe);
+        bottom: 22mm;
+      }
+      .inside .impact {
+        list-style: none;
+      }
+      .inside .impact li {
+        padding: 2.6mm 0;
+        border-top: 0.25pt solid var(--rule);
+        font-size: 9.5pt;
+        line-height: 1.3;
+        text-wrap: pretty;
+      }
+      .inside .impact li:last-child {
+        border-bottom: 0.25pt solid var(--rule);
+      }
+      /* the one line that ties the three panels: a rule with the product's facts in notation */
+      .strip {
+        position: absolute;
+        left: calc(var(--bleed) + var(--safe));
+        right: calc(var(--bleed) + var(--safe));
+        bottom: calc(var(--bleed) + 8mm);
+        border-top: 0.25pt solid var(--rule);
+        padding-top: 2.5mm;
+        display: grid;
+        grid-template-columns: var(--panel) var(--panel) 1fr;
+      }
+      .strip .mono {
+        padding-right: 10mm;
+      }
+      .strip .mono:nth-child(2) {
+        padding-left: 0;
+      }
+      .strip .mono:nth-child(3) {
+        padding-left: 0;
+      }
+
+      /* ---------- guides (non-printing) ---------- */
+      .guides {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .g-bleed {
+        position: absolute;
+        inset: 0;
+        outline: 1px dashed var(--g-bleed);
+        outline-offset: -1px;
+      }
+      .g-trim {
+        position: absolute;
+        inset: var(--bleed);
+        outline: 1px solid var(--g-trim);
+      }
+      .g-fold {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        border-left: 1px dashed var(--g-fold);
+      }
+      .g-fold--a {
+        left: calc(var(--bleed) + var(--panel));
+      }
+      .g-fold--b {
+        left: calc(var(--bleed) + 2 * var(--panel));
+      }
+      .g-safe {
+        position: absolute;
+        top: calc(var(--bleed) + var(--safe));
+        bottom: calc(var(--bleed) + var(--safe));
+        width: calc(var(--panel) - 2 * var(--safe));
+        outline: 1px dotted var(--g-safe);
+      }
+      .g-safe--1 {
+        left: calc(var(--bleed) + var(--safe));
+      }
+      .g-safe--2 {
+        left: calc(var(--bleed) + var(--panel) + var(--safe));
+      }
+      .g-safe--3 {
+        left: calc(var(--bleed) + 2 * var(--panel) + var(--safe));
+      }
+      .g-name {
+        position: absolute;
+        top: calc(var(--bleed) + 3mm);
+        font-family: var(--mono);
+        font-size: 8px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--g-fold);
+        padding: 3px 5px;
+        border: 1px solid var(--g-fold);
+        width: max-content;
+        max-width: 90mm;
+      }
+      .g-name--1 {
+        left: calc(var(--bleed) + 3mm);
+      }
+      .g-name--2 {
+        left: calc(var(--bleed) + var(--panel) + 3mm);
+      }
+      .g-name--3 {
+        left: calc(var(--bleed) + 2 * var(--panel) + 3mm);
+      }
+      .g-mark {
+        position: absolute;
+        width: 5mm;
+        height: 5mm;
+      }
+      body:not(.show-trim) .g-trim,
+      body:not(.show-bleed) .g-bleed,
+      body:not(.show-fold) .g-fold,
+      body:not(.show-safe) .g-safe,
+      body:not(.show-names) .g-name {
+        display: none;
+      }
+
+      @media print {
+        .bar,
+        .note,
+        .board-label,
+        .guides {
+          display: none !important;
+        }
+        body {
+          background: #fff;
+        }
+        .boards {
+          padding: 0;
+          gap: 0;
+        }
+        .board-wrap {
+          transform: none !important;
+        }
+        .board {
+          box-shadow: none;
+          page-break-after: always;
+        }
+        @page {
+          size: 303mm 216mm;
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="show-trim show-bleed show-fold show-safe show-names">
+    <div
+      class="bar"
+      role="toolbar"
+      aria-label="Viewer controls (not part of the artwork)">
+      <strong>Vagora · tri-fold brochure · design reference</strong>
+      <span>guides</span>
+      <label
+        ><input type="checkbox" data-g="trim" checked />
+        <i class="sw" style="background: var(--g-trim)"></i> trim</label
+      >
+      <label
+        ><input type="checkbox" data-g="bleed" checked />
+        <i class="sw" style="background: var(--g-bleed)"></i> 3 mm bleed</label
+      >
+      <label
+        ><input type="checkbox" data-g="fold" checked />
+        <i class="sw" style="background: var(--g-fold)"></i> panels /
+        folds</label
+      >
+      <label
+        ><input type="checkbox" data-g="safe" checked />
+        <i class="sw" style="background: var(--g-safe)"></i> safe zones (10
+        mm)</label
+      >
+      <label
+        ><input type="checkbox" data-g="names" checked /> panel names</label
+      >
+      <label><input type="checkbox" id="all" checked /> all guides</label>
+      <span class="zoom"
+        >view <button data-z="1" class="is-on">100%</button>
+        <button data-z="0.5">50%</button>
+        <button data-z="0.25">25% · arm's length</button></span
+      >
+    </div>
+
+    <p class="note">
+      <b>Concept dieline.</b> Three equal 99 mm panels on a 297 × 210 mm sheet,
+      3 mm bleed, 10 mm safe. In a roll fold the fold-in panel (outside left ·
+      inside left) is usually 1.5–3 mm narrower — the Illustrator designer must
+      confirm the printer's fold allowance and move both folds before final
+      artwork. No allowance is baked in. Crops are given as source-pixel
+      rectangles of the 1920 × 1080 masters. CMYK conversion is the
+      designer's/printer's.
+    </p>
+
+    <div class="boards">
+      <!-- ============================== OUTSIDE ============================== -->
+      <div class="board-wrap">
+        <p class="board-label">
+          <span>Outside · 297 × 210 mm + 3 mm bleed</span
+          ><span>fold-in / intro · back / cta · front cover</span>
+        </p>
+        <section class="board outside" aria-label="Outside of the brochure">
+          <!-- FOLD-IN · INTRO — white -->
+          <div class="panel panel--1 intro" data-panel="fold-in">
+            <p class="mono eyebrow">Vagora is</p>
+            <h2 class="lead">
+              An interactive mirror that helps customers discover more, explore
+              effortlessly, and gives retailers more from every visit.
+            </h2>
+            <p class="body">
+              Freestanding on the shop floor, the Vagora Mirror starts when
+              someone steps in front of it. Nothing to tap, nothing to learn.
+            </p>
+            <ol class="facts">
+              <li>
+                <p class="mono idx">01</p>
+                <p class="feature">Live 3D try-on</p>
+                <p class="small">The garment moves when the customer moves.</p>
+              </li>
+              <li>
+                <p class="mono idx">02</p>
+                <p class="feature">More than the rail</p>
+                <p class="small">
+                  Sizes and colourways stay available on screen, checked against
+                  live stock.
+                </p>
+              </li>
+              <li>
+                <p class="mono idx">03</p>
+                <p class="feature">Connected to purchase</p>
+                <p class="small">
+                  Selected garments, sizes and colourways can move with the
+                  customer to the till.
+                </p>
+              </li>
+            </ol>
+          </div>
+
+          <!-- BACK · CTA — black, centred (the ask) -->
+          <div class="panel panel--2 bleeds-y dark ask" data-panel="back">
+            <p class="mono eyebrow">For demos and enquiries</p>
+            <h2 class="display">See it in<br />your store.</h2>
+            <p class="contact">
+              <span>hi@5thlayer.co</span><span>5thlayer.co</span>
+            </p>
+            <img
+              class="lockup"
+              src="../../../assets/brand/logo/vagora-lockup-vertical-on-dark.svg"
+              width="272"
+              height="308"
+              alt="Vagora Mirror" />
+          </div>
+
+          <!-- FRONT COVER — one photograph, one black field -->
+          <div class="panel panel--3 bleeds bleeds-y cover" data-panel="front">
+            <div class="photo">
+              <!-- feature-catalogue.webp · crop x 840–1910 of 1920, full height · the customer in beige, the cobalt jumpsuit on the screen, the catalogue at the screen's edges -->
+              <img
+                src="../../../assets/imagery/feature-catalogue.webp"
+                alt="A customer in a beige outfit stands before the Vagora Mirror; the screen shows her in a cobalt jumpsuit, with the catalogue's garments along its edges." />
+            </div>
+            <div class="field dark">
+              <img
+                class="lockup"
+                src="../../../assets/brand/logo/vagora-lockup-vertical-on-dark.svg"
+                width="272"
+                height="308"
+                alt="Vagora Mirror" />
+              <h1 class="statement">See it before<br />you wear it.</h1>
+            </div>
+          </div>
+
+          <div class="guides" aria-hidden="true">
+            <div class="g-bleed"></div>
+            <div class="g-trim"></div>
+            <div class="g-fold g-fold--a"></div>
+            <div class="g-fold g-fold--b"></div>
+            <div class="g-safe g-safe--1"></div>
+            <div class="g-safe g-safe--2"></div>
+            <div class="g-safe g-safe--3"></div>
+            <span class="g-name g-name--1">Fold-in · intro</span>
+            <span class="g-name g-name--2">Back · CTA</span>
+            <span class="g-name g-name--3">Front cover</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============================== INSIDE ============================== -->
+      <div class="board-wrap">
+        <p class="board-label">
+          <span>Inside · 297 × 210 mm + 3 mm bleed</span
+          ><span
+            >the customer experience · what changes in the store · beyond the
+            mirror</span
+          >
+        </p>
+        <section class="board inside" aria-label="Inside of the brochure">
+          <!-- the one dominant object: a photograph across panels 1 and 2 -->
+          <div class="photo">
+            <!-- feature-try-on.webp · crop x 183–1920 of 1920, full height · the mirror (green dress rendered) left of the fold, the customer (white shirt, jeans) right of it -->
+            <img
+              src="../../../assets/imagery/feature-try-on.webp"
+              alt="The Vagora Mirror shows a customer in a green wrap dress while she stands before it in a white shirt and jeans, one hand raised toward the screen." />
+          </div>
+
+          <!-- PANEL 1 · THE CUSTOMER EXPERIENCE -->
+          <div class="panel panel--1" data-panel="inside-left">
+            <div class="col col--under">
+              <p class="mono eyebrow">The customer experience</p>
+              <h2 class="section" style="margin-bottom: 6mm">
+                See it before<br />anything is fetched.
+              </h2>
+              <div class="annot">
+                <p class="body">
+                  Vagora renders the selected garment on the customer in live
+                  3D. It tracks their movement in real time while sizes and
+                  colourways remain available on screen.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 2 · WHAT CHANGES IN THE STORE -->
+          <div class="panel panel--2" data-panel="inside-middle">
+            <div class="col col--under">
+              <p class="mono eyebrow">What changes in the store</p>
+              <h2 class="section" style="margin-bottom: 6mm">
+                More of the catalogue<br />enters the decision.
+              </h2>
+              <ol class="impact">
+                <li>
+                  Staff fetch a piece the customer has already seen on
+                  themselves.
+                </li>
+                <li>
+                  The buying decision is no longer limited to what physically
+                  fits on the rail.
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- PANEL 3 · BEYOND THE MIRROR -->
+          <div class="panel panel--3" data-panel="inside-right">
+            <div class="col col--full">
+              <p class="mono eyebrow">Beyond the Mirror</p>
+              <h2 class="section" style="margin-bottom: 5mm">
+                What the retailer<br />gets back.
+              </h2>
+              <p class="lede" style="margin-bottom: 9mm">
+                Selections reach the till. Customer interest becomes visible.
+                Every mirror is managed from one console.
+              </p>
+              <div class="annot">
+                <p class="mono idx">(01)</p>
+                <p class="feature">Their picks, already at the till.</p>
+                <p class="body">
+                  One scan sends selected garments, colourways and sizes to the
+                  customer's phone and the counter.
+                </p>
+              </div>
+              <div class="annot">
+                <p class="mono idx">(02)</p>
+                <p class="feature">See what customers explored.</p>
+                <p class="body">
+                  See what customers browsed, tried, combined, saved and
+                  ignored, by store and garment.
+                </p>
+              </div>
+              <div class="annot">
+                <p class="mono idx">(03)</p>
+                <p class="feature">Run every mirror from one console.</p>
+                <p class="body">
+                  Manage catalogue, content and configuration across every
+                  store, with sync status and offline alerts in one place.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- the strip that ties the spread: one rule, the product's facts -->
+          <div class="strip" aria-label="Product facts">
+            <p class="mono">Starts by itself · nothing to tap</p>
+            <p class="mono">Portrait display · freestanding</p>
+            <p class="mono">Nothing is stored · no face database</p>
+          </div>
+
+          <div class="guides" aria-hidden="true">
+            <div class="g-bleed"></div>
+            <div class="g-trim"></div>
+            <div class="g-fold g-fold--a"></div>
+            <div class="g-fold g-fold--b"></div>
+            <div class="g-safe g-safe--1"></div>
+            <div class="g-safe g-safe--2"></div>
+            <div class="g-safe g-safe--3"></div>
+            <span class="g-name g-name--1"
+              >Inside left — back of the fold-in</span
+            >
+            <span class="g-name g-name--2">Inside middle</span>
+            <span class="g-name g-name--3">Inside right</span>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      // Viewer only: guide toggles and zoom. Nothing here touches the artwork.
+      const body = document.body
+      const boxes = [...document.querySelectorAll("input[data-g]")]
+      const all = document.getElementById("all")
+      boxes.forEach((b) =>
+        b.addEventListener("change", () => {
+          body.classList.toggle("show-" + b.dataset.g, b.checked)
+          all.checked = boxes.every((x) => x.checked)
+        }),
+      )
+      all.addEventListener("change", () =>
+        boxes.forEach((b) => {
+          b.checked = all.checked
+          body.classList.toggle("show-" + b.dataset.g, b.checked)
+        }),
+      )
+      const wraps = [...document.querySelectorAll(".board-wrap")]
+      document.querySelectorAll("[data-z]").forEach((btn) =>
+        btn.addEventListener("click", () => {
+          const z = Number(btn.dataset.z)
+          document
+            .querySelectorAll("[data-z]")
+            .forEach((b) => b.classList.toggle("is-on", b === btn))
+          wraps.forEach((w) => {
+            w.style.transform = `scale(${z})`
+            w.style.marginBottom = `calc(-1 * (1 - ${z}) * ${w.offsetHeight}px)`
+          })
+        }),
+      )
+    </script>
+  </body>
+</html>
